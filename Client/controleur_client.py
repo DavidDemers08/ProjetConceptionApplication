@@ -1,12 +1,14 @@
 import urllib.request
-import urllib.parse 
+import urllib.parse
 import json
 
 from sys import path
-path.append('../Utils')
-import utils
 
-#class Controleur_Client(Controleur):
+path.append('../Utils')
+import Utils as utils
+
+
+# class Controleur_Client(Controleur):
 class Controleur_Client:
     def set_vue(self, vue):
         self.vue = vue
@@ -22,7 +24,7 @@ class Controleur_Client:
         data = urllib.parse.urlencode(args).encode('ascii')
 
         # on effectue la demande au serveur
-        #reponse = urllib.request.urlopen(Controleur.URL, data)
+        # reponse = urllib.request.urlopen(Controleur.URL, data)
         reponse = urllib.request.urlopen(utils.URL, data)
 
         # on retourne l'objet retourné par le serveur
@@ -34,11 +36,12 @@ class Controleur_Client:
     # controleur_serveur dans le request.form
     def identifier_usager(self, nom, mdp):
         infos = {
-            utils.FONCTION:utils.IDENTIFIER_USAGER,
-            utils.NOM:nom,
-            utils.MDP:mdp
+            utils.FONCTION: utils.IDENTIFIER_USAGER,
+            utils.NOM: nom,
+            utils.MDP: mdp
         }
         return self.appel_serveur(infos)
+
 
 # test
 def main():
@@ -47,6 +50,7 @@ def main():
     print(d)
 
     return 0
+
 
 if __name__ == '__main__':
     quit(main())
