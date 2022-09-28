@@ -3,7 +3,7 @@ from serveur_web import Serveur_Web
 
 from sys import path
 path.append('../Utils')
-import utils
+import Utils.utils as utils
 
 def main():
     controleur = Controleur_Serveur()

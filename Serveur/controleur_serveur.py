@@ -3,7 +3,7 @@ from dao import Dao
 
 from sys import path
 path.append('../Utils')
-import utils
+import Utils.utils as utils
 
 
 # class Controleur_Serveur(Controleur):
