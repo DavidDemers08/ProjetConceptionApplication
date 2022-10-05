@@ -11,7 +11,8 @@ import Utils.utils as utils
 class Controleur_Serveur:
     def __init__(self):
         self.fonctions = {
-            utils.IDENTIFIER_USAGER: self.identifier_usager
+            utils.IDENTIFIER_USAGER: self.identifier_usager,
+            utils.CREER_COMPTE_VILLE: self.creer_compte_ville
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -19,6 +20,7 @@ class Controleur_Serveur:
     # controleur_serveur dans le request.form
     # la réponse de la BD est JSON-ifiée
     def reponse(self, request_form):
+
         fonction_str = request_form[utils.FONCTION]
         fonction = self.fonctions[fonction_str]
         infos = fonction(request_form)
@@ -30,3 +32,5 @@ class Controleur_Serveur:
         nom = form[utils.NOM]
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
+    def creer_compte_ville(self,form):
+        pass
