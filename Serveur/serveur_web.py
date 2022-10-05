@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask, request
 from werkzeug.wrappers import Response
 from controleur_serveur import Controleur_Serveur
 
