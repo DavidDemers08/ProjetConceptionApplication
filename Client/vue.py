@@ -152,5 +152,8 @@ class Vue(ttk.Frame):
                 Utils.utils.REGION: region
                 }
 
-        if len(nom) > 0 and len(nom_admin) > 0 and len(mdp) > 0:
+        print(args)
+
+        if len(nom) > 0 and len(nom_admin) > 0 and len(mdp) > 0 and len(pays):
             reponse = self.controleur.creer_compte_ville(**args)
+

@@ -43,7 +43,9 @@ class Controleur_Client:
         return self.appel_serveur(infos)
 
     def creer_compte_ville(self, **args_ville):
+
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
+        print(args_ville)
         return self.appel_serveur(args_ville)
 
 

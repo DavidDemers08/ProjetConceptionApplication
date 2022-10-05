@@ -2,12 +2,11 @@ from sys import path
 import json
 
 path.append('./DAO')
-#from Serveur.DAO.dao import Dao
+# from Serveur.DAO.dao import Dao
 from dao import Dao
 
-
 path.append('../Utils')
-#import Utils.utils as utils
+# import Utils.utils as utils
 import utils
 
 
@@ -37,14 +36,13 @@ class Controleur_Serveur:
         return Dao().identifier_usager(nom, mdp)
 
     def creer_compte_ville(self, form):
+        return Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
 
-        return Dao().insert_compagnie(form[utils.NOM_VILLE],form[utils.PAYS],form[utils.PROVINCE],form[utils.REGION])
-
-    def creer_usager(self,form):
-         prenom= form[utils.NOM]
-         identifiant= form[utils.IDENTIFIANT]
-         mdp= form[utils.MDP]
-         titre= form[utils.TITRE]
-         genre= form[utils.GENRE]
-         id_compagnie= form[utils.ID_COMPAGNIE]
-         permission= form[utils.PERMISSION]
+    def creer_usager(self, form):
+        prenom = form[utils.NOM]
+        identifiant = form[utils.IDENTIFIANT]
+        mdp = form[utils.MDP]
+        titre = form[utils.TITRE]
+        genre = form[utils.GENRE]
+        id_compagnie = form[utils.ID_COMPAGNIE]
+        permission = form[utils.PERMISSION]

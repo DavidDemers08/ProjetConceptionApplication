@@ -122,9 +122,13 @@ class Dao():
     def insert_compagnie(self, nom, pays, province, region):
         self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
         self.conn.commit()
+        return self.select_all_compagnies()
+
+
+
 
     def insert_membre_dans_compagnie(self, id_compagnie, id_membre, permission_membre):
-        self.cur.execute(INSERT_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
+        self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
         self.conn.commit()
 
     def select_all_membres(self):
