@@ -3,6 +3,7 @@ from tkinter import Tk
 from vue import Vue
 from controleur_client import Controleur_Client
 
+
 class Module(Tk):
     def __init__(self):
         super().__init__()
@@ -14,6 +15,7 @@ class Module(Tk):
         vue.set_controleur(controleur)
         controleur.set_vue(vue)
 
+
 def main():
     try:
         module = Module()
@@ -22,6 +24,7 @@ def main():
         print_exc()
         return 1
     return 0
+
 
 if __name__ == '__main__':
     quit(main())

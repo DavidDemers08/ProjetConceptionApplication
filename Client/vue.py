@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 class Vue(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -9,6 +10,11 @@ class Vue(ttk.Frame):
 
     def set_controleur(self, controleur):
         self.controleur = controleur
+
+    def vider_frame(self):
+        for widget in self.winfo_children():
+            widget.destroy()
+
 
     def remplir_vue(self):
         self.label_nom = ttk.Label(self, text='Nom ')
@@ -24,7 +30,7 @@ class Vue(ttk.Frame):
         self.var_mdp = tk.StringVar()
         self.input_mdp = ttk.Entry(self, textvariable=self.var_mdp, show='*', width=30)
         self.input_mdp.grid(row=2, column=1, sticky=tk.E)
-        
+
         self.bouton_connexion = ttk.Button(self, text='Connexion', command=self.clic_bouton_connexion)
         self.bouton_connexion.bind('<Return>', lambda e: self.bouton_connexion.invoke())
         self.bouton_connexion.grid(row=3, column=1, pady=(20, 0), sticky=tk.E)
@@ -36,13 +42,13 @@ class Vue(ttk.Frame):
         self.bouton_enreigister = ttk.Button(self, text='Enreigistrer', command=self.clic_bouton_enreigister)
         self.bouton_enreigister.bind('<Return>', lambda e: self.bouton_enreigister.invoke())
         self.bouton_enreigister.grid(row=5, column=1, pady=(10, 0), sticky=tk.E)
-        
+
         self.label_message = ttk.Label(self, text='', foreground='red')
         self.label_message.grid(row=5, column=0, columnspan=2, sticky=tk.W)
 
     def clic_bouton_connexion(self):
         if self.controleur:
-            #message d'erreur par controleur ou par vue?
+            # message d'erreur par controleur ou par vue?
             reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
             if len(reponse):
                 self.afficher_succes(reponse)
@@ -53,7 +59,9 @@ class Vue(ttk.Frame):
         self.var_nom.set('')
         self.var_mdp.set('')
     def clic_bouton_enreigister(self):
-        pass
+        self.vider_frame()
+
+
 
     def afficher_erreur(self, message):
         self.label_message['text'] = message

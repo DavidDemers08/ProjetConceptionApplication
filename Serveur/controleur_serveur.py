@@ -2,6 +2,7 @@ import json
 from Serveur.DAO.dao import Dao
 
 from sys import path
+
 path.append('../Utils')
 import Utils.utils as utils
 
@@ -10,7 +11,7 @@ import Utils.utils as utils
 class Controleur_Serveur:
     def __init__(self):
         self.fonctions = {
-            utils.IDENTIFIER_USAGER:self.identifier_usager
+            utils.IDENTIFIER_USAGER: self.identifier_usager
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -29,4 +30,3 @@ class Controleur_Serveur:
         nom = form[utils.NOM]
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
-        
