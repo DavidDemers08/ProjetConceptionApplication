@@ -17,5 +17,7 @@ CREER_COMPTE_VILLE = 'creer_compte_ville'
 NOM_VILLE = 'nom_ville'
 NOM_ADMIN = 'nom_admin'
 MDP_ADMIN = 'mdp_admin'
-    
+PAYS = "pays"
+PROVINCE = "province"
+REGION = "region"
     
