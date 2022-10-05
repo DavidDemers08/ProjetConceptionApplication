@@ -81,10 +81,11 @@ class Dao():
         CREER_MEMBRE_DANS_COMPAGNIE
     ]
     __detruire = [
-        DROP_COMPAGNIE,
+        DROP_MEMBRE_DANS_COMPAGNIE,
         DROP_MEMBRE,
-        DROP_MODULES,
-        DROP_MEMBRE_DANS_COMPAGNIE
+        DROP_COMPAGNIE,
+        DROP_MODULES
+
     ]
 
     # singleton pas possible car:
@@ -142,17 +143,19 @@ class Dao():
         sql = '''
             SELECT
                 membre.identifiant,
-                membre.permission,
                 membre.titre,
                 compagnie.id,
                 compagnie.nom
             FROM membre
+            INNER JOIN membre_dans_compagnie
+                ON membre_dans_compagnie.id_membre = membre.id
             INNER JOIN compagnie
-            ON membre.compagnie = compagnie.id
-            WHERE membre.identifiant = ? AND membre.mdp = ?  
+                ON membre_dans_compagnie.id_compagnie = compagnie.id
+            WHERE membre.identifiant = ? AND membre.mdp = ?
         '''
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
+
 
 
 def main():

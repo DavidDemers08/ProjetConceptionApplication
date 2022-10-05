@@ -1,10 +1,14 @@
-import json
-from Serveur.DAO.dao import Dao
-
 from sys import path
+import json
+path.append('./DAO')
+#from Serveur.DAO.dao import Dao
+from dao import Dao
+
+
 
 path.append('../Utils')
-import Utils.utils as utils
+#import Utils.utils as utils
+import utils
 
 
 # class Controleur_Serveur(Controleur):
@@ -32,5 +36,6 @@ class Controleur_Serveur:
         nom = form[utils.NOM]
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
+
     def creer_compte_ville(self,form):
         pass
