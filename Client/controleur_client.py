@@ -13,11 +13,17 @@ class Controleur_Client:
     def set_vue(self, vue):
         self.vue = vue
 
+    def set_vue_gestion(self, vue_gestion):
+        self.vue_gestion= vue_gestion
+
+
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
     # les reliera au controleur_serveur qui, lui
     # communiquera avec la BD
     # La réponse est json-ifiée
+
+
     def appel_serveur(self, args):
         # on encode les données en format url
         # et ensuite en bytes

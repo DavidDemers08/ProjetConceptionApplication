@@ -1,23 +1,22 @@
 from traceback import print_exc
 from tkinter import Tk
-from vue import Vue
+from vue_gestion import VueGestion
 from controleur_client import Controleur_Client
 
-class Module(Tk):
+class Module_Gestion(Tk):
     def __init__(self):
         super().__init__()
         controleur = Controleur_Client()
 
         # peut-être éventuellement dans une sous-classe
-        vue = Vue(self)
-        vue.grid(row=0, column=0, padx=10, pady=10)
-        vue.set_controleur(controleur)
-        controleur.set_vue(vue)
-
+        vue_gestion = VueGestion(self)
+        vue_gestion.grid(row=3, column=3, padx=10, pady=10)
+        vue_gestion.set_controleur(controleur)
+        controleur.set_vue_gestion(vue_gestion)
 
 def main():
     try:
-        module = Module()
+        module = Module_Gestion()
         module.mainloop()
     except:
         print_exc()
