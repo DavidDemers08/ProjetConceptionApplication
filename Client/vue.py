@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+import Utils.utils
+
 
 class Vue(ttk.Frame):
     def __init__(self, parent):
@@ -103,15 +105,43 @@ class Vue(ttk.Frame):
         self.input_mdp_admin = ttk.Entry(self, textvariable=self.var_mdp_admin, show="*", width=30)
         self.input_mdp_admin.grid(row=3, column=1, sticky=tk.E)
 
+        self.label_pays = ttk.Label(self, text='pays ')
+        self.label_pays.grid(row=4, column=0, pady=(5, 0), sticky=tk.E)
+
+        self.var_pays = tk.StringVar()
+        self.input_pays = ttk.Entry(self, textvariable=self.var_pays, width=30)
+        self.input_pays.grid(row=4, column=1, sticky=tk.E)
+
+        self.label_province = ttk.Label(self, text='province/etat ')
+        self.label_province.grid(row=5, column=0, pady=(5, 0), sticky=tk.E)
+
+        self.var_province = tk.StringVar()
+        self.input_province = ttk.Entry(self, textvariable=self.var_province, width=30)
+        self.input_province.grid(row=5, column=1, sticky=tk.E)
+
+        self.label_region = ttk.Label(self, text='region')
+        self.label_region.grid(row=6, column=0, pady=(5, 0), sticky=tk.E)
+
+        self.var_region = tk.StringVar()
+        self.input_region = ttk.Entry(self, textvariable=self.var_region, width=30)
+        self.input_region.grid(row=6, column=1, sticky=tk.E)
+
         self.bouton_enregister_ville = ttk.Button(self, text='Enregistrer', command=self.clic_bouton_enregistrer_ville)
         self.bouton_enregister_ville.bind('<Return>', lambda e: self.bouton_enregister_ville.invoke())
-        self.bouton_enregister_ville.grid(row=5, column=1, pady=(10, 0), sticky=tk.E)
+        self.bouton_enregister_ville.grid(row=7, column=1, pady=(10, 0), sticky=tk.E)
 
     def clic_bouton_enregistrer_ville(self):
         nom = self.var_nom_compagnie.get()
         nom_admin = self.var_nom_admin.get()
         mdp = self.var_mdp_admin.get()
+        pays = self.var_pays.get()
+        province = self.var_province.get()
+        region = self.var_region.get()
+        args = {Utils.utils.NOM_VILLE: nom,
+                Utils.utils.PAYS: pays,
+                Utils.utils.PROVINCE: province,
+                Utils.utils.REGION: region
+                }
 
-        if len(nom)>0 and len(nom_admin)>0 and len(mdp)>0:
-            reponse = self.controleur.creer_compte_ville(nom, nom_admin,mdp)
-
+        if len(nom) > 0 and len(nom_admin) > 0 and len(mdp) > 0:
+            reponse = self.controleur.creer_compte_ville(**args)
