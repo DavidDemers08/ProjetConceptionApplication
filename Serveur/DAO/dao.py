@@ -14,11 +14,12 @@ CREATE TABLE IF NOT EXISTS membre
     nom TEXT NOT NULL,
     identifiant TEXT NOT NULL,
     mdp TEXT,
-    titre TEXT
+    titre TEXT,
+    genre TEXT
 )
 '''
 DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
-INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre) VALUES(?, ?, ?, ?, ?)'
+INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
 SELECT_MEMBRE = 'SELECT * FROM membre'
 
 # ***************** COMPAGNIE *********************
@@ -30,11 +31,11 @@ CREATE TABLE IF NOT EXISTS compagnie
     nom TEXT UNIQUE,
     pays TEXTE,
     province TEXTE,
-    region TEXTE,
+    region TEXTE
 )
 '''
 DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
-INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?, ?)'
+INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?)'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
@@ -65,7 +66,8 @@ CREATE TABLE IF NOT EXISTS modules
     version NUMERIC NOT NULL,
     chemin_executable TEXT NOT NULL,
     prix_mensuel NUMERIC NOT NULL
-)'''
+)
+'''
 DROP_MODULES = 'DROP TABLE IF EXISTS modules'
 INSERT_MODULES = 'INSERT INTO modules(nom, version, prix_mensuel) VALUES(?, ?)'
 SELECT_MODULES = 'SELECT * FROM modules'
@@ -75,13 +77,14 @@ class Dao():
     __creer = [
         CREER_COMPAGNIE,
         CREER_MEMBRE,
-        CREER_MEMBRE_DANS_COMPAGNIE,
-        CREER_MODULE
+        CREER_MODULE,
+        CREER_MEMBRE_DANS_COMPAGNIE
     ]
     __detruire = [
-        DROP_MODULES,
+        DROP_COMPAGNIE,
         DROP_MEMBRE,
-        DROP_COMPAGNIE
+        DROP_MODULES,
+        DROP_MEMBRE_DANS_COMPAGNIE
     ]
 
     # singleton pas possible car:
@@ -110,20 +113,29 @@ class Dao():
             self.cur.execute(table)
 
     # ***************** AJOUTER METHODES DA0 *********************
-    def insert_membre(self, prenom, nom, identifiant, mdp, titre, permission):
-        self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, permission))
+    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie, permission):
+        cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
+        self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
 
     def insert_compagnie(self, nom, pays, province, region):
         self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
         self.conn.commit()
 
-    def select_membre(self):
+    def insert_membre_dans_compagnie(self, id_compagnie, id_membre, permission_membre):
+        self.cur.execute(INSERT_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
+        self.conn.commit()
+
+    def select_all_membres(self):
         self.cur.execute(SELECT_MEMBRE)
         return self.cur.fetchall()
 
-    def select_compagnie(self):
+    def select_all_compagnies(self):
         self.cur.execute(SELECT_COMPAGNIE)
+        return self.cur.fetchall()
+
+    def select_membres_all_compagnie(self):
+        self.cur.execute(SELECT_MEMBRE_DANS_COMPAGNIE)
         return self.cur.fetchall()
 
     def identifier_usager(self, nom, mdp):
