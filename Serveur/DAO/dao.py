@@ -14,14 +14,11 @@ CREATE TABLE IF NOT EXISTS membre
     nom TEXT NOT NULL,
     identifiant TEXT NOT NULL,
     mdp TEXT,
-    permission TEXT NOT NULL,
     titre TEXT
-    id_compagnie INTEGER NOT NULL,
-    FOREIGN KEY (id_compagnie) REFERENCES compagnie(id)
 )
 '''
 DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
-INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre, permission, id_compagnie) VALUES(?, ?, ?, ?, ?, ?, ?)'
+INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre) VALUES(?, ?, ?, ?, ?)'
 SELECT_MEMBRE = 'SELECT * FROM membre'
 
 # ***************** COMPAGNIE *********************
@@ -34,13 +31,28 @@ CREATE TABLE IF NOT EXISTS compagnie
     pays TEXTE,
     province TEXTE,
     region TEXTE,
-    super_admin_id INTEGER NOT NULL,
-    FOREIGN KEY (super_admin_id) REFERENCES membre(id)
 )
 '''
 DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
-INSERT_COMPAGNIE = 'INSERT INTO compagnie(nomcompagnie) VALUES(?)'
+INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?, ?)'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie'
+
+# ***************** MEMBRE DANS COMPAGNIE *********************
+
+CREER_MEMBRE_DANS_COMPAGNIE = '''
+CREATE TABLE IF NOT EXISTS membre_dans_compagnie
+(
+    id_compagnie INTEGER NOT NULL,
+    id_membre INTEGER NOT NULL,
+    permission_membre TEXT NOT NULL,
+    
+    FOREIGN KEY(id_compagnie) REFERENCES compagnie(id),
+    FOREIGN KEY(id_membre) REFERENCES membre(id)
+)
+'''
+DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
+INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
+SELECT_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 
 # ***************** MODULES *********************
 
@@ -61,9 +73,10 @@ SELECT_MODULES = 'SELECT * FROM modules'
 
 class Dao():
     __creer = [
-        CREER_MODULE,
         CREER_COMPAGNIE,
-        CREER_MEMBRE
+        CREER_MEMBRE,
+        CREER_MEMBRE_DANS_COMPAGNIE,
+        CREER_MODULE
     ]
     __detruire = [
         DROP_MODULES,
@@ -96,13 +109,13 @@ class Dao():
         for table in Dao.__creer:
             self.cur.execute(table)
 
-    # ***************** AJOUTER METHODE DA0 *********************
-    def insert_membre(self, prenom, nom, identifiant, mdp, titre, permission, id_compagnie):
-        self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, permission, id_compagnie))
+    # ***************** AJOUTER METHODES DA0 *********************
+    def insert_membre(self, prenom, nom, identifiant, mdp, titre, permission):
+        self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, permission))
         self.conn.commit()
 
-    def insert_compagnie(self, nomcompagnie):
-        self.cur.execute(INSERT_COMPAGNIE, (nomcompagnie,))
+    def insert_compagnie(self, nom, pays, province, region):
+        self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
         self.conn.commit()
 
     def select_membre(self):
