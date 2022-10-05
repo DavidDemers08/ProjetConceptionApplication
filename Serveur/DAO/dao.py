@@ -49,59 +49,23 @@ CREATE TABLE IF NOT EXISTS modules
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     nom TEXT NOT NULL,
-    version NUMERIC NOT NULL
+    description TEXT,
+    version NUMERIC NOT NULL,
+    chemin_executable TEXT NOT NULL,
     prix_mensuel NUMERIC NOT NULL
 )'''
 DROP_MODULES = 'DROP TABLE IF EXISTS modules'
 INSERT_MODULES = 'INSERT INTO modules(nom, version, prix_mensuel) VALUES(?, ?)'
 SELECT_MODULES = 'SELECT * FROM modules'
 
-# ***************** CLIENT *********************
-
-CREER_CLIENT = '''
-CREATE TABLE IF NOT EXISTS client
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom TEXT,
-    courriel TEXT,
-    tel TEXT,
-    compagnie TEXT,
-    adresse TEXT,
-    rue TEXT,
-    ville TEXT
-)'''
-DROP_CLIENT = 'DROP TABLE IF EXISTS client'
-INSERT_CLIENT = 'INSERT INTO client(nom, courriel, tel, compagnie, adresse, rue, ville) VALUES(?, ?, ?, ?, ?, ?, ?)'
-SELECT_CLIENT = 'SELECT * FROM client'
-
-# ***************** PROJET *********************
-
-CREER_PROJET = '''
-CREATE TABLE IF NOT EXISTS projet
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom TEXT UNIQUE,
-    client NUMERIC,
-    chargedeprojet NUMERIC,
-    datedelancement DATE,
-    datedefinprevue DATE
-)'''
-DROP_PROJET = 'DROP TABLE IF EXISTS projet'
-INSERT_PROJET = 'INSERT INTO projet(nomdeprojet, client, chargedeprojet, datedelancement, datedefinprevue) VALUES(?, ?, ?, ?, ?)'
-SELECT_PROJET = 'SELECT * FROM projet'
-
 
 class Dao():
     __creer = [
-        CREER_CLIENT,
-        CREER_PROJET,
-        CREER_MODULES,
+        CREER_MODULE,
         CREER_COMPAGNIE,
         CREER_MEMBRE
     ]
     __detruire = [
-        DROP_CLIENT,
-        DROP_PROJET,
         DROP_MODULES,
         DROP_MEMBRE,
         DROP_COMPAGNIE

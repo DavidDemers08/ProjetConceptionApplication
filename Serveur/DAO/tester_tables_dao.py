@@ -1,4 +1,4 @@
-from dao import Dao
+from Serveur.DAO.dao import Dao
 
 def insert(dao):
     dao.insert_compagnie('Totologie')
