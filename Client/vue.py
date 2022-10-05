@@ -83,6 +83,15 @@ class Vue(ttk.Frame):
     def cacher_message(self):
         self.label_message['text'] = ''
 
+    def fonction_facile_a_faire_vraiment(self, label, input, texte):
+        label = ttk.Label(self, text=texte)
+        label.grid(row=1, column=0, pady=(5, 0), sticky=tk.E)
+
+        var = tk.StringVar()
+        input = ttk.Entry(self, textvariable= var, width=30)
+        input.grid(row=1, column=1, sticky=tk.E)
+        return
+
     def afficher_enregistrer(self):
         self.label_nom_compagnie = ttk.Label(self, text='Nom Compagnie ')
         self.label_nom_compagnie.grid(row=1, column=0, pady=(5, 0), sticky=tk.E)

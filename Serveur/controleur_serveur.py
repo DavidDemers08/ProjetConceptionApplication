@@ -1,12 +1,14 @@
+from sys import path
 import json
 
-import Utils.utils
-from Serveur.DAO.dao import Dao
+path.append('./DAO')
+#from Serveur.DAO.dao import Dao
+from dao import Dao
 
-from sys import path
 
 path.append('../Utils')
-import Utils.utils as utils
+#import Utils.utils as utils
+import utils
 
 
 # class Controleur_Serveur(Controleur):
@@ -46,4 +48,3 @@ class Controleur_Serveur:
          genre= form[utils.GENRE]
          id_compagnie= form[utils.ID_COMPAGNIE]
          permission= form[utils.PERMISSION]
-

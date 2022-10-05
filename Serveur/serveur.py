@@ -4,7 +4,8 @@ from serveur_web import Serveur_Web
 from sys import path
 
 path.append('../Utils')
-import Utils.utils as utils
+# import Utils.utils as utils
+import utils
 
 
 def main():

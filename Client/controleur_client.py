@@ -5,8 +5,8 @@ import json
 from sys import path
 
 path.append('../Utils')
-import Utils.utils as utils
-
+# import Utils.utils as utils
+import utils
 
 # class Controleur_Client(Controleur):
 class Controleur_Client:
