@@ -42,8 +42,14 @@ class Controleur_Client:
         }
         return self.appel_serveur(infos)
 
-    def creer_compte_ville(self):
-        pass
+    def creer_compte_ville(self,nom_ville,nom_admin,mdp):
+        infos = {
+            utils.FONCTION: utils.CREER_COMPTE_VILLE,
+            utils.NOM_VILLE: nom_ville,
+            utils.NOM_ADMIN: nom_admin,
+            utils.MDP_ADMIN: mdp
+        }
+        return self.appel_serveur(infos)
 
 
 # test
