@@ -32,6 +32,10 @@ class Vue(ttk.Frame):
         self.bouton_annuler = ttk.Button(self, text='Annuler', command=self.clic_bouton_annuler)
         self.bouton_annuler.bind('<Return>', lambda e: self.bouton_annuler.invoke())
         self.bouton_annuler.grid(row=4, column=1, pady=(10, 0), sticky=tk.E)
+
+        self.bouton_enreigister = ttk.Button(self, text='Enreigistrer', command=self.clic_bouton_enreigister)
+        self.bouton_enreigister.bind('<Return>', lambda e: self.bouton_enreigister.invoke())
+        self.bouton_enreigister.grid(row=5, column=1, pady=(10, 0), sticky=tk.E)
         
         self.label_message = ttk.Label(self, text='', foreground='red')
         self.label_message.grid(row=5, column=0, columnspan=2, sticky=tk.W)
@@ -48,6 +52,8 @@ class Vue(ttk.Frame):
     def clic_bouton_annuler(self):
         self.var_nom.set('')
         self.var_mdp.set('')
+    def clic_bouton_enreigister(self):
+        pass
 
     def afficher_erreur(self, message):
         self.label_message['text'] = message

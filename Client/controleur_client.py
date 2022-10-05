@@ -42,6 +42,9 @@ class Controleur_Client:
         }
         return self.appel_serveur(infos)
 
+    def creer_compte_ville(self):
+        pass
+
 
 # test
 def main():
