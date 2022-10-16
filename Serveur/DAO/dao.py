@@ -122,10 +122,8 @@ class Dao():
     def insert_compagnie(self, nom, pays, province, region):
         self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
         self.conn.commit()
+        # TODO j'ai besoin de l'ID de la compagnie pour ajouter l'admin
         return self.select_all_compagnies()
-
-
-
 
     def insert_membre_dans_compagnie(self, id_compagnie, id_membre, permission_membre):
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
@@ -159,7 +157,6 @@ class Dao():
         '''
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
-
 
 
 def main():

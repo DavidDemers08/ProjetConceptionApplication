@@ -88,7 +88,7 @@ class Vue(ttk.Frame):
         label.grid(row=1, column=0, pady=(5, 0), sticky=tk.E)
 
         var = tk.StringVar()
-        input = ttk.Entry(self, textvariable= var, width=30)
+        input = ttk.Entry(self, textvariable=var, width=30)
         input.grid(row=1, column=1, sticky=tk.E)
         return
 
@@ -147,13 +147,18 @@ class Vue(ttk.Frame):
         province = self.var_province.get()
         region = self.var_region.get()
         args = {Utils.utils.NOM_VILLE: nom,
+                Utils.utils.NOM_ADMIN: nom_admin,
+                Utils.utils.MDP_ADMIN: mdp,
                 Utils.utils.PAYS: pays,
                 Utils.utils.PROVINCE: province,
                 Utils.utils.REGION: region
                 }
 
-        print(args)
-
-        if len(nom) > 0 and len(nom_admin) > 0 and len(mdp) > 0 and len(pays):
+        if nom and nom_admin and mdp and pays and province and region:
             reponse = self.controleur.creer_compte_ville(**args)
+            print(reponse)
+            self.vider_frame()
+            self.remplir_vue()
 
+        else:
+            print("Un des champs est vide")

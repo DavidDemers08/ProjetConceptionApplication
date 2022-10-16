@@ -20,4 +20,3 @@ MDP_ADMIN = 'mdp_admin'
 PAYS = "pays"
 PROVINCE = "province"
 REGION = "region"
-    

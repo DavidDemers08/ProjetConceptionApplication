@@ -4,9 +4,11 @@ import json
 
 from sys import path
 
+from Utils import utils
+
 path.append('../Utils')
 # import Utils.utils as utils
-import utils
+
 
 # class Controleur_Client(Controleur):
 class Controleur_Client:
@@ -51,7 +53,6 @@ class Controleur_Client:
     def creer_compte_ville(self, **args_ville):
 
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
-        print(args_ville)
         return self.appel_serveur(args_ville)
 
 

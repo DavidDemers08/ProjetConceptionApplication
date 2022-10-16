@@ -1,13 +1,16 @@
 from sys import path
 import json
 
+from Serveur.DAO.dao import Dao
+from Utils import utils
+
 path.append('./DAO')
 # from Serveur.DAO.dao import Dao
-from dao import Dao
+
 
 path.append('../Utils')
 # import Utils.utils as utils
-import utils
+
 
 
 # class Controleur_Serveur(Controleur):
@@ -46,3 +49,7 @@ class Controleur_Serveur:
         genre = form[utils.GENRE]
         id_compagnie = form[utils.ID_COMPAGNIE]
         permission = form[utils.PERMISSION]
+
+    def creer_compte_admin(self, nom_admin, mdp_admin):
+        # permission ultime
+        pass
