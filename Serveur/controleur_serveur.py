@@ -9,8 +9,9 @@ path.append('./DAO')
 
 
 path.append('../Utils')
-# import Utils.utils as utils
 
+
+# import Utils.utils as utils
 
 
 # class Controleur_Serveur(Controleur):
@@ -38,8 +39,15 @@ class Controleur_Serveur:
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
 
-    def creer_compte_ville(self, form):
-        return Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
+    def creer_compte_ville(self, form) -> str:
+        try:
+            Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
+            id_compagnie = Dao().select_id_of_compagnie(form[utils.NOM_VILLE])
+            self.creer_compte_admin(form[utils.NOM_ADMIN], form[utils.MDP_ADMIN], id_compagnie)
+            return f"la ville suivante a été ajoutée : {form[utils.NOM_VILLE]} ainsi que l'administrateur suivant : " \
+                   f"{form[utils.NOM_ADMIN]} "
+        except:
+            return "Impossible d'ajouter votre compagnie"
 
     def creer_usager(self, form):
         prenom = form[utils.NOM]
@@ -50,6 +58,8 @@ class Controleur_Serveur:
         id_compagnie = form[utils.ID_COMPAGNIE]
         permission = form[utils.PERMISSION]
 
-    def creer_compte_admin(self, nom_admin, mdp_admin):
+    def creer_compte_admin(self, nom_admin: str, mdp_admin: str, id_compagnie: int) -> str:
         # permission ultime
         pass
+
+
