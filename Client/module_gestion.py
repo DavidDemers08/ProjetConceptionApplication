@@ -11,7 +11,7 @@ class ModuleGestion(Tk):
         controleur = parent
 
 
-        # peut-être éventuellement dans une sous-classe
+
         vue = VueGestion(self)
         vue.grid(row=0, column=0, padx=10, pady=10)
         vue.set_controleur(controleur)
