@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS membre
 DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
 INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
 SELECT_MEMBRE = 'SELECT * FROM membre'
+SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
+DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'
 
 # ***************** COMPAGNIE *********************
 
@@ -37,6 +39,7 @@ CREATE TABLE IF NOT EXISTS compagnie
 DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
 INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?)'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie'
+SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE name =?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
@@ -54,7 +57,8 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
 INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
 SELECT_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
-SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE name =?'
+DELETE_MEMBRE_FROM_COMPAGNIE = 'DELETE FROM membre_dans_compagnie WHERE id_membre=?'
+
 
 # ***************** MODULES *********************
 
@@ -131,9 +135,17 @@ class Dao():
         self.conn.commit()
 
     def select_id_of_compagnie(self,name):
-        self.cur.execute(SELECT_ID_COMPAGNIE, name)
+        self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
+        return self.cur.fetchall()[0][0]
 
-        return self.cur.fetchall()
+    def get_membre_id(self, identifiant):
+        self.cur.execute(SELECT_ID_MEMBRE, (identifiant,))
+        return self.cur.fetchall()[0][0]
+
+    def delete_membre(self, identifiant):
+        id_membre = self.get_membre_id(identifiant)
+        self.cur.execute(DELETE_MEMBRE_FROM_COMPAGNIE, (id_membre,))
+        self.cur.execute(DELETE_MEMBRE, (identifiant,))
 
     def select_all_membres(self):
         self.cur.execute(SELECT_MEMBRE)
