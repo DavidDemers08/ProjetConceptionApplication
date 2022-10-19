@@ -25,12 +25,15 @@ def select(dao):
     for rangee in dao.select_membres_all_compagnie():
         print(rangee)
 
+def delete(dao):
+    dao.delete_membre('toto')
 
 def main():
     bd = Dao()
     bd.creer_bd()
     insert(bd)
     select(bd)
+    delete(bd)
 
     print('\nIdentifier l\'usager')
     print(bd.identifier_usager('toto', 'totototo'))
