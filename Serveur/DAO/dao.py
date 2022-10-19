@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS compagnie
 DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
 INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?)'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie'
-SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE name =?'
+SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
@@ -78,7 +78,7 @@ INSERT_MODULES = 'INSERT INTO modules(nom, version, prix_mensuel) VALUES(?, ?)'
 SELECT_MODULES = 'SELECT * FROM modules'
 
 
-class Dao():
+class Dao:
     __creer = [
         CREER_COMPAGNIE,
         CREER_MEMBRE,
