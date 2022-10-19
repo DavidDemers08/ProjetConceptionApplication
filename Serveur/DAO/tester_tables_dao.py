@@ -11,6 +11,7 @@ def insert(dao):
     dao.insert_membre('Ta', 'Ta', identifiant='tata', mdp='tatatata', titre='admin', genre='femme',
                       id_compagnie=1, permission='ALL')
 
+    dao.insert_module('valorant', '3.19', '37.77', 'C:\\Users\\1569047\\Pictures\\Saved')
 
 def select(dao):
     print('\nCompagnie')
@@ -25,9 +26,16 @@ def select(dao):
     for rangee in dao.select_membres_all_compagnie():
         print(rangee)
 
+    print('\nModules')
+    for rangee in dao.select_all_modules():
+        print(rangee)
+
 def delete(dao):
     dao.delete_membre('toto')
 
+def getid(dao):
+    print("\nMon id membre",dao.get_membre_id('toto'))
+    print("Mon id module",dao.get_module_id('valorant','3.19'))
 
 def update(dao):
     dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion',permission_membre='Chef', nom_compagnie='Laval')
@@ -39,6 +47,7 @@ def main():
     select(bd)
     update(bd)
     select(bd)
+    getid(bd)
 
     print('\nIdentifier l\'usager')
     print(bd.identifier_usager('toto', 'totototo'))
