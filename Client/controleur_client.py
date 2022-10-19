@@ -3,7 +3,6 @@ import urllib.parse
 import json
 
 from sys import path
-
 from Utils import utils
 
 path.append('../Utils')
@@ -17,6 +16,7 @@ class Controleur_Client:
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion= vue_gestion
+
 
 
     # On prépare et on envoie les infos, incluant
@@ -55,6 +55,15 @@ class Controleur_Client:
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
+    def afficher_membres(self):
+        a = {utils.FONCTION: utils.AFFICHER_MEMBRES}
+
+        return self.appel_serveur(a)
+
+    def afficher_compagnies(self):
+        a = {utils.FONCTION: utils.AFFICHER_COMPAGNIES}
+
+        return self.appel_serveur(a)
 
 
 # test

@@ -1,4 +1,3 @@
-
 # web
 HOTE = '127.0.0.1'
 PORT = 5000
@@ -19,5 +18,10 @@ PAYS = "pays"
 PROVINCE = "province"
 REGION = "region"
 GENRE = "genre"
-PRENOM= "prenom"
+PRENOM = "prenom"
 NOM = "nom"
+
+AFFICHER_MEMBRES = "afficher_membres"
+
+
+AFFICHER_COMPAGNIES = "afficher_compagnies"

@@ -115,8 +115,6 @@ class Vue(ttk.Frame):
         self.input_mdp_admin = ttk.Entry(self, textvariable=self.var_mdp_admin, show="*", width=30)
         self.input_mdp_admin.grid(row=3, column=1, sticky=tk.E)
 
-
-
         self.label_pays = ttk.Label(self, text='pays ')
         self.label_pays.grid(row=4, column=0, pady=(5, 0), sticky=tk.E)
 
@@ -182,12 +180,11 @@ class Vue(ttk.Frame):
                 Utils.utils.PRENOM: prenom
                 }
 
-        if nom_compagnie and uti_admin and mdp and pays and province and region and genre  and prenom and nom:
+        if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
             reponse = self.controleur.creer_compte_ville(**args)
             print(reponse)
             self.vider_frame()
             self.remplir_vue()
-
         else:
             print("Un des champs est vide")
-            print(self.controleur.voir_membre())
+            print(self.controleur.afficher_compagnies())

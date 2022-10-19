@@ -93,12 +93,16 @@ CREATE TABLE IF NOT EXISTS modules
     description TEXT,
     version NUMERIC NOT NULL,
     chemin_executable TEXT NOT NULL,
-    prix_mensuel NUMERIC NOT NULL
+    prix_mensuel NUMERIC NOT NULL,
+    
+    UNIQUE(nom,version)
 )
 '''
 DROP_MODULES = 'DROP TABLE IF EXISTS modules'
-INSERT_MODULES = 'INSERT INTO modules(nom, version, prix_mensuel) VALUES(?, ?)'
-
+INSERT_MODULES = 'INSERT INTO modules(nom,description, version,chemin_executable, prix_mensuel) VALUES(?, ?, ?, ?, ?)'
+# TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
+SELECT_ID_MODULE = 'SELECT id FROM modules WHERE nom =? AND version =?'
+SELECT_MODULE_PAR_ID = 'SELECT nom,version,chemin_executable FROM modules WHERE id =? AND version =?'
 SELECT_MODULES = 'SELECT * FROM modules'
 SELECT_MODULE = 'SELLECT * FROM modules WHERE id=?'
 SELECT_MODULE_ID = 'SELECT id FROM modules WHERE nom=? AND version=?'
@@ -293,10 +297,26 @@ class Dao:
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
 
+    def insert_module(self, nom, version, prix_mensuel,chemin_executable, derscription = "Aucune Description"):
+        self.cur.execute(INSERT_MODULES, (nom,derscription, version,chemin_executable,prix_mensuel))
+        self.conn.commit()
+
+    def select_all_modules(self):
+        self.cur.execute(SELECT_MODULES)
+        return self.cur.fetchall()
+
+    # TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
+    def get_module_id(self, nom,version):
+        self.cur.execute(SELECT_ID_MODULE, (nom,version,))
+        return self.cur.fetchall()[0][0]
+
+    def select_module(self, id_module, version_module):
+        self.cur.execute(SELECT_MODULE_PAR_ID,(id_module,version_module))
+        return self.cur.fetchall()
+        
 def main():
     Dao().creer_bd()
     return 0
-
 
 # main
 
