@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
 INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
 
+SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
 SELECT_ALL_MEMBRES_DE_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie WHERE id_compagnie=?'
 SELECT_ID_FROM_MEMBRE_DE_COMPAGNIE = 'SELECT id FROM membre_dans_compagnie WHERE id_membre=? AND id_compagnie=?'
@@ -219,7 +220,7 @@ class Dao:
         return self.cur.fetchall()
 
     def select_membres_all_compagnie(self):
-        self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE)
+        self.cur.execute(SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE)
         return self.cur.fetchall()
 
     def select_id_of_compagnie(self, name):
