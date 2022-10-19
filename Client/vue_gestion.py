@@ -1,25 +1,24 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
-        #self.controleur = None
+        self.controleur = None
         self.remplir_vue_gestion()
-
-
 
     def set_controleur(self, controleur):
         self.controleur = controleur
 
     def remplir_vue_gestion(self):
 
-        self.data =("1","2","3","4")
-        self.data1 = ("allo", "bigg","toast")
-        #self.listWidt
-          #  =int(self.winfo_width()/3)
+        self.data = ("1", "2", "3", "4")
+        self.data1 = ("allo", "bigg", "toast")
+        # self.listWidt
+        #  =int(self.winfo_width()/3)
         self.bouton_gestion_membre = ttk.Button(self, text='Gestion Membre', command=self.clic_bouton_membre)
         self.bouton_gestion_membre.grid(row=0, column=0, pady=(20, 0), sticky=tk.E)
 
@@ -29,44 +28,43 @@ class VueGestion(ttk.Frame):
         self.bouton_gestion_modules = ttk.Button(self, text='Gestion modules', command=self.clic_bouton_modules)
         self.bouton_gestion_modules.grid(row=0, column=2, pady=(20, 0), sticky=tk.E)
 
-        self.canevas_list = tk.Canvas(self,height=200, bg= 'white')
+        self.canevas_list = tk.Canvas(self, height=200, bg='white')
 
-        self.canevas_list.grid(row = 1, column=0, columnspan=3, sticky=tk.E)
-        self.lWidth = int(self.canevas_list.winfo_width() /3)
-
+        self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
+        self.lWidth = int(self.canevas_list.winfo_width() / 3)
 
         self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre', command=self.clic_bouton_ajout_membre)
-        self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0),sticky=tk.E)
+        self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
 
         self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
         self.bouton_gerer_employe.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
-        #self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
-
-
+        # self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
 
     def delete_lists(self):
         self.canevas_list.destroy()
-        self.canevas_list = tk.Canvas(self, height=200, bg='white')
+        self.canevas_list = tk.Canvas(self, height=200, width=600, bg='white')
         self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
 
     def clic_bouton_membre(self):
         self.delete_lists()
-        print(self.canevas_list.winfo_width()+1)
-        self.list_identifiant = tk.Listbox(self.canevas_list, selectmode='browse' )
-        self.list_permission = tk.Listbox(self.canevas_list, selectmode='browse' )
-        self.list_role = tk.Listbox(self.canevas_list, selectmode='browse' )
+        print(self.canevas_list.winfo_width() + 1)
+        colonnes = ('Nom', 'Permission', 'Rôle')
+        self.list_identifiant = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
+                                             selectmode='browse')
+        self.list_identifiant.heading('Nom', text='Nom')
 
-        for num in self.data:
-            self.list_identifiant.insert(END, num)
-        self.list_identifiant.place(x=25, y=0)
+        data = []
+        for n in range(1, 50):
+            data.append((f'Employé {n}', f'Accès {n}', f'Rôle {n}'))
 
-        for num in self.data1:
-            self.list_permission.insert(END, num)
-        self.list_permission.place(x=125, y=0)
-
-        for num in self.data:
-            self.list_role.insert(END, num)
-        self.list_role.place(x=225, y=0)
+        self.list_identifiant.heading('Permission', text='Permission')
+        self.list_identifiant.heading('Rôle', text='Rôle')
+        self.list_identifiant.column('Rôle', anchor='center')
+        self.list_identifiant.column('Permission', anchor='center')
+        self.list_identifiant.column('Nom', anchor='center')
+        for emp in data:
+            self.list_identifiant.insert('', tk.END, values=emp)
+        self.list_identifiant.place(x=0, y=0)
 
     def populate_list(self):
         pass
@@ -75,11 +73,30 @@ class VueGestion(ttk.Frame):
         pass
 
     def clic_bouton_gestion_employe(self):
-        pass
+        selection = self.list_identifiant.selection()
+        if selection:
+            selection = self.list_identifiant.selection()
+            item = self.list_identifiant.item(selection[0])
+            record = item['values']
+            self.gerer_emp_module = Toplevel()
+            vue = VueGererEmp(self.gerer_emp_module, self, record)
+            vue.place(height=500, width=500)
+            self.gerer_emp_module.geometry("500x500")
+            self.gerer_emp_module.title("Gestion Employé")
+
+
+
+
+        else:
+            pass
+
+    def fermer_module_emp(self):
+        self.gerer_emp_module.destroy()
+
     def clic_bouton_projets(self):
-        #self.canevas_list.delete(self)
+        # self.canevas_list.delete(self)
         self.delete_lists()
-        #self.canevas_list.after(1000)
+        # self.canevas_list.after(1000)
 
         self.list_identifiant = tk.Listbox(self.canevas_list, selectmode='browse')
         self.list_permission = tk.Listbox(self.canevas_list, selectmode='browse')
@@ -96,7 +113,6 @@ class VueGestion(ttk.Frame):
         for num in self.data:
             self.list_role.insert(END, num)
         self.list_role.place(x=225, y=0)
-
 
     def clic_bouton_modules(self):
         # self.canevas_list.delete(self)
@@ -130,6 +146,3 @@ class VueGestion(ttk.Frame):
 
     def cacher_message(self):
         self.label_message['text'] = ''
-
-    #def list_box(self):
-       # self.w = Listbox()

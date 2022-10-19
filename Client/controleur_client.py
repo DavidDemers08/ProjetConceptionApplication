@@ -4,6 +4,8 @@ import json
 
 from sys import path
 
+from Client.module_gestion import ModuleGestion
+from Client.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -17,6 +19,11 @@ class Controleur_Client:
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion= vue_gestion
+
+    def afficher_gestion(self):
+        module_gestion = ModuleGestion(self)
+
+
 
 
     # On prépare et on envoie les infos, incluant
@@ -45,7 +52,7 @@ class Controleur_Client:
     def identifier_usager(self, nom, mdp):
         infos = {
             utils.FONCTION: utils.IDENTIFIER_USAGER,
-            utils.NOM: nom,
+            utils.NOM_USAGER: nom,
             utils.MDP: mdp
         }
         return self.appel_serveur(infos)
@@ -54,6 +61,16 @@ class Controleur_Client:
 
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
+
+    def afficher_membres(self):
+        a = {utils.FONCTION: utils.AFFICHER_MEMBRES}
+
+        return self.appel_serveur(a)
+
+    def afficher_compagnies(self):
+        a = {utils.FONCTION: utils.AFFICHER_COMPAGNIES}
+
+        return self.appel_serveur(a)
 
 
 # test

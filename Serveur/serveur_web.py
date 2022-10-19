@@ -3,6 +3,7 @@ from werkzeug.wrappers import Response
 from controleur_serveur import Controleur_Serveur
 from traceback import print_exc
 
+
 class Serveur_Web:
     __app = Flask(__name__)
     __app.secret_key = "toto1washere2"
