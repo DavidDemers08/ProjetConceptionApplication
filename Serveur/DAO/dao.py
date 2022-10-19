@@ -69,9 +69,13 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 '''
 DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
 INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
-SELECT_ALL_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
-SELECT_MEMBRE_DANS_COMPAGNIES = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
+
+SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
+SELECT_ALL_MEMBRES_DE_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie WHERE id_compagnie=?'
+SELECT_ID_FROM_MEMBRE_DE_COMPAGNIE = 'SELECT id FROM membre_dans_compagnie WHERE id_membre=? AND id_compagnie=?'
+
 DELETE_MEMBRE_FROM_COMPAGNIE = 'DELETE FROM membre_dans_compagnie WHERE id_membre=?'
+
 UPDATE_PERMISSION_MEMBRE = '''
 UPDATE membre_dans_compagnie
     SET permission_membre = ?
@@ -93,7 +97,12 @@ CREATE TABLE IF NOT EXISTS modules
 '''
 DROP_MODULES = 'DROP TABLE IF EXISTS modules'
 INSERT_MODULES = 'INSERT INTO modules(nom, version, prix_mensuel) VALUES(?, ?)'
+
 SELECT_MODULES = 'SELECT * FROM modules'
+SELECT_MODULE = 'SELLECT * FROM modules WHERE id=?'
+SELECT_MODULE_ID = 'SELECT id FROM modules WHERE nom=? AND version=?'
+
+DELETE_MODULES = 'DELETE FROM modules WHERE nom=? AND version=?'
 
 # ***************** ACCÈS *********************
 CREER_ACCES = '''
@@ -103,9 +112,15 @@ CREATE TABLE IF NOT EXISTS acces
     nom TEXT NOT NULL UNIQUE
 )
 '''
-DROP_ACCES = 'DROP TABLE IF EXISTS acces'
-INSERT_ACCES = 'INSERT INTO acces(nom) VALUES(?)'
-SELECT_ACCES = 'SELECT * FROM acces'
+DROP_ACCESS = 'DROP TABLE IF EXISTS acces'
+INSERT_ACCESS = 'INSERT INTO acces(nom) VALUES(?)'
+
+SELECT_ALL_ACCESS = 'SELECT * FROM acces'
+SELECT_ACCESS = 'SELECT * FROM acces WHERE id=?'
+SELECT_ACCESS_ID = 'SELECT id FROM acces WHERE nom=?'
+
+DELETE_ACCESS = 'DELETE FROM acces WHERE nom=? AND id=?'
+
 
 # ***************** MODULE PAR ACCÈS *********************
 CREER_MODULE_PAR_ACCES = '''
@@ -119,11 +134,15 @@ CREATE TABLE IF NOT EXISTS module_par_acces
     FOREIGN KEY(id_acces) REFERENCES acces(id)
 )
 '''
-DROP_MODULE_PAR_ACCES = 'DROP TABLE IF EXISTS module_par_acces'
-INSERT_MODULE_PAR_ACCES = 'INSERT INTO module_par_acces(id_module, id_acces) VALUES(?,?)'
-SELECT_MODULE_PAR_ACCES = 'SELECT * FROM module_par_acces'
+DROP_MODULE_PAR_ACCESS = 'DROP TABLE IF EXISTS module_par_acces'
+INSERT_MODULE_PAR_ACCESS = 'INSERT INTO module_par_acces(id_module, id_acces) VALUES(?,?)'
 
-# ***************** MODULE PAR ACCÈS *********************
+SELECT_ALL_MODULE_PAR_ACCESS = 'SELECT * FROM module_par_acces WHERE id_acces=?'
+
+DELETE_ACCESS_POUR_MODULE = 'DELETE FROM module_par_acces WHERE id_module=? AND id_acces=?'
+
+
+# ***************** ACCÈS PAR MEMBRE *********************
 CREER_ACCES_PAR_MEMBRE = '''
 CREATE TABLE IF NOT EXISTS acces_par_membre
 (
@@ -137,7 +156,10 @@ CREATE TABLE IF NOT EXISTS acces_par_membre
 '''
 DROP_ACCES_PAR_MEMBRE = 'DROP TABLE IF EXISTS acces_par_membre'
 INSERT_ACCES_PAR_MEMBRE = 'INSERT INTO acces_par_membre(id_module, id_acces) VALUES(?,?)'
-SELECT_ACCES_PAR_MEMBRE = 'SELECT * FROM acces_par_membre'
+
+SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM acces_par_membre WHERE id_acces=?'
+
+DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM acces_par_membre WHERE id_membre=? AND id_acces=?'
 
 
 class Dao:
@@ -152,9 +174,9 @@ class Dao:
     ]
     __detruire = [
         DROP_ACCES_PAR_MEMBRE,
-        DROP_MODULE_PAR_ACCES,
+        DROP_MODULE_PAR_ACCESS,
         DROP_MEMBRE_DANS_COMPAGNIE,
-        DROP_ACCES,
+        DROP_ACCESS,
         DROP_MODULES,
         DROP_MEMBRE,
         DROP_COMPAGNIE
@@ -197,7 +219,7 @@ class Dao:
         return self.cur.fetchall()
 
     def select_membres_all_compagnie(self):
-        self.cur.execute(SELECT_ALL_MEMBRE_DANS_COMPAGNIE)
+        self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE)
         return self.cur.fetchall()
 
     def select_id_of_compagnie(self, name):
@@ -225,11 +247,11 @@ class Dao:
         self.conn.commit()
 
     def insert_acces(self, nom):
-        self.cur.execute(INSERT_ACCES, (nom,))
+        self.cur.execute(INSERT_ACCESS, (nom,))
         self.conn.commit()
 
     def insert_module_par_acces(self, id_module, id_acces):
-        self.cur.execute(INSERT_MODULE_PAR_ACCES, (id_module, id_acces))
+        self.cur.execute(INSERT_MODULE_PAR_ACCESS, (id_module, id_acces))
         self.conn.commit()
 
     # ***************** DELETE
