@@ -25,12 +25,17 @@ def select(dao):
     for rangee in dao.select_membres_all_compagnie():
         print(rangee)
 
+    print('\nMembre dans compagnie')
+    for rangee in dao.select_membres_all_compagnie():
+        print(rangee)
+
+
 def delete(dao):
     dao.delete_membre('toto')
 
 
 def update(dao):
-    dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion',permission_membre='Chef', nom_compagnie='Laval')
+    dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef', nom_compagnie='Laval')
 
 def main():
     bd = Dao()
