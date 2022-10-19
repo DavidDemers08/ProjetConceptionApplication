@@ -3,6 +3,9 @@ import urllib.parse
 import json
 
 from sys import path
+
+from Client.module_gestion import ModuleGestion
+from Client.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -16,6 +19,10 @@ class Controleur_Client:
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion= vue_gestion
+
+    def afficher_gestion(self):
+        module_gestion = ModuleGestion(self)
+
 
 
 
