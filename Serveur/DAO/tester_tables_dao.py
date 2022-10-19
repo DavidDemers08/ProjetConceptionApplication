@@ -37,9 +37,9 @@ def select(dao):
 def delete(dao):
     dao.delete_membre('toto')
 
-def getid(dao):
-    print("\nMon id membre",dao.get_membre_id('toto'))
-    print("Mon id module",dao.get_module_id('valorant','3.19'))
+def get_id(dao):
+    print("\nMon id membre", dao.get_membre_id('toto'))
+    print("Mon id module", dao.get_module_id('valorant','3.19'))
 
 def update(dao):
     dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef', nom_compagnie='Laval')
@@ -51,7 +51,7 @@ def main():
     select(bd)
     update(bd)
     select(bd)
-    getid(bd)
+    get_id(bd)
 
     print('\nIdentifier l\'usager')
     print(bd.identifier_usager('toto', 'totototo'))
