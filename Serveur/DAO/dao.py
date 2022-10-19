@@ -23,6 +23,15 @@ INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) 
 SELECT_MEMBRE = 'SELECT * FROM membre'
 SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
 DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'
+UPDATE_MEMBRE = ''' 
+UPDATE membre
+    SET prenom = ?,
+    nom = ?,
+    titre = ?,
+    identifiant = ?
+WHERE id = ?
+'''
+
 
 # ***************** COMPAGNIE *********************
 
@@ -39,13 +48,14 @@ CREATE TABLE IF NOT EXISTS compagnie
 DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
 INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?)'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie'
-SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE name =?'
+SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom =?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
 CREER_MEMBRE_DANS_COMPAGNIE = '''
 CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     id_compagnie INTEGER NOT NULL,
     id_membre INTEGER NOT NULL,
     permission_membre TEXT NOT NULL,
@@ -58,7 +68,11 @@ DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
 INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
 SELECT_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 DELETE_MEMBRE_FROM_COMPAGNIE = 'DELETE FROM membre_dans_compagnie WHERE id_membre=?'
-
+UPDATE_PERMISSION_MEMBRE = '''
+UPDATE membre_dans_compagnie
+    SET permission_membre = ?
+WHERE id_membre = ? AND id_compagnie = ?
+'''
 
 # ***************** MODULES *********************
 
@@ -175,6 +189,19 @@ class Dao():
         '''
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
+
+    def update_membre(self, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
+        id_membre = self.get_membre_id(identifiant)
+        if (permission_membre is not None) and (nom_compagnie is not None):
+            self.update_permission_membre(id_membre, nom_compagnie, permission_membre)
+
+        self.cur.execute(UPDATE_MEMBRE, (nom, prenom, titre, identifiant, id_membre))
+        self.conn.commit()
+
+    def update_permission_membre(self, id_membre, nom_compagnie, permission_membre):
+        id_compagnie = self.select_id_of_compagnie(nom_compagnie)
+        self.cur.execute(UPDATE_PERMISSION_MEMBRE, (permission_membre, id_membre, id_compagnie))
+        self.conn.commit()
 
 
 def main():

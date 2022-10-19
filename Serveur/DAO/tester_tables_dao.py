@@ -28,12 +28,17 @@ def select(dao):
 def delete(dao):
     dao.delete_membre('toto')
 
+
+def update(dao):
+    dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion',permission_membre='Chef', nom_compagnie='Laval')
+
 def main():
     bd = Dao()
     bd.creer_bd()
     insert(bd)
     select(bd)
-    delete(bd)
+    update(bd)
+    select(bd)
 
     print('\nIdentifier l\'usager')
     print(bd.identifier_usager('toto', 'totototo'))
