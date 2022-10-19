@@ -9,14 +9,15 @@ FONCTION = 'fonction'
 
 # identifier_usager
 IDENTIFIER_USAGER = 'identifier_usager'
-NOM = 'nom'
+NOM_USAGER = 'nom_usager'
 MDP = 'mdp'
 
 # creer compte ville
 CREER_COMPTE_VILLE = 'creer_compte_ville'
 NOM_VILLE = 'nom_ville'
-NOM_ADMIN = 'nom_admin'
-MDP_ADMIN = 'mdp_admin'
 PAYS = "pays"
 PROVINCE = "province"
 REGION = "region"
+GENRE = "genre"
+PRENOM= "prenom"
+NOM = "nom"

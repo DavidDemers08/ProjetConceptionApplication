@@ -35,7 +35,7 @@ class Controleur_Serveur:
     # instance de sqlite3 doit être utilisée dans le même
     # thread que celui de sa création
     def identifier_usager(self, form):
-        nom = form[utils.NOM]
+        nom = form[utils.NOM_USAGER]
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
 
@@ -43,14 +43,16 @@ class Controleur_Serveur:
         try:
             Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
             id_compagnie = Dao().select_id_of_compagnie(form[utils.NOM_VILLE])
-            self.creer_compte_admin(form[utils.NOM_ADMIN], form[utils.MDP_ADMIN], id_compagnie)
+
+            #self.creer_compte_admin(nom=form[utils.NOM],prenom= form[utils.PRENOM],id_compagnie= id_compagnie,genre=form[utils.GENRE],mdp_admin=form[utils.MDP],identifiant=form[utils.NOM_USAGER])
+
             return f"la ville suivante a été ajoutée : {form[utils.NOM_VILLE]} ainsi que l'administrateur suivant : " \
-                   f"{form[utils.NOM_ADMIN]} "
+                   f"{form[utils.NOM_USAGER]} "
         except:
             return "Impossible d'ajouter votre compagnie"
 
     def creer_usager(self, form):
-        prenom = form[utils.NOM]
+        prenom = form[utils.PRENOM]
         identifiant = form[utils.IDENTIFIANT]
         mdp = form[utils.MDP]
         titre = form[utils.TITRE]
@@ -58,8 +60,12 @@ class Controleur_Serveur:
         id_compagnie = form[utils.ID_COMPAGNIE]
         permission = form[utils.PERMISSION]
 
-    def creer_compte_admin(self, nom_admin: str, mdp_admin: str, id_compagnie: int) -> str:
-        # permission ultime
-        pass
+    def creer_compte_admin(self, identifiant: str, mdp_admin: str, id_compagnie: int,genre: str ,nom: str,prenom:str) -> str:
+        try:
+            Dao.insert_membre(self=self,prenom=prenom,nom=nom,identifiant=identifiant,mdp=mdp_admin,id_compagnie=id_compagnie,titre="admin",permission="1",genre=genre)
+        except:
+            print(Exception)
+            print("erreur icitte")
+
 
 

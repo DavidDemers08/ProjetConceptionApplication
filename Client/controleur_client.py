@@ -45,7 +45,7 @@ class Controleur_Client:
     def identifier_usager(self, nom, mdp):
         infos = {
             utils.FONCTION: utils.IDENTIFIER_USAGER,
-            utils.NOM: nom,
+            utils.NOM_USAGER: nom,
             utils.MDP: mdp
         }
         return self.appel_serveur(infos)

@@ -100,12 +100,12 @@ class Vue(ttk.Frame):
         self.input_nom_compagnie = ttk.Entry(self, textvariable=self.var_nom_compagnie, width=30)
         self.input_nom_compagnie.grid(row=1, column=1, sticky=tk.E)
 
-        self.label_nom_admin = ttk.Label(self, text='Nom utilisateur Admin ')
-        self.label_nom_admin.grid(row=2, column=0, pady=(5, 0), sticky=tk.E)
+        self.label_uti_admin = ttk.Label(self, text='Nom utilisateur Admin ')
+        self.label_uti_admin.grid(row=2, column=0, pady=(5, 0), sticky=tk.E)
 
-        self.var_nom_admin = tk.StringVar()
-        self.input_nom_admin = ttk.Entry(self, textvariable=self.var_nom_admin, width=30)
-        self.input_nom_admin.grid(row=2, column=1, sticky=tk.E)
+        self.var_uti_admin = tk.StringVar()
+        self.input_uti_admin = ttk.Entry(self, textvariable=self.var_uti_admin, width=30)
+        self.input_uti_admin.grid(row=2, column=1, sticky=tk.E)
 
         self.label_mdp_admin = ttk.Label(self, text='Mot de passe Admin ')
         self.label_mdp_admin.grid(row=3, column=0, pady=(5, 0), sticky=tk.E)
@@ -113,6 +113,8 @@ class Vue(ttk.Frame):
         self.var_mdp_admin = tk.StringVar()
         self.input_mdp_admin = ttk.Entry(self, textvariable=self.var_mdp_admin, show="*", width=30)
         self.input_mdp_admin.grid(row=3, column=1, sticky=tk.E)
+
+
 
         self.label_pays = ttk.Label(self, text='pays ')
         self.label_pays.grid(row=4, column=0, pady=(5, 0), sticky=tk.E)
@@ -137,24 +139,49 @@ class Vue(ttk.Frame):
 
         self.bouton_enregister_ville = ttk.Button(self, text='Enregistrer', command=self.clic_bouton_enregistrer_ville)
         self.bouton_enregister_ville.bind('<Return>', lambda e: self.bouton_enregister_ville.invoke())
-        self.bouton_enregister_ville.grid(row=7, column=1, pady=(10, 0), sticky=tk.E)
+        self.bouton_enregister_ville.grid(row=11, column=1, pady=(10, 0), sticky=tk.E)
+
+        self.label_nom_admin = ttk.Label(self, text='Nom Admin')
+        self.label_nom_admin.grid(row=8, column=0, pady=(5, 0), sticky=tk.E)
+        self.var_nom_admin = tk.StringVar()
+        self.input_nom_admin = ttk.Entry(self, textvariable=self.var_nom_admin, width=30)
+        self.input_nom_admin.grid(row=8, column=1, sticky=tk.E)
+
+        self.label_prenom_admin = ttk.Label(self, text='Prenom Admin')
+        self.label_prenom_admin.grid(row=9, column=0, pady=(5, 0), sticky=tk.E)
+        self.var_prenom_admin = tk.StringVar()
+        self.input_prenom_admin = ttk.Entry(self, textvariable=self.var_prenom_admin, width=30)
+        self.input_prenom_admin.grid(row=9, column=1, sticky=tk.E)
+
+        self.label_genre_admin = ttk.Label(self, text='Genre Admin (H/F)')
+        self.label_genre_admin.grid(row=10, column=0, pady=(5, 0), sticky=tk.E)
+        self.var_genre_admin = tk.StringVar()
+        self.input_genre_admin = ttk.Entry(self, textvariable=self.var_genre_admin, width=30)
+        self.input_genre_admin.grid(row=10, column=1, sticky=tk.E)
 
     def clic_bouton_enregistrer_ville(self):
-        nom = self.var_nom_compagnie.get()
-        nom_admin = self.var_nom_admin.get()
+        nom_compagnie = self.var_nom_compagnie.get()
+        uti_admin = self.var_uti_admin.get()
         mdp = self.var_mdp_admin.get()
         pays = self.var_pays.get()
         province = self.var_province.get()
         region = self.var_region.get()
-        args = {Utils.utils.NOM_VILLE: nom,
-                Utils.utils.NOM_ADMIN: nom_admin,
-                Utils.utils.MDP_ADMIN: mdp,
+        genre = self.var_genre_admin.get()
+        nom = self.var_nom_admin.get()
+        prenom = self.var_prenom_admin.get()
+
+        args = {Utils.utils.NOM_VILLE: nom_compagnie,
+                Utils.utils.NOM_USAGER: uti_admin,
+                Utils.utils.MDP: mdp,
                 Utils.utils.PAYS: pays,
                 Utils.utils.PROVINCE: province,
-                Utils.utils.REGION: region
+                Utils.utils.REGION: region,
+                Utils.utils.GENRE: genre,
+                Utils.utils.NOM: nom,
+                Utils.utils.PRENOM: prenom
                 }
 
-        if nom and nom_admin and mdp and pays and province and region:
+        if nom_compagnie and uti_admin and mdp and pays and province and region and genre  and prenom and nom:
             reponse = self.controleur.creer_compte_ville(**args)
             print(reponse)
             self.vider_frame()
