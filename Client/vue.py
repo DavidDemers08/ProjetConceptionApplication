@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 import Utils.utils
+from Serveur.DAO.dao import Dao
 
 
 class Vue(ttk.Frame):
@@ -189,3 +190,4 @@ class Vue(ttk.Frame):
 
         else:
             print("Un des champs est vide")
+            print(self.controleur.voir_membre())
