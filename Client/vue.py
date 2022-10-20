@@ -10,6 +10,7 @@ class Vue(ttk.Frame):
         super().__init__(parent)
         self.controleur = None
         self.remplir_vue()
+        self.parent = parent
 
     def set_controleur(self, controleur):
         self.controleur = controleur

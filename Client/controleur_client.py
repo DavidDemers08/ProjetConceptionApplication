@@ -18,10 +18,11 @@ class Controleur_Client:
         self.vue = vue
 
     def set_vue_gestion(self, vue_gestion):
-        self.vue_gestion= vue_gestion
+        self.vue_gestion = vue_gestion
 
     def afficher_gestion(self):
-        module_gestion = ModuleGestion(self)
+        self.vue.master.destroy()
+        ModuleGestion(self)
 
 
 

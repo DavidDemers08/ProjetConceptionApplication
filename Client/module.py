@@ -9,7 +9,6 @@ class Module(Tk):
         super().__init__()
         controleur = Controleur_Client()
 
-
         vue = Vue(self)
         vue.grid(row=0, column=0, padx=10, pady=10)
         vue.set_controleur(controleur)
