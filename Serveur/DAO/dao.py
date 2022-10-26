@@ -94,7 +94,7 @@ class Dao:
     # (un membre peut être là plusieurs fois)
     def select_membres_all_compagnie(self):
         self.cur.execute(SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE)
-        return self.cur.fetchall()[0]
+        return self.cur.fetchall()
 
     # retourne tous les membres d'une compagnie
     def select_all_membres_de_compagnie(self, nom_compagnie):
