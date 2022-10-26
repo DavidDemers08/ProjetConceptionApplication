@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from vue_gerer_emp import VueGererEmp
+
+from Client.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
@@ -49,25 +50,27 @@ class VueGestion(ttk.Frame):
         self.delete_lists()
         print(self.canevas_list.winfo_width() + 1)
         colonnes = ('Nom', 'Permission', 'Rôle')
-        self.list_identifiant = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
+        self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                              selectmode='browse')
-        self.list_identifiant.heading('Nom', text='Nom')
+        self.liste.heading('Nom', text='Nom')
 
         data = []
         for n in range(1, 50):
             data.append((f'Employé {n}', f'Accès {n}', f'Rôle {n}'))
 
-        self.list_identifiant.heading('Permission', text='Permission')
-        self.list_identifiant.heading('Rôle', text='Rôle')
-        self.list_identifiant.column('Rôle', anchor='center')
-        self.list_identifiant.column('Permission', anchor='center')
-        self.list_identifiant.column('Nom', anchor='center')
+        self.liste.heading('Permission', text='Permission')
+        self.liste.heading('Rôle', text='Rôle')
+        self.liste.column('Rôle', anchor='center')
+        self.liste.column('Permission', anchor='center')
+        self.liste.column('Nom', anchor='center')
         for emp in data:
-            self.list_identifiant.insert('', tk.END, values=emp)
-        self.list_identifiant.place(x=0, y=0)
+            self.liste.insert('', tk.END, values=emp)
+        self.liste.place(x=0, y=0)
 
     def populate_list(self):
         pass
+
+
 
     def start_module_gerer_emp(self, params):
         self.gerer_emp_module = Toplevel()
@@ -77,18 +80,12 @@ class VueGestion(ttk.Frame):
         self.gerer_emp_module.title("Gestion Employé")
 
     def clic_bouton_gestion_employe(self):
-        selection = self.list_identifiant.selection()
+        selection = self.liste.selection()
         if selection:
-            selection = self.list_identifiant.selection()
-            item = self.list_identifiant.item(selection[0])
+            item = self.liste.item(selection[0])
             record = item['values']
             self.start_module_gerer_emp(record)
 
-
-
-
-        else:
-            pass
 
     def fermer_module_emp(self):
         self.gerer_emp_module.destroy()
@@ -98,13 +95,13 @@ class VueGestion(ttk.Frame):
         self.delete_lists()
         # self.canevas_list.after(1000)
 
-        self.list_identifiant = tk.Listbox(self.canevas_list, selectmode='browse')
+        self.liste = tk.Listbox(self.canevas_list, selectmode='browse')
         self.list_permission = tk.Listbox(self.canevas_list, selectmode='browse')
         self.list_role = tk.Listbox(self.canevas_list, selectmode='browse')
 
         for num in self.data1:
-            self.list_identifiant.insert(END, num)
-        self.list_identifiant.place(x=25, y=0)
+            self.liste.insert(END, num)
+        self.liste.place(x=25, y=0)
 
         for num in self.data:
             self.list_permission.insert(END, num)
@@ -115,14 +112,30 @@ class VueGestion(ttk.Frame):
         self.list_role.place(x=225, y=0)
 
     def clic_bouton_modules(self):
-        # self.canevas_list.delete(self)
         self.delete_lists()
-        # self.canevas_list.after(1000)
-        self.list_role = tk.Listbox(self.canevas_list, selectmode='browse')
 
-        for num in self.data:
-            self.list_role.insert(END, num)
-        self.list_role.place(x=0, y=0)
+        colonnes = ('Modules',)
+        self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
+                                             selectmode='browse')
+        self.liste.heading('Modules', text='Modules disponibles:')
+
+        data = []
+        data.append(('Gestion Budget',))
+        data.append(('Gestion Inventaire',))
+        data.append(('Gestion Événements',))
+        data.append(('Gestion Propriétés',))
+        self.liste.column('Modules', anchor='center')
+        self.liste.column('Modules', width=600)
+        for module in data:
+            self.liste.insert('', tk.END, values=module)
+        self.liste.place(x=0, y=0)
+        self.liste.bind("<Double-1>", self.start_module)
+
+    def start_module(self, arg):
+        selection = self.liste.selection()
+        item = self.liste.item(selection[0])
+        record = item['values']
+        print(record)
 
     def clic_bouton_annuler(self):
         self.var_nom.set('')
