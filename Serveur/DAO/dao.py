@@ -1,6 +1,6 @@
 import sqlite3
-from tables_requetes_SaaS import *
-from dao_modules import *
+from Serveur.DAO.dao_modules import *
+from Serveur.DAO.tables_requetes_SaaS import *
 
 # singleton pas possible car:
 # sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread.
