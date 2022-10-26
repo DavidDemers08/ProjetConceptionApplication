@@ -55,11 +55,12 @@ def delete(dao):
 
 def get_id(dao):
     print("\nMon id membre", dao.get_membre_id('toto'))
-    print("Mon id module", dao.get_module_id('valorant','3.19'))
+    print("Mon id module", dao.get_module_id('valorant', '3.19'))
 
 def update(dao):
-    dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef', nom_compagnie='Laval')
-
+    pass
+    #dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef', nom_compagnie='Laval')
+    #dao.insert_multiple_modules_pour_acces(id_acces=1, modules_id=[1, 2])
 
 
 
@@ -67,6 +68,7 @@ def main():
     bd = Dao()
     bd.creer_bd()
     insert(bd)
+    update(bd)
     select_main_tables(bd)
     select_link_tables(bd)
     return 0

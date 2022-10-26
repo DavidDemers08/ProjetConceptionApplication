@@ -126,6 +126,16 @@ class Dao:
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
+        # check acces if exist
+        id_access_initial = self.get_access_id(nom_access)
+
+        if id_access_initial is None:
+            self.insert_acces(nom_access)
+            id_access = self.get_access_id(nom_access)
+            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+        else:
+            id_access = id_access_initial
+            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
 
     def insert_modules(self):
@@ -251,7 +261,6 @@ class Dao:
 
     # TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
     def insert_membre_a_acces(self, membre_id, id_access):
-        print(membre_id, f'access : {id_access}')
         self.cur.execute(INSERT_MEMBRE_A_ACCESS, (membre_id, id_access[0]))
         self.conn.commit()
 
