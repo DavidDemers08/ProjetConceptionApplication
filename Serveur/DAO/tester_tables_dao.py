@@ -14,8 +14,9 @@ def insert(dao):
     dao.insert_module('valorant', '3.19', '37.77', 'C:\\Users\\1569047\\Pictures\\Saved')
     dao.insert_module('League', '4.20', '50.80', 'C:\\Users\\1569047\\Pictures')
 
+    # dao.insert_module_pour_un_access()
 
-def select(dao):
+def select_main_tables(dao):
     print('\nCompagnie')
     for rangee in dao.select_all_compagnies():
         print(rangee)
@@ -64,7 +65,7 @@ def main():
     bd = Dao()
     bd.creer_bd()
     insert(bd)
-    select(bd)
+    select_main_tables(bd)
     select_link_tables(bd)
     return 0
 

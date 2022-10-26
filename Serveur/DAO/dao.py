@@ -211,7 +211,7 @@ class Dao:
         self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))
         self.conn.commit()
 
-    def insert_module_par_acces(self, id_module, id_acces):
+    def insert_module_pour_un_access(self, id_module, id_acces):
         self.cur.execute(INSERT_MODULE_PAR_ACCESS, (id_module, id_acces))
         self.conn.commit()
 
