@@ -23,7 +23,8 @@ class Controleur_Serveur:
             utils.CREER_COMPTE_VILLE: self.creer_compte_ville,
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
-            utils.CREER_ACCES : self.creer_acces
+            utils.CREER_ACCES: self.creer_acces,
+            utils.CREER_MODULES: self.creer_modules
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -75,30 +76,36 @@ class Controleur_Serveur:
         except:
             print(Exception)
 
-    def voir_membre(self):
+    def voir_membre(self, form):
         membre = []
         for rangee in Dao().select_all_membres():
             membre.append(rangee)
             print(rangee)
         return membre
 
-    def voir_compagnie(self):
+    def voir_compagnie(self, form):
         compagnie = []
         for rangee in Dao().select_all_compagnies():
             compagnie.append(rangee)
         return compagnie
 
-    def voir_membre_all_compagnie(self):
+    def voir_membre_all_compagnie(self, form):
         membre = []
         for rangee in Dao().select_membres_all_compagnie():
             membre.append(rangee)
         return membre
 
     def afficher_membres(self, form):
-        return self.voir_membre()
+        return self.voir_membre(form)
 
     def afficher_compagnies(self, form):
-        return self.voir_compagnie()
+        return self.voir_compagnie(form)
 
-    def creer_acces(self,form):
+    def creer_acces(self, form):
         return Dao().insert_acces(form[utils.NOM_ACCES])
+
+    def liaison_acces_module(self, form):
+        pass
+
+    def creer_modules(self, form):
+        return Dao().insert_modules()

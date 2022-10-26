@@ -29,3 +29,5 @@ AFFICHER_COMPAGNIES = "afficher_compagnies"
 
 CREER_ACCES = 'creer_acces'
 NOM_ACCES = 'nom_acces'
+
+CREER_MODULES = "creer_modules"

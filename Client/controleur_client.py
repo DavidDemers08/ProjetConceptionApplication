@@ -15,10 +15,12 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
-        self.creation_acces_admin()
+        pass
+        #self.creation_acces_admin()
 
     def set_vue(self, vue):
         self.vue = vue
+
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion = vue_gestion
@@ -72,12 +74,18 @@ class Controleur_Client:
 
         return self.appel_serveur(a)
 
-    def creation_acces_admin(self,):
+    def creation_acces_admin(self):
         a = {
             utils.FONCTION: utils.NOM_ACCES,
             utils.NOM_ACCES: 'Super Administrateur'
         }
         self.appel_serveur(a)
+
+    def creation_modules(self):
+        a = {
+            utils.FONCTION: utils.CREER_MODULES
+        }
+        return self.appel_serveur(a)
 
 
 

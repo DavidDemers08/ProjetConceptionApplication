@@ -2,7 +2,6 @@ import sqlite3
 from tables_requetes_SaaS import *
 from dao_modules import *
 
-
 # singleton pas possible car:
 # sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread.
 # The object was created in thread id 12960 and this is thread id 14996.
@@ -107,6 +106,7 @@ class Dao:
         self.cur.execute(SELECT_ALL_ACCESS)
         return self.cur.fetchall()
 
+
     def select_all_module_par_acces(self):
         self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_ACCESS)
         return self.cur.fetchall()
@@ -115,16 +115,41 @@ class Dao:
         self.cur.execute(SELECT_ALL_ACCES_POUR_ALL_MEMBRES)
         return self.cur.fetchall()
 
+
     def get_access_id(self, nom):
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchone()
 
-    # ***************** INSERT
+       
 
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str, nom_access: str):
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
+
+
+    def insert_modules(self):
+        pass
+        #self.cur.execute(CREER_MODULE, ("gestion", "permet de faire la gestion du personnel", 1.0, "le chemin de traverse", 34.44))
+        #self.conn.commit()
+
+        # self.cur.executemany(CREER_MODULE, [
+        #     ("gestion", "permet de faire la gestion du personnel", 1.0, "le chemin de traverse", 34.44),
+        #     ("propriete", "permet de montrer les propriete de la compagnie", 2.0, "le chemin de traverse2", 37.47),
+        #     ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 3.0, "le chemin de traverse3",
+        #      40.00),
+        #     ("evenement", "permet de faire la gestion des evenements de la compagnie", 4.0, "le chemin de traverse4",
+        #      9.99),
+        #     ("budget", "permet de faire la gestion du budget de la compagnie", 5.0, "le chemin de traverse5", 21.35),
+        #     ("employe", "permet de faire la gestion des employees de la compagnie", 6.0, "le chemin de traverse6",
+        #      21.21),
+        #     ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 7.0,
+        #      "le chemin de traverse7", 4.20),
+        #     ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 8.0, "le chemin de traverse8",
+        #      99.66),
+        #     ("materielle", "permet de faire la gestion du materiel de la compagnie", 9.0, "le chemin de traverse9",
+        #      23.21)])
+        #return self.select_all_modules()
 
         # check acces if exist
         id_access_initial = self.get_access_id(nom_access)
