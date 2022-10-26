@@ -9,6 +9,8 @@ def insert(dao):
     dao.insert_membre('To', 'To', identifiant='toto', mdp='totototo', titre='admin', genre='homme',
                       id_compagnie=2, permission='ALL', nom_access='Dieu')
     dao.insert_membre('Ta', 'Ta', identifiant='tata', mdp='tatatata', titre='admin', genre='femme',
+                      id_compagnie=1, permission='ALL')
+    dao.insert_membre('ge', 'ge', identifiant='gege', mdp='gegegege', titre='admin', genre='homme',
                       id_compagnie=1, permission='ALL', nom_access='Concierge')
 
     dao.insert_module('valorant', '3.19', '37.77', 'C:\\Users\\1569047\\Pictures\\Saved')

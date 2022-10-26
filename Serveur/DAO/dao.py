@@ -120,6 +120,7 @@ class Dao:
         return self.cur.fetchone()
 
     # ***************** INSERT
+
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str, nom_access: str):
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
