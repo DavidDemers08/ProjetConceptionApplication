@@ -53,9 +53,11 @@ class VueGestion(ttk.Frame):
                                              selectmode='browse')
         self.liste.heading('Nom', text='Nom')
 
+
         data = []
         for n in range(1, 50):
             data.append((f'Employé {n}', f'Accès {n}', f'Rôle {n}'))
+
 
         self.liste.heading('Permission', text='Permission')
         self.liste.heading('Rôle', text='Rôle')
@@ -66,9 +68,9 @@ class VueGestion(ttk.Frame):
             self.liste.insert('', tk.END, values=emp)
         self.liste.place(x=0, y=0)
 
+
     def populate_list(self):
         pass
-
 
 
     def start_module_gerer_emp(self, params):
@@ -79,6 +81,7 @@ class VueGestion(ttk.Frame):
         self.gerer_emp_module.title("Gestion Employé")
 
     def clic_bouton_gestion_employe(self):
+
         selection = self.liste.selection()
         if selection:
             item = self.liste.item(selection[0])
@@ -94,6 +97,7 @@ class VueGestion(ttk.Frame):
         # self.canevas_list.after(1000)
 
         self.liste = tk.Listbox(self.canevas_list, selectmode='browse')
+
         self.list_permission = tk.Listbox(self.canevas_list, selectmode='browse')
         self.list_role = tk.Listbox(self.canevas_list, selectmode='browse')
 
@@ -134,6 +138,7 @@ class VueGestion(ttk.Frame):
         item = self.liste.item(selection[0])
         record = item['values']
         print(record)
+
 
     def clic_bouton_annuler(self):
         self.var_nom.set('')
