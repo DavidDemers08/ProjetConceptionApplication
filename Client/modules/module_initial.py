@@ -14,7 +14,7 @@ class Module(Tk):
         vue.grid(row=0, column=0, padx=10, pady=10)
         vue.set_controleur(controleur)
         controleur.set_vue(vue)
-        controleur.creation_modules()
+        print(controleur.creation_modules())
 
 
 def main():
