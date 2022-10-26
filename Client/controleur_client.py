@@ -83,7 +83,7 @@ class Controleur_Client:
 
     def creation_modules(self):
         a = {
-            utils.FONCTION: utils.CREER_MODULES
+            utils.FONCTION: utils.AFFICHER_MODULES
         }
         return self.appel_serveur(a)
 
