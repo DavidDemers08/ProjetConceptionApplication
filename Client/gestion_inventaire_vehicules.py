@@ -1,21 +1,18 @@
 from traceback import print_exc
 from tkinter import Tk
-from vue_gestion import VueGestion
-from vue_gerer_emp import VueGererEmp
+from vue_gestion_inventaire_vehicules import VueGestionInventaireVehicules
 from controleur_client import Controleur_Client
 
 class Module_Gestion(Tk):
     def __init__(self):
         super().__init__()
-        self.controleur = Controleur_Client()
+        controleur = Controleur_Client()
 
         # peut-être éventuellement dans une sous-classe
-        vue_gestion = VueGestion(self)
-        vue_gestion.grid(row=3, column=3, padx=10, pady=10)
-        vue_gestion.set_controleur(self.controleur)
-        self.controleur.set_vue_gestion(vue_gestion)
-
-
+        vue_gestion_inventaire_vehicules = VueGestionInventaireVehicules(self)
+        vue_gestion_inventaire_vehicules.grid(row=9, column=5, padx=10, pady=10)
+        vue_gestion_inventaire_vehicules.set_controleur(controleur)
+        controleur.set_vue_gestion(vue_gestion_inventaire_vehicules)
 
 def main():
     try:

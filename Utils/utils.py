@@ -25,3 +25,7 @@ AFFICHER_MEMBRES = "afficher_membres"
 
 
 AFFICHER_COMPAGNIES = "afficher_compagnies"
+
+
+CREER_ACCES = 'creer_acces'
+NOM_ACCES = 'nom_acces'
