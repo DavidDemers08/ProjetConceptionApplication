@@ -16,7 +16,6 @@ class VueGestionAjout(ttk.Frame):
     def remplir_vue_gestion_ajout(self):
         self.populate_window()
 
-
     def populate_window(self):
         self.photo_pwd = PhotoImage(file=r"..\Media\Images\show_pwd.png",width=20 ,height=20)
         self.titre_module = ttk.Label(self, text='Ajout Membre')

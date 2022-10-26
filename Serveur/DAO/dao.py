@@ -277,6 +277,11 @@ class Dao:
 
     # ***************** INSERT
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie, permission):
+
+        if self.get_access_id(permission) is None:
+            pass
+            #ajouter acces + link tables
+
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()

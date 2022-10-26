@@ -1,8 +1,10 @@
 from traceback import print_exc
 from tkinter import Tk
-from vue_gestion import VueGestion
-from vue_gerer_emp import VueGererEmp
-from controleur_client import Controleur_Client
+
+from Client.controleur_client import Controleur_Client
+from Client.vues.vue_gestion import VueGestion
+from Client.vues.vue_gerer_emp import VueGererEmp
+
 
 class Module_Gestion(Tk):
     def __init__(self):
@@ -16,7 +18,6 @@ class Module_Gestion(Tk):
         self.controleur.set_vue_gestion(vue_gestion)
 
 
-
 def main():
     try:
         module = Module_Gestion()
@@ -25,6 +26,7 @@ def main():
         print_exc()
         return 1
     return 0
+
 
 if __name__ == '__main__':
     quit(main())

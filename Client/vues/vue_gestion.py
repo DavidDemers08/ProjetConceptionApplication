@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from vue_gerer_emp import VueGererEmp
+from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
@@ -83,9 +83,6 @@ class VueGestion(ttk.Frame):
             item = self.list_identifiant.item(selection[0])
             record = item['values']
             self.start_module_gerer_emp(record)
-
-
-
 
         else:
             pass

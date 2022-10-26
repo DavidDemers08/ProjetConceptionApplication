@@ -4,8 +4,8 @@ import json
 
 from sys import path
 
-from Client.module_gestion import ModuleGestion
-from Client.vue_gestion import VueGestion
+from Client.modules.module_gestion import ModuleGestion
+from Client.vues.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -14,6 +14,9 @@ path.append('../Utils')
 
 # class Controleur_Client(Controleur):
 class Controleur_Client:
+    def __init__(self):
+        self.creation_acces_admin()
+
     def set_vue(self, vue):
         self.vue = vue
 
@@ -24,15 +27,11 @@ class Controleur_Client:
         self.vue.master.destroy()
         ModuleGestion(self)
 
-
-
-
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
     # les reliera au controleur_serveur qui, lui
     # communiquera avec la BD
     # La réponse est json-ifiée
-
 
     def appel_serveur(self, args):
         # on encode les données en format url
@@ -72,6 +71,14 @@ class Controleur_Client:
         a = {utils.FONCTION: utils.AFFICHER_COMPAGNIES}
 
         return self.appel_serveur(a)
+
+    def creation_acces_admin(self,):
+        a = {
+            utils.FONCTION: utils.NOM_ACCES,
+            utils.NOM_ACCES: 'Super Administrateur'
+        }
+        self.appel_serveur(a)
+
 
 
 # test
