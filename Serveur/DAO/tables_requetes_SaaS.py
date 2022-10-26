@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS module_par_access
     id_module  INTEGER NOT NULL,
     id_access INTEGER NOT NULL,
 
-    FOREIGN KEY(id_module) REFERENCES module(id),
+    FOREIGN KEY(id_module) REFERENCES modules(id),
     FOREIGN KEY(id_access) REFERENCES access(id)
 )
 '''
