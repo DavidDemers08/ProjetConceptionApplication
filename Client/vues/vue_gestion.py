@@ -33,7 +33,7 @@ class VueGestion(ttk.Frame):
         self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
         self.lWidth = int(self.canevas_list.winfo_width() / 3)
 
-        self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre', command=self.clic_bouton_ajout_membre)
+        self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre', command=lambda: self.start_module_gerer_emp(None))
         self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
 
         self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
@@ -69,8 +69,12 @@ class VueGestion(ttk.Frame):
     def populate_list(self):
         pass
 
-    def clic_bouton_ajout_membre(self):
-        pass
+    def start_module_gerer_emp(self, params):
+        self.gerer_emp_module = Toplevel()
+        vue = VueGererEmp(self, params)
+        vue.place(height=500, width=500)
+        self.gerer_emp_module.geometry("500x500")
+        self.gerer_emp_module.title("Gestion Employé")
 
     def clic_bouton_gestion_employe(self):
         selection = self.list_identifiant.selection()
@@ -78,11 +82,7 @@ class VueGestion(ttk.Frame):
             selection = self.list_identifiant.selection()
             item = self.list_identifiant.item(selection[0])
             record = item['values']
-            self.gerer_emp_module = Toplevel()
-            vue = VueGererEmp(self.gerer_emp_module, self, record)
-            vue.place(height=500, width=500)
-            self.gerer_emp_module.geometry("500x500")
-            self.gerer_emp_module.title("Gestion Employé")
+            self.start_module_gerer_emp(record)
 
         else:
             pass
