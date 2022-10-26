@@ -9,18 +9,18 @@ from Client.vues.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
+
+
 # import Utils.utils as utils
 
 
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
-        pass
-        #self.creation_acces_admin()
+        self.username = None
 
     def set_vue(self, vue):
         self.vue = vue
-
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion = vue_gestion
@@ -60,7 +60,6 @@ class Controleur_Client:
         return self.appel_serveur(infos)
 
     def creer_compte_ville(self, **args_ville):
-
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
@@ -87,6 +86,11 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_access(self):
+        a = {
+            utils.FONCTION: utils.GET_ACCESS
+        }
+        return self.appel_serveur(a)
 
 
 # test

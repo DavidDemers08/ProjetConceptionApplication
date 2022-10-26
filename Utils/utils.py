@@ -31,3 +31,6 @@ CREER_ACCES = 'creer_acces'
 NOM_ACCES = 'nom_acces'
 
 AFFICHER_MODULES = "afficher_modules"
+
+
+GET_ACCESS = "get_access"

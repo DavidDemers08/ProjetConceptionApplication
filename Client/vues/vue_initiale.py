@@ -55,7 +55,9 @@ class Vue(ttk.Frame):
             # message d'erreur par controleur ou par vue?
             reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
             if len(reponse):
+                self.controleur.username=self.var_nom.get()
                 self.controleur.afficher_gestion()
+
             else:
                 self.afficher_erreur(f'Nom ou mot de passe incorrects')
 

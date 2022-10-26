@@ -13,6 +13,8 @@ class VueGestion(ttk.Frame):
 
     def set_controleur(self, controleur):
         self.controleur = controleur
+        print(self.controleur.username)
+        # self.acces = self.controleur.get_access()
 
     def remplir_vue_gestion(self):
 
