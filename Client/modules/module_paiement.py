@@ -1,9 +1,8 @@
 from tkinter import Tk
 from traceback import print_exc
 
-from Client.vue_gestion import VueGestion
-from vue_paiement import VuePaiement
-from controleur_client import Controleur_Client
+from Client.vues.vue_paiement import VuePaiement
+from Client.controleur_client import Controleur_Client
 
 
 class ModulePaiement(Tk):
