@@ -1,7 +1,7 @@
 from traceback import print_exc
 from tkinter import Tk
 from vue_ventes_en_ligne import VueOnlineSales
-from vue_gerer_emp import VueGererEmp
+#from vue_gerer_emp import VueGererEmp
 from controleur_client import Controleur_Client
 
 class Module_Ventes_En_ligne(Tk):
