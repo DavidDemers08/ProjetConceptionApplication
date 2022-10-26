@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-from Client.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
@@ -85,7 +84,6 @@ class VueGestion(ttk.Frame):
             item = self.liste.item(selection[0])
             record = item['values']
             self.start_module_gerer_emp(record)
-
 
     def fermer_module_emp(self):
         self.gerer_emp_module.destroy()

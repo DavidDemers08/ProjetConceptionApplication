@@ -22,7 +22,8 @@ class Controleur_Serveur:
             utils.IDENTIFIER_USAGER: self.identifier_usager,
             utils.CREER_COMPTE_VILLE: self.creer_compte_ville,
             utils.AFFICHER_MEMBRES: self.afficher_membres,
-            utils.AFFICHER_COMPAGNIES: self.afficher_compagnies
+            utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
+            utils.CREER_ACCES : self.creer_acces
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -66,7 +67,7 @@ class Controleur_Serveur:
         permission = form[utils.PERMISSION]
 
     def creer_compte_admin(self, identifiant: str, mdp_admin: str, id_compagnie: int, genre: str, nom: str,
-                           prenom: str) -> str:
+                           prenom: str) -> None:
         try:
             Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
                                 id_compagnie=id_compagnie, titre="admin", permission="1", genre=genre)
@@ -98,3 +99,6 @@ class Controleur_Serveur:
 
     def afficher_compagnies(self, form):
         return self.voir_compagnie()
+
+    def creer_acces(self,form):
+        return Dao().insert_acces(form[utils.NOM_ACCES])

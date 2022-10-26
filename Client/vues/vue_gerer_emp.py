@@ -10,11 +10,7 @@ class VueGererEmp(ttk.Frame):
         self.data_recu = data
         self.permission = 1
         self.remplir_vue_gestion()
-
-
-
-
-
+        
     def set_controleur(self, controleur):
         self.controleur = controleur
 
@@ -47,7 +43,6 @@ class VueGererEmp(ttk.Frame):
         clicked_compagnie.set(options_compagnie[0])
         self.niveau_acces_selectionne = self.data[4]
         self.compagnie_selectionnee = self.data[5]
-
 
         self.titre_module = Label(self, text="Gestion d'Employé", font=('Times 14'))
         self.titre_module.place(x=150, y=10)
