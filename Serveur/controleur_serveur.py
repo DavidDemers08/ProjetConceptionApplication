@@ -24,7 +24,7 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.CREER_MODULES: self.creer_modules
+            utils.AFFICHER_MODULES: self.afficher_modules
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -107,5 +107,5 @@ class Controleur_Serveur:
     def liaison_acces_module(self, form):
         pass
 
-    def creer_modules(self, form):
+    def afficher_modules(self, form):
         return Dao().insert_modules()

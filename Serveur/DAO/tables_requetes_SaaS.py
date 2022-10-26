@@ -2,7 +2,6 @@ FK_ON = 'PRAGMA foreign_keys = 1'
 
 BD_GEST_MEDIA = 'gestion_media.db'
 
-
 # ***************** MEMBRE *********************
 
 CREER_MEMBRE = '''
@@ -130,7 +129,7 @@ CREATE TABLE IF NOT EXISTS module_par_access
     id_module  INTEGER NOT NULL,
     id_access INTEGER NOT NULL,
 
-    FOREIGN KEY(id_module) REFERENCES module(id),
+    FOREIGN KEY(id_module) REFERENCES modules(id),
     FOREIGN KEY(id_access) REFERENCES access(id)
 )
 '''
@@ -159,3 +158,4 @@ INSERT_MEMBRE_A_ACCESS = 'INSERT INTO access_par_membre(id_membre, id_access) VA
 SELECT_ALL_ACCES_POUR_ALL_MEMBRES = 'SELECT * FROM access_par_membre'
 SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
 DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id_access=?'
+SELECT_ID_MEMBRE_WITH_USERNAME = 'SELECT id FROM membre WHERE identifiant = ?'

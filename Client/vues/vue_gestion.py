@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
+from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
@@ -12,6 +13,8 @@ class VueGestion(ttk.Frame):
 
     def set_controleur(self, controleur):
         self.controleur = controleur
+        print(self.controleur.username)
+        # self.acces = self.controleur.get_access()
 
     def remplir_vue_gestion(self):
 
@@ -72,6 +75,16 @@ class VueGestion(ttk.Frame):
     def populate_list(self):
         pass
 
+    def start_module(self, arg):
+        selection = self.liste.selection()
+        item = self.liste.item(selection[0])
+        record = item['values']
+        # if record[0] == "Gestion Budget":
+        #     self.gerer_budget_module = Toplevel()
+        #     vue = VueGererBudget(self)
+        #     vue.place(height=500, width=500)
+        #     self.gerer_emp_module.geometry("600x600")
+        #     self.gerer_emp_module.title("Gestion Budget")
 
     def start_module_gerer_emp(self, params):
         self.gerer_emp_module = Toplevel()
@@ -81,7 +94,6 @@ class VueGestion(ttk.Frame):
         self.gerer_emp_module.title("Gestion Employé")
 
     def clic_bouton_gestion_employe(self):
-
         selection = self.liste.selection()
         if selection:
             item = self.liste.item(selection[0])
@@ -133,11 +145,6 @@ class VueGestion(ttk.Frame):
         self.liste.place(x=0, y=0)
         self.liste.bind("<Double-1>", self.start_module)
 
-    def start_module(self, arg):
-        selection = self.liste.selection()
-        item = self.liste.item(selection[0])
-        record = item['values']
-        print(record)
 
 
     def clic_bouton_annuler(self):
