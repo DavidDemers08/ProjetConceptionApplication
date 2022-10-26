@@ -1,7 +1,8 @@
 from traceback import print_exc
 from tkinter import Tk
-from vue import Vue
-from controleur_client import Controleur_Client
+
+from Client.controleur_client import Controleur_Client
+from Client.vues.vue_initiale import Vue
 
 
 class Module(Tk):

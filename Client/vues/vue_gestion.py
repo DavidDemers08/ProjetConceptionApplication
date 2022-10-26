@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from vue_gerer_emp import VueGererEmp
+from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
@@ -83,9 +83,6 @@ class VueGestion(ttk.Frame):
             vue.place(height=500, width=500)
             self.gerer_emp_module.geometry("500x500")
             self.gerer_emp_module.title("Gestion Employé")
-
-
-
 
         else:
             pass
