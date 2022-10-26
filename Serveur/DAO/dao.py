@@ -53,7 +53,6 @@ SELECT_COMPAGNIE = 'SELECT * FROM compagnie WHERE id=?'
 SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
 DELETE_COMPAGNIE = 'DELETE FROM compagnie WHERE id=?'
 
-
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
 CREER_MEMBRE_DANS_COMPAGNIE = '''
@@ -81,7 +80,6 @@ UPDATE membre_dans_compagnie
     SET permission_membre = ?
 WHERE id_membre = ? AND id_compagnie = ?
 '''
-
 
 # ***************** MODULES *********************
 
@@ -125,7 +123,6 @@ SELECT_ACCESS = 'SELECT * FROM access WHERE id=?'
 SELECT_ACCESS_ID = 'SELECT id FROM access WHERE nom=?'
 DELETE_ACCESS = 'DELETE FROM access WHERE nom=? AND id=?'
 
-
 # ***************** MODULE PAR ACCÈS *********************
 CREER_MODULE_PAR_ACCESS = '''
 CREATE TABLE IF NOT EXISTS module_par_access
@@ -143,7 +140,6 @@ INSERT_MODULE_PAR_ACCESS = 'INSERT INTO module_par_access(id_module, id_access) 
 
 SELECT_ALL_MODULE_PAR_ACCESS = 'SELECT * FROM module_par_access WHERE id_access=?'
 DELETE_ACCESS_POUR_MODULE = 'DELETE FROM module_par_access WHERE id_module=? AND id_access=?'
-
 
 # ***************** ACCÈS PAR MEMBRE *********************
 CREER_ACCESS_PAR_MEMBRE = '''
@@ -228,7 +224,7 @@ class Dao:
         self.cur.execute(SELECT_ID_MEMBRE, (identifiant,))
         return self.cur.fetchall()[0][0]
 
-    def get_module_id(self,nom, version):
+    def get_module_id(self, nom, version):
         self.cur.execute(SELECT_ID_MODULE, (nom, version))
         return self.cur.fetchall()[0]
 
@@ -250,8 +246,7 @@ class Dao:
     def delete_module(self, nom, version):
         self.cur.execute(DELETE_MODULE, (nom, version))
 
-
-    #retourne tous les membres de tous les compagnies
+    # retourne tous les membres de tous les compagnies
     # (un membre peut être là plusieurs fois)
     def select_membres_all_compagnie(self):
         self.cur.execute(SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE)
@@ -267,24 +262,47 @@ class Dao:
         self.cur.execute(SELECT_ALL_ACCESS)
         return self.cur.fetchall()
 
-    def get_access_id(self,nom):
+    def get_access_id(self, nom):
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchall()[0]
 
     def delete_access(self, nom):
         id_access = self.get_access_id(nom)
-        self.cur.execute(DELETE_ACCESS, (nom,id_access))
+        self.cur.execute(DELETE_ACCESS, (nom, id_access))
 
     # ***************** INSERT
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie, permission):
 
         if self.get_access_id(permission) is None:
             pass
-            #ajouter acces + link tables
+            # ajouter acces + link tables
 
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
+
+    def insert_modules(self):
+        pass
+        #self.cur.execute(CREER_MODULE, ("gestion", "permet de faire la gestion du personnel", 1.0, "le chemin de traverse", 34.44))
+        #self.conn.commit()
+
+        # self.cur.executemany(CREER_MODULE, [
+        #     ("gestion", "permet de faire la gestion du personnel", 1.0, "le chemin de traverse", 34.44),
+        #     ("propriete", "permet de montrer les propriete de la compagnie", 2.0, "le chemin de traverse2", 37.47),
+        #     ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 3.0, "le chemin de traverse3",
+        #      40.00),
+        #     ("evenement", "permet de faire la gestion des evenements de la compagnie", 4.0, "le chemin de traverse4",
+        #      9.99),
+        #     ("budget", "permet de faire la gestion du budget de la compagnie", 5.0, "le chemin de traverse5", 21.35),
+        #     ("employe", "permet de faire la gestion des employees de la compagnie", 6.0, "le chemin de traverse6",
+        #      21.21),
+        #     ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 7.0,
+        #      "le chemin de traverse7", 4.20),
+        #     ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 8.0, "le chemin de traverse8",
+        #      99.66),
+        #     ("materielle", "permet de faire la gestion du materiel de la compagnie", 9.0, "le chemin de traverse9",
+        #      23.21)])
+        #return self.select_all_modules()
 
     def insert_compagnie(self, nom, pays, province, region):
         self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
@@ -338,8 +356,8 @@ class Dao:
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
 
-    def insert_module(self, nom, version, prix_mensuel,chemin_executable, derscription = "Aucune Description"):
-        self.cur.execute(INSERT_MODULES, (nom,derscription, version,chemin_executable, prix_mensuel))
+    def insert_module(self, nom, version, prix_mensuel, chemin_executable, derscription="Aucune Description"):
+        self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))
         self.conn.commit()
 
     def insert_module_par_acces(self, id_module, id_acces):
@@ -350,16 +368,17 @@ class Dao:
         self.cur.execute(DELETE_ACCESS_POUR_MODULE, (id_module, id_access))
 
     # TODO faire leurs fonctions!
-    #INSERT_ACCESS_PAR_MEMBRE = 'INSERT INTO access_par_membre(id_module, id_acces) VALUES(?,?)'
-    #SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
-    #DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id'
+    # INSERT_ACCESS_PAR_MEMBRE = 'INSERT INTO access_par_membre(id_module, id_acces) VALUES(?,?)'
+    # SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
+    # DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id'
 
     # TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
 
-        
+
 def main():
     Dao().creer_bd()
     return 0
+
 
 # main
 

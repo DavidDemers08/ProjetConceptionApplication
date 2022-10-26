@@ -11,6 +11,7 @@ class Vue(ttk.Frame):
         self.controleur = None
         self.remplir_vue()
         self.parent = parent
+        #print(self.controleur.creation_modules())
 
     def set_controleur(self, controleur):
         self.controleur = controleur
