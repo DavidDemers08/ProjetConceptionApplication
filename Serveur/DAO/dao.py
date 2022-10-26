@@ -1,168 +1,11 @@
 import sqlite3
-
-FK_ON = 'PRAGMA foreign_keys = 1'
-
-BD_GEST_MEDIA = 'gestion_media.db'
-
-# ***************** MEMBRE *********************
-
-CREER_MEMBRE = '''
-CREATE TABLE IF NOT EXISTS membre
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    prenom TEXT NOT NULL,
-    nom TEXT NOT NULL,
-    identifiant TEXT NOT NULL,
-    mdp TEXT,
-    titre TEXT,
-    genre TEXT
-)
-'''
-DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
-INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
-
-SELECT_MEMBRES = 'SELECT * FROM membre'
-SELECT_MEMBRE = 'SELECT * FROM membre WHERE identifiant=?'
-SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
-DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'
-UPDATE_MEMBRE = ''' 
-UPDATE membre
-    SET prenom = ?,
-    nom = ?,
-    titre = ?,
-    identifiant = ?
-WHERE id = ?
-'''
-
-# ***************** COMPAGNIE *********************
-CREER_COMPAGNIE = '''
-CREATE TABLE IF NOT EXISTS compagnie
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom TEXT UNIQUE,
-    pays TEXTE,
-    province TEXTE,
-    region TEXTE
-)
-'''
-DROP_COMPAGNIE = 'DROP TABLE IF EXISTS compagnie'
-INSERT_COMPAGNIE = 'INSERT INTO compagnie(nom, pays, province, region) VALUES(?, ?, ?, ?)'
-
-SELECT_COMPAGNIES = 'SELECT * FROM compagnie'
-SELECT_COMPAGNIE = 'SELECT * FROM compagnie WHERE id=?'
-SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
-DELETE_COMPAGNIE = 'DELETE FROM compagnie WHERE id=?'
+from tables_requetes_SaaS import *
+from dao_modules import *
 
 
-# ***************** MEMBRE DANS COMPAGNIE *********************
-
-CREER_MEMBRE_DANS_COMPAGNIE = '''
-CREATE TABLE IF NOT EXISTS membre_dans_compagnie
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    id_compagnie INTEGER NOT NULL,
-    id_membre INTEGER NOT NULL,
-    permission_membre TEXT NOT NULL,
-    
-    FOREIGN KEY(id_compagnie) REFERENCES compagnie(id),
-    FOREIGN KEY(id_membre) REFERENCES membre(id)
-)
-'''
-DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
-INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
-
-SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
-SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
-SELECT_ALL_MEMBRES_DE_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie WHERE id_compagnie=?'
-SELECT_ID_FROM_MEMBRE_DE_COMPAGNIE = 'SELECT id FROM membre_dans_compagnie WHERE id_membre=? AND id_compagnie=?'
-DELETE_MEMBRE_FROM_COMPAGNIE = 'DELETE FROM membre_dans_compagnie WHERE id_membre=?'
-UPDATE_PERMISSION_MEMBRE = '''
-UPDATE membre_dans_compagnie
-    SET permission_membre = ?
-WHERE id_membre = ? AND id_compagnie = ?
-'''
-
-
-# ***************** MODULES *********************
-
-CREER_MODULE = '''
-CREATE TABLE IF NOT EXISTS modules
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom TEXT NOT NULL,
-    description TEXT,
-    version NUMERIC NOT NULL,
-    chemin_executable TEXT NOT NULL,
-    prix_mensuel NUMERIC NOT NULL,
-    
-    UNIQUE(nom,version)
-)
-'''
-DROP_MODULES = 'DROP TABLE IF EXISTS modules'
-INSERT_MODULES = 'INSERT INTO modules(nom,description, version,chemin_executable, prix_mensuel) VALUES(?, ?, ?, ?, ?)'
-
-# TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
-SELECT_ID_MODULE = 'SELECT id FROM modules WHERE nom =? AND version =?'
-SELECT_MODULE_PAR_ID = 'SELECT nom,version,chemin_executable FROM modules WHERE id =? AND version =?'
-SELECT_MODULES = 'SELECT * FROM modules'
-SELECT_MODULE = 'SELLECT * FROM modules WHERE id=?'
-SELECT_MODULE_ID = 'SELECT id FROM modules WHERE nom=? AND version=?'
-DELETE_MODULE = 'DELETE FROM modules WHERE nom=? AND version=?'
-
-# ***************** ACCÈS *********************
-CREER_ACCESS = '''
-CREATE TABLE IF NOT EXISTS access
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    nom TEXT NOT NULL UNIQUE
-)
-'''
-DROP_ACCESS = 'DROP TABLE IF EXISTS access'
-INSERT_ACCESS = 'INSERT INTO access(nom) VALUES(?)'
-
-SELECT_ALL_ACCESS = 'SELECT * FROM access'
-SELECT_ACCESS = 'SELECT * FROM access WHERE id=?'
-SELECT_ACCESS_ID = 'SELECT id FROM access WHERE nom=?'
-DELETE_ACCESS = 'DELETE FROM access WHERE nom=? AND id=?'
-
-
-# ***************** MODULE PAR ACCÈS *********************
-CREER_MODULE_PAR_ACCESS = '''
-CREATE TABLE IF NOT EXISTS module_par_access
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    id_module  INTEGER NOT NULL,
-    id_access INTEGER NOT NULL,
-        
-    FOREIGN KEY(id_module) REFERENCES module(id),
-    FOREIGN KEY(id_access) REFERENCES access(id)
-)
-'''
-DROP_MODULE_PAR_ACCESS = 'DROP TABLE IF EXISTS module_par_access'
-INSERT_MODULE_PAR_ACCESS = 'INSERT INTO module_par_access(id_module, id_access) VALUES(?,?)'
-
-SELECT_ALL_MODULE_PAR_ACCESS = 'SELECT * FROM module_par_access WHERE id_access=?'
-DELETE_ACCESS_POUR_MODULE = 'DELETE FROM module_par_access WHERE id_module=? AND id_access=?'
-
-
-# ***************** ACCÈS PAR MEMBRE *********************
-CREER_ACCESS_PAR_MEMBRE = '''
-CREATE TABLE IF NOT EXISTS access_par_membre
-(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    id_membre  INTEGER NOT NULL,
-    id_access INTEGER NOT NULL,
-
-    FOREIGN KEY(id_membre) REFERENCES membre(id),
-    FOREIGN KEY(id_access) REFERENCES access(id)
-)
-'''
-DROP_ACCESS_PAR_MEMBRE = 'DROP TABLE IF EXISTS access_par_membre'
-INSERT_ACCESS_PAR_MEMBRE = 'INSERT INTO access_par_membre(id_module, id_acces) VALUES(?,?)'
-
-SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
-DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id_access=?'
-
+# singleton pas possible car:
+# sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread.
+# The object was created in thread id 12960 and this is thread id 14996.
 
 class Dao:
     __creer = [
@@ -184,12 +27,10 @@ class Dao:
         DROP_COMPAGNIE
     ]
 
-    # singleton pas possible car:
-
-    # sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 12960 and this is thread id 14996.
     def __init__(self):
         self.chemin_bd = BD_GEST_MEDIA
         self.connexion()
+        # self.Inventaire = Inventaire(self.cur, self.conn, Dao.__creer, Dao.__detruire) ----> exemple de creation de classe pour un module
 
     def __del__(self):
         self.deconnexion()
@@ -222,20 +63,20 @@ class Dao:
 
     def select_id_of_compagnie(self, name):
         self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
-        return self.cur.fetchall()[0][0]
+        return self.cur.fetchone()
 
     def get_membre_id(self, identifiant):
         self.cur.execute(SELECT_ID_MEMBRE, (identifiant,))
-        return self.cur.fetchall()[0][0]
+        return self.cur.fetchone()[0]
 
-    def get_module_id(self,nom, version):
+    def get_module_id(self, nom, version):
         self.cur.execute(SELECT_ID_MODULE, (nom, version))
-        return self.cur.fetchall()[0]
+        return self.cur.fetchone()
 
     def select_module(self, nom, version):
         id_module = self.get_module_id(nom, version)
         self.cur.execute(SELECT_MODULE, (id_module,))
-        return self.cur.fetchall()[0]
+        return self.cur.fetchone()
 
     def select_all_modules(self):
         self.cur.execute(SELECT_MODULES)
@@ -250,8 +91,7 @@ class Dao:
     def delete_module(self, nom, version):
         self.cur.execute(DELETE_MODULE, (nom, version))
 
-
-    #retourne tous les membres de tous les compagnies
+    # retourne tous les membres de tous les compagnies
     # (un membre peut être là plusieurs fois)
     def select_membres_all_compagnie(self):
         self.cur.execute(SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE)
@@ -267,24 +107,39 @@ class Dao:
         self.cur.execute(SELECT_ALL_ACCESS)
         return self.cur.fetchall()
 
-    def get_access_id(self,nom):
-        self.cur.execute(SELECT_ACCESS_ID, (nom,))
-        return self.cur.fetchall()[0]
+    def select_all_module_par_acces(self):
+        self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_ACCESS)
+        return self.cur.fetchall()
 
-    def delete_access(self, nom):
-        id_access = self.get_access_id(nom)
-        self.cur.execute(DELETE_ACCESS, (nom,id_access))
+    def select_all_acces_membres(self):
+        self.cur.execute(SELECT_ALL_ACCES_POUR_ALL_MEMBRES)
+        return self.cur.fetchall()
+
+    def get_access_id(self, nom):
+        self.cur.execute(SELECT_ACCESS_ID, (nom,))
+        return self.cur.fetchone()
 
     # ***************** INSERT
-    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie, permission):
-
-        if self.get_access_id(permission) is None:
-            pass
-            #ajouter acces + link tables
-
+    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str, nom_access: str):
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
+
+        # check acces if exist
+        id_access_initial = self.get_access_id(nom_access)
+
+        if id_access_initial is None:
+            self.insert_acces(nom_access)
+            id_access = self.get_access_id(nom_access)
+            print(id_access)
+            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+        else:
+            id_access = id_access_initial
+            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+
+
+
+
 
     def insert_compagnie(self, nom, pays, province, region):
         self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
@@ -296,8 +151,18 @@ class Dao:
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
         self.conn.commit()
 
-    def insert_acces(self, nom):
+    def insert_acces(self, nom, modules_id:list = None):
         self.cur.execute(INSERT_ACCESS, (nom,))
+        if modules_id is not None:
+            self.insert_modules_pour_acces(self.cur.lastrowid, modules_id)
+        self.conn.commit()
+
+
+    def insert_modules_pour_acces(self, id_acces: int, modules_id: list):
+        tuple_array = []
+        for id_module in modules_id:
+            tuple_array.append((id_module, id_acces))
+        self.cur.executemany(INSERT_MODULE_PAR_ACCESS, tuple_array)
         self.conn.commit()
 
     # ***************** DELETE
@@ -305,6 +170,10 @@ class Dao:
         id_membre = self.get_membre_id(identifiant)
         self.cur.execute(DELETE_MEMBRE_FROM_COMPAGNIE, (id_membre,))
         self.cur.execute(DELETE_MEMBRE, (identifiant,))
+
+    def delete_access(self, nom):
+        id_access = self.get_access_id(nom)
+        self.cur.execute(DELETE_ACCESS, (nom, id_access))
 
     # ***************** UPDATE
     def update_membre(self, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
@@ -338,11 +207,11 @@ class Dao:
         self.cur.execute(sql, (nom, mdp))
         return self.cur.fetchall()
 
-    def insert_module(self, nom, version, prix_mensuel,chemin_executable, derscription = "Aucune Description"):
-        self.cur.execute(INSERT_MODULES, (nom,derscription, version,chemin_executable, prix_mensuel))
+    def insert_module(self, nom, version, prix_mensuel, chemin_executable, derscription="Aucune Description"):
+        self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))
         self.conn.commit()
 
-    def insert_module_par_acces(self, id_module, id_acces):
+    def insert_module_pour_un_access(self, id_module, id_acces):
         self.cur.execute(INSERT_MODULE_PAR_ACCESS, (id_module, id_acces))
         self.conn.commit()
 
@@ -350,16 +219,21 @@ class Dao:
         self.cur.execute(DELETE_ACCESS_POUR_MODULE, (id_module, id_access))
 
     # TODO faire leurs fonctions!
-    #INSERT_ACCESS_PAR_MEMBRE = 'INSERT INTO access_par_membre(id_module, id_acces) VALUES(?,?)'
-    #SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
-    #DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id'
+    # INSERT_ACCESS_PAR_MEMBRE = 'INSERT INTO access_par_membre(id_module, id_acces) VALUES(?,?)'
+    # SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
+    # DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id'
 
     # TODO Si le Select_ID ne contient pas de valeur ajuster pour qu'il puisse compiler
+    def insert_membre_a_acces(self, membre_id, id_access):
+        print(membre_id, f'access : {id_access}')
+        self.cur.execute(INSERT_MEMBRE_A_ACCESS, (membre_id, id_access[0]))
+        self.conn.commit()
 
-        
+
 def main():
     Dao().creer_bd()
     return 0
+
 
 # main
 
