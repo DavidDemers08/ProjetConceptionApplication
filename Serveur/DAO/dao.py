@@ -58,6 +58,10 @@ class Dao:
         self.cur.execute(SELECT_MEMBRES)
         return self.cur.fetchall()
 
+    def select_id_membre_with_username(self,username):
+        self.cur.execute(SELECT_ID_MEMBRE_WITH_USERNAME,(username,))
+        return self.cur.fetchall()
+
     def select_all_compagnies(self):
         self.cur.execute(SELECT_COMPAGNIES)
         return self.cur.fetchall()
