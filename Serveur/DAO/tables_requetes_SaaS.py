@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS module_par_compagnie
 )
 '''
 DROP_MODULE_PAR_COMPAGNIE = 'DROP TABLE IF EXISTS module_par_compagnie'
-INSERT_MODULE_PAR_COMPAGNIE = 'INSERT INTO module_par_compagnie(id_module, id_compagnie) VALUES(?,?)'
+INSERT_MODULE_PAR_COMPAGNIE = 'INSERT INTO module_par_compagnie(id_compagnie, id_module) VALUES(?,?)'
 
 SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE = 'SELECT * FROM module_par_compagnie'
 SELECT_ALL_MODULE_PAR_COMPAGNIE = 'SELECT * FROM module_par_compagnie WHERE id_compagnie=?'

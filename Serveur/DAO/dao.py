@@ -32,7 +32,7 @@ class Dao:
     def __init__(self):
         self.chemin_bd = BD_GEST_MEDIA
         self.connexion()
-        self.insert_modules()
+        #self.insert_modules()
         # self.Inventaire = Inventaire(self.cur, self.conn, Dao.__creer, Dao.__detruire) ----> exemple de creation de classe pour un module
 
     def __del__(self):
@@ -114,6 +114,10 @@ class Dao:
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
+    def select_all_modules_all_compagnies(self):
+        self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE)
+        return self.cur.fetchall()
+
     def select_all_access(self):
         self.cur.execute(SELECT_ALL_ACCESS)
         return self.cur.fetchall()
@@ -129,6 +133,10 @@ class Dao:
     def get_access_id(self, nom):
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchone()
+
+    def insert_module_pour_compagnie(self, id_compagnie, id_module):
+        self.cur.execute(INSERT_MODULE_PAR_COMPAGNIE, (id_compagnie, id_module))
+        self.conn.commit()
 
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str,
                       nom_access: str):
@@ -163,7 +171,7 @@ class Dao:
              99.66),
             ("materielle", "permet de faire la gestion du materiel de la compagnie", 9.0, "le chemin de traverse9",
              23.21)])
-
+        self.conn.commit()
         return self.select_all_modules()
 
         # check acces if exist
