@@ -15,9 +15,11 @@ class Dao:
         CREER_ACCESS,
         CREER_MEMBRE_DANS_COMPAGNIE,
         CREER_MODULE_PAR_ACCESS,
-        CREER_ACCESS_PAR_MEMBRE
+        CREER_ACCESS_PAR_MEMBRE,
+        CREER_MODULE_PAR_COMPAGNIE
     ]
     __detruire = [
+        DROP_MODULE_PAR_COMPAGNIE,
         DROP_ACCESS_PAR_MEMBRE,
         DROP_MODULE_PAR_ACCESS,
         DROP_MEMBRE_DANS_COMPAGNIE,
@@ -77,6 +79,10 @@ class Dao:
     def get_module_id(self, nom, version):
         self.cur.execute(SELECT_ID_MODULE, (nom, version))
         return self.cur.fetchone()
+
+    def select_all_modules_of_compagnie(self,id_compagnie):
+        self.cur.execute(SELECT_ALL_MODULE_PAR_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
 
     def select_module(self, nom, version):
         id_module = self.get_module_id(nom, version)
