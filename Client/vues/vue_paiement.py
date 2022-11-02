@@ -6,17 +6,18 @@ import Utils.utils
 
 
 class VuePaiement(ttk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent,controleur):
         super().__init__(parent)
-        self.controleur = None
+        self.controleur = controleur
         self.liste_module = []
         ###test pour remplir liste module
         self.liste_module.append(("nom module 1", "42.45", "2001/9/11"))
         self.liste_module.append(("nom module 2", "4s2.45", "2001/91/11"))
         self.liste_module.append(("nom module 3", "42.4a5", "20011/9/11"))
         self.remplir_vue()
-        self.parent = parent
 
+
+        print(self.controleur.get_module())
 
     def set_controleur(self, controleur):
         self.controleur = controleur
@@ -38,6 +39,7 @@ class VuePaiement(ttk.Frame):
 
     def remplir_grid_module(self):
         compteur_row = 2
+
         for module in self.liste_module:
             nom_module = ttk.Label(self, text=module[0])
             nom_module.grid(column=0, row=compteur_row,  padx=50, sticky=tk.N)
