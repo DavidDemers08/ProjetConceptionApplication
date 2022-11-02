@@ -24,7 +24,8 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.AFFICHER_MODULES: self.afficher_modules
+            utils.AFFICHER_MODULES: self.afficher_modules,
+            utils.GET_MODULE: self.get_module
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -108,6 +109,14 @@ class Controleur_Serveur:
     def afficher_modules(self, form):
         return Dao().insert_modules()
 
+    def get_module(self,form):
+        module = ["stuff"]
+        #for range in Dao.select_all_modules_of_compagnie(1):
+        #    module.append(range)
+        return module
+
+
 
 if __name__ == "__main__":
     Dao().creer_bd()
+
