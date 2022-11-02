@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS membre
     prenom TEXT NOT NULL,
     nom TEXT NOT NULL,
     identifiant TEXT NOT NULL,
-    mdp TEXT,
+    mdp TEXT NOT NULL,
     titre TEXT,
     genre TEXT
 )
@@ -20,7 +20,7 @@ DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
 INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
 
 SELECT_MEMBRES = 'SELECT * FROM membre'
-SELECT_MEMBRE = 'SELECT * FROM membre WHERE identifiant=?'
+SELECT_MEMBRE = 'SELECT * FROM membre WHERE identifiant=? AND mdp =?'
 SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
 DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'
 UPDATE_MEMBRE = ''' 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     id_compagnie INTEGER NOT NULL,
     id_membre INTEGER NOT NULL,
-    permission_membre TEXT NOT NULL,
+    permission_membre INTEGER NOT NULL,
 
     FOREIGN KEY(id_compagnie) REFERENCES compagnie(id),
     FOREIGN KEY(id_membre) REFERENCES membre(id)

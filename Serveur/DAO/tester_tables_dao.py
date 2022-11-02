@@ -7,11 +7,11 @@ def insert(dao):
     dao.insert_compagnie('Brassard', 'Canada', 'Quebec', 'Montréal')
 
     dao.insert_membre('To', 'To', identifiant='toto', mdp='totototo', titre='admin', genre='homme',
-                      id_compagnie=2, permission='ALL', nom_access='Dieu')
+    id_compagnie=2, permission='ALL', nom_access='Dieu')
     dao.insert_membre('Ta', 'Ta', identifiant='tata', mdp='tatatata', titre='admin', genre='femme',
-                      id_compagnie=1, permission='ALL', nom_access='Mike')
+    id_compagnie=1, permission='ALL', nom_access='Mike')
     dao.insert_membre('ge', 'ge', identifiant='gege', mdp='gegegege', titre='admin', genre='homme',
-                      id_compagnie=1, permission='ALL', nom_access='Concierge')
+    id_compagnie=1, permission='ALL', nom_access='Concierge')
 
     dao.insert_module('valorant', '3.19', '37.77', 'C:\\Users\\1569047\\Pictures\\Saved')
     dao.insert_module('League', '4.20', '50.80', 'C:\\Users\\1569047\\Pictures')
@@ -59,8 +59,9 @@ def get_id(dao):
 
 
 def update(dao):
-    # dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef', nom_compagnie='Laval')
-    dao.insert_modules_pour_acces(1, [1,2])
+    # dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef',
+    # nom_compagnie='Laval')
+    dao.insert_modules_pour_acces(1, [1, 2])
 
 
 def main():
