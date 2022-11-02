@@ -24,10 +24,21 @@ class VueAjoutModules(ttk.Frame):
             widget.destroy()
 
     def remplir_vue(self):
+        self.heading = ttk.Label(self, text='Ajout de Module', style='Heading.TLabel')
+        self.heading.grid(column=0, row=0, columnspan=2, pady=5, sticky=tk.N)
+
+        self.module = ttk.Label(self, text="Module")
+        self.module.grid(column=0, row=1, sticky=tk.W, padx=50)
+        self.prix = ttk.Label(self, text="Prix")
+        self.prix.grid(column=1, row=1, sticky=tk.W, padx=50)
+        self.exp_date= ttk.Label(self, text="Date d'expiration")
+        self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
+
+        self.remplir_grid_module()
         self.table.create()
         if self.table.modifiable_rows:
             self.parent.bind('<Return>', lambda e: self.update_liste_modules())
 
     def update_liste_modules(self):
         self.liste_module = self.table.update_lines()
-        print(self.liste_module)
+

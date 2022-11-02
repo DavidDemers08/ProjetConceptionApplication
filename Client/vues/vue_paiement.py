@@ -13,9 +13,9 @@ class VuePaiement(ttk.Frame):
         self.liste_module = []
         self.parent = parent
         ###test pour remplir liste module
-        self.liste_module.append(("nom module 1", "42.45", "2001/9/11"))
-        self.liste_module.append(("nom module 2", "412.45", "2001/91/11"))
-        self.liste_module.append(("nom module 3", "421.45", "20011/9/11"))
+        self.liste_module.append(["nom module 1", "42.45", "2001/9/11"])
+        self.liste_module.append(["nom module 2", "412.45", "2001/91/11"])
+        self.liste_module.append(["nom module 3", "421.45", "20011/9/11"])
         self.remplir_vue()
 
 
@@ -42,3 +42,4 @@ class VuePaiement(ttk.Frame):
     def remplir_grid_module(self):
 
         table = Table(vue=self, lines_array=self.liste_module,start_row=2,start_column=0,padx=50, modifiable_rows=False)
+        table.create()
