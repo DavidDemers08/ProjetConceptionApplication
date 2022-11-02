@@ -38,8 +38,16 @@ class VuePaiement(ttk.Frame):
         self.exp_date= ttk.Label(self, text="Date d'expiration")
         self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
         self.remplir_grid_module()
+        self.calcul_total()
 
     def remplir_grid_module(self):
-
+        self.liste_module.append(self.calcul_total())
         table = Table(vue=self, lines_array=self.liste_module,start_row=2,start_column=0,padx=50, modifiable_rows=False)
         table.create()
+
+    def calcul_total(self):
+        total=0
+        for module in self.liste_module:
+            total += float(module[1])
+        total =round(total, 2)
+        return ("Total",str(total),"")
