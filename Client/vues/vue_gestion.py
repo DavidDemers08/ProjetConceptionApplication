@@ -50,23 +50,26 @@ class VueGestion(ttk.Frame):
 
     def clic_bouton_membre(self):
         self.delete_lists()
-        print(self.canevas_list.winfo_width() + 1)
-        colonnes = ('Nom', 'Permission', 'Rôle')
+        colonnes = ('Nom', 'Identifiant', 'Permission', 'Rôle')
         self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                              selectmode='browse')
-        self.liste.heading('Nom', text='Nom')
-
 
         data = []
+        # TODO utiliser de vrais employés
+        # Ici on append dans le data de faux employés avec la boucle
         for n in range(1, 50):
-            data.append((f'Employé {n}', f'Accès {n}', f'Rôle {n}'))
+            data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
 
-
+        self.liste.heading('Nom', text='Nom')
+        self.liste.heading('Identifiant', text='Identifiant')
         self.liste.heading('Permission', text='Permission')
         self.liste.heading('Rôle', text='Rôle')
-        self.liste.column('Rôle', anchor='center')
-        self.liste.column('Permission', anchor='center')
-        self.liste.column('Nom', anchor='center')
+
+        self.liste.column('Rôle', anchor='center', stretch=NO,width=150)
+        self.liste.column('Identifiant', anchor='center',stretch=NO,width=150)
+        self.liste.column('Permission', anchor='center',stretch=NO,width=150)
+        self.liste.column('Nom', anchor='center',stretch=NO,width=150)
+
         for emp in data:
             self.liste.insert('', tk.END, values=emp)
         self.liste.place(x=0, y=0)
