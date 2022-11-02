@@ -50,12 +50,9 @@ class Controleur_Serveur:
             Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
             id_compagnie = Dao().select_id_of_compagnie(form[utils.NOM_VILLE])
 
-            self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
-                                    genre=form[utils.GENRE], mdp_admin=form[utils.MDP],
-                                    identifiant=form[utils.NOM_USAGER])
-
-            return f"la ville suivante a été ajoutée : {form[utils.NOM_VILLE]} ainsi que l'administrateur suivant : " \
-                   f"{form[utils.NOM_USAGER]} "
+            return self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
+                                           genre=form[utils.GENRE], mdp_admin=form[utils.MDP],
+                                           identifiant=form[utils.NOM_USAGER])
         except:
             return "Impossible d'ajouter votre compagnie"
 
@@ -69,13 +66,14 @@ class Controleur_Serveur:
         permission = form[utils.PERMISSION]
 
     def creer_compte_admin(self, identifiant: str, mdp_admin: str, id_compagnie: int, genre: str, nom: str,
-                           prenom: str) -> None:
+                           prenom: str):
         try:
-            Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
-                                id_compagnie=id_compagnie, titre="admin", permission="1", genre=genre)
+            return Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
+                                       id_compagnie=id_compagnie, titre="admin", permission=1, genre=genre,
+                                       nom_access="Super Admin")
 
         except:
-            print(Exception)
+            return Exception
 
     def voir_membre(self, form):
         membre = []
@@ -116,3 +114,9 @@ class Controleur_Serveur:
         #for range in Dao.select_all_modules_of_compagnie(1):
         #    module.append(range)
         return module
+
+
+
+if __name__ == "__main__":
+    Dao().creer_bd()
+
