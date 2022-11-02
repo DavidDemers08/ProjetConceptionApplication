@@ -1,6 +1,6 @@
 import sqlite3
-from Serveur.DAO.dao_modules import *
-from Serveur.DAO.tables_requetes_SaaS import *
+from dao_modules import *
+from tables_requetes_SaaS import *
 
 
 # singleton pas possible car:
@@ -253,6 +253,15 @@ class Dao:
         #     WHERE membre.identifiant = ? AND membre.mdp = ?
         # '''
         return self.cur.execute(SELECT_MEMBRE, (nom, mdp)).fetchone()
+
+    def get_all_module_not_in_compagnie(self, id_compagnie):
+        sql = '''
+        SELECT * FROM modules
+        INNER JOIN module_par_compagnie
+            ON module_par_compagnie.id_module = modules.id
+        WHERE id_compagnie != ?
+        '''
+        return self.cur.execute(sql,(id_compagnie,)).fetchall()
 
     def insert_module(self, nom, version, prix_mensuel, chemin_executable, derscription="Aucune Description"):
         self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))

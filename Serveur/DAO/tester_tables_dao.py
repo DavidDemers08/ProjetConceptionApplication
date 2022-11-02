@@ -1,4 +1,5 @@
-from Serveur.DAO.dao import Dao
+#from Serveur.DAO.dao import Dao
+from dao import Dao
 
 
 def insert(dao):
@@ -59,6 +60,9 @@ def select_link_tables(dao):
     for rangee in dao.select_all_acces_membres():
         print(f'id: {rangee[0]} -- id_membre: {rangee[1]} -- id_access: {rangee[2]}')
 
+    print('\nLOL')
+    for rangee in dao.get_all_module_not_in_compagnie(2):
+        print(rangee)
 
 def delete(dao):
     dao.delete_membre('toto')
@@ -70,11 +74,11 @@ def get_id(dao):
 
 
 def update(dao):
-
+    pass
     # dao.update_membre(identifiant='toto', prenom='Mike', nom='Toto', titre='Champion', permission_membre='Chef',
     # nom_compagnie='Laval')
 
-    dao.insert_modules_pour_acces(1, [1, 2])
+    #dao.insert_modules_pour_acces(1, [1, 2])
 
 
 def main():
