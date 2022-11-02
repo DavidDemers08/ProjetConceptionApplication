@@ -32,7 +32,6 @@ class Dao:
     def __init__(self):
         self.chemin_bd = BD_GEST_MEDIA
         self.connexion()
-        #self.insert_modules()
         # self.Inventaire = Inventaire(self.cur, self.conn, Dao.__creer, Dao.__detruire) ----> exemple de creation de classe pour un module
 
     def __del__(self):
@@ -60,8 +59,8 @@ class Dao:
         self.cur.execute(SELECT_MEMBRES)
         return self.cur.fetchall()
 
-    def select_id_membre_with_username(self,username):
-        self.cur.execute(SELECT_ID_MEMBRE_WITH_USERNAME,(username,))
+    def select_id_membre_with_username(self, username):
+        self.cur.execute(SELECT_ID_MEMBRE_WITH_USERNAME, (username,))
         return self.cur.fetchall()
 
     def select_all_compagnies(self):
@@ -134,25 +133,28 @@ class Dao:
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchone()
 
+
     def insert_module_pour_compagnie(self, id_compagnie, id_module):
         self.cur.execute(INSERT_MODULE_PAR_COMPAGNIE, (id_compagnie, id_module))
         self.conn.commit()
 
-    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str,
+    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: int,
                       nom_access: str):
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
-        self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
+        # self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
         # check acces if exist
-        id_access_initial = self.get_access_id(nom_access)
+        # id_access_initial = self.get_access_id(nom_access)
+        #
+        # if id_access_initial is None:
+        #     self.insert_acces(nom_access)
+        #     id_access = self.get_access_id(nom_access)
+        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+        # else:
+        #     id_access = id_access_initial
+        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
-        if id_access_initial is None:
-            self.insert_acces(nom_access)
-            id_access = self.get_access_id(nom_access)
-            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
-        else:
-            id_access = id_access_initial
-            self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+        return self.select_all_membres()
 
     def insert_modules(self):
         self.cur.executemany(INSERT_MODULES, [
@@ -237,21 +239,20 @@ class Dao:
 
     # ***************** AUTRES
     def identifier_usager(self, nom, mdp):
-        sql = '''
-            SELECT
-                membre.identifiant,
-                membre.titre,
-                compagnie.id,
-                compagnie.nom
-            FROM membre
-            INNER JOIN membre_dans_compagnie
-                ON membre_dans_compagnie.id_membre = membre.id
-            INNER JOIN compagnie
-                ON membre_dans_compagnie.id_compagnie = compagnie.id
-            WHERE membre.identifiant = ? AND membre.mdp = ?
-        '''
-        self.cur.execute(sql, (nom, mdp))
-        return self.cur.fetchall()
+        # sql = '''
+        #     SELECT
+        #         membre.identifiant,
+        #         membre.titre,
+        #         compagnie.id,
+        #         compagnie.nom
+        #     FROM membre
+        #     INNER JOIN membre_dans_compagnie
+        #         ON membre_dans_compagnie.id_membre = membre.id
+        #     INNER JOIN compagnie
+        #         ON membre_dans_compagnie.id_compagnie = compagnie.id
+        #     WHERE membre.identifiant = ? AND membre.mdp = ?
+        # '''
+        return self.cur.execute(SELECT_MEMBRE, (nom, mdp)).fetchone()
 
     def insert_module(self, nom, version, prix_mensuel, chemin_executable, derscription="Aucune Description"):
         self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))

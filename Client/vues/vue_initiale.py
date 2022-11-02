@@ -54,10 +54,10 @@ class Vue(ttk.Frame):
         if self.controleur:
             # message d'erreur par controleur ou par vue?
             reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
-            if len(reponse):
-                self.controleur.username=self.var_nom.get()
+            print(reponse)
+            if reponse:
+                self.controleur.username = self.var_nom.get()
                 self.controleur.afficher_gestion()
-
             else:
                 self.afficher_erreur(f'Nom ou mot de passe incorrects')
 
@@ -186,7 +186,7 @@ class Vue(ttk.Frame):
 
         if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
             reponse = self.controleur.creer_compte_ville(**args)
-            print(reponse)
+            print (reponse)
             self.vider_frame()
             self.remplir_vue()
         else:

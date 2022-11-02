@@ -21,6 +21,7 @@ GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
 
+
 AFFICHER_MEMBRES = "afficher_membres"
 
 
@@ -32,5 +33,5 @@ NOM_ACCES = 'nom_acces'
 
 AFFICHER_MODULES = "afficher_modules"
 
-
+GET_MODULE = "get_module"
 GET_ACCESS = "get_access"

@@ -11,9 +11,16 @@ class VueGestion(ttk.Frame):
         self.controleur = None
         self.remplir_vue_gestion()
 
+        from Client.modules.module_paiement import ModulePaiement
+        self.dictionnaire_module =  {
+              "Gestion Budget": ModulePaiement,
+              "Gestion Inventaire": ModulePaiement,
+              "Gestion Événements": ModulePaiement,
+              "Gestion Propriétés": ModulePaiement
+            }
+
     def set_controleur(self, controleur):
         self.controleur = controleur
-        print(self.controleur.username)
         # self.acces = self.controleur.get_access()
 
     def remplir_vue_gestion(self):
@@ -37,36 +44,41 @@ class VueGestion(ttk.Frame):
         self.lWidth = int(self.canevas_list.winfo_width() / 3)
 
         self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre', command=lambda: self.start_module_gerer_emp(None))
-        self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
-
         self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
-        self.bouton_gerer_employe.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
+
         # self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
 
     def delete_lists(self):
         self.canevas_list.destroy()
+        self.bouton_gerer_employe.grid_remove()
+        self.bouton_ajouter_membre.grid_remove()
         self.canevas_list = tk.Canvas(self, height=200, width=600, bg='white')
         self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
 
     def clic_bouton_membre(self):
         self.delete_lists()
-        print(self.canevas_list.winfo_width() + 1)
-        colonnes = ('Nom', 'Permission', 'Rôle')
+        self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
+        self.bouton_gerer_employe.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
+        colonnes = ('Nom', 'Identifiant', 'Permission', 'Rôle')
         self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                              selectmode='browse')
-        self.liste.heading('Nom', text='Nom')
-
 
         data = []
+        # TODO utiliser de vrais employés
+        # Ici on append dans le data de faux employés avec la boucle
         for n in range(1, 50):
-            data.append((f'Employé {n}', f'Accès {n}', f'Rôle {n}'))
+            data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
 
-
+        self.liste.heading('Nom', text='Nom')
+        self.liste.heading('Identifiant', text='Identifiant')
         self.liste.heading('Permission', text='Permission')
         self.liste.heading('Rôle', text='Rôle')
-        self.liste.column('Rôle', anchor='center')
-        self.liste.column('Permission', anchor='center')
-        self.liste.column('Nom', anchor='center')
+
+        self.liste.column('Rôle', anchor='center', stretch=NO,width=150)
+        self.liste.column('Identifiant', anchor='center',stretch=NO,width=150)
+        self.liste.column('Permission', anchor='center',stretch=NO,width=150)
+        self.liste.column('Nom', anchor='center',stretch=NO,width=150)
+
         for emp in data:
             self.liste.insert('', tk.END, values=emp)
         self.liste.place(x=0, y=0)
@@ -79,12 +91,10 @@ class VueGestion(ttk.Frame):
         selection = self.liste.selection()
         item = self.liste.item(selection[0])
         record = item['values']
-        # if record[0] == "Gestion Budget":
-        #     self.gerer_budget_module = Toplevel()
-        #     vue = VueGererBudget(self)
-        #     vue.place(height=500, width=500)
-        #     self.gerer_emp_module.geometry("600x600")
-        #     self.gerer_emp_module.title("Gestion Budget")
+        infos_module = self.dictionnaire_module[record[0]]
+        infos_module()
+
+
 
     def start_module_gerer_emp(self, params):
         self.gerer_emp_module = Toplevel()

@@ -5,6 +5,13 @@ from tkinter import ttk
 
 class VueGererEmp(ttk.Frame):
     def __init__(self, vue_gestion, data):
+        """
+
+        :param vue_gestion: ne pas toucher, représente la vue originale
+        :param data: contient le Prénom [0], l'identifiant[1] le titre[2] et le niveau d'accès[3] en String.
+        #TODO utiliser le data pour faire une request au DAO de tout les infos sur l'employé en
+        # question pour remplacer les données hardcodées sur l'employé
+        """
         super().__init__(vue_gestion.gerer_emp_module)
         self.vue_gestion = vue_gestion
         self.data_recu = data
@@ -16,10 +23,12 @@ class VueGererEmp(ttk.Frame):
 
     def remplir_vue_gestion(self):
         if self.data_recu is not None:
-            self.data = [self.data_recu[0], "Belony", "carlens2000@live.ca", self.data_recu[1], self.data_recu[2], "Desjardins"]
+            # Si il y a du data recu, on modifie un employé. sinon, on crée un nouvel employé
+            self.data = [self.data_recu[0], "Belony", self.data_recu[1], self.data_recu[3], self.data_recu[2], "Desjardins"]
         else: self.data = ["", "", "", "", "Aucun","Desjardins"]
+        # TODO mettre des vrais niveaux d'accès
         options = [
-            "Aucun",
+            self.data_recu[2] if self.data_recu else "Aucun",
             "Programmeur",
             "Entrepreneur",
             "Mécanicier",
@@ -30,6 +39,7 @@ class VueGererEmp(ttk.Frame):
         clicked = StringVar()
         clicked.set(options[0])
 
+        #TODO mettre des vrais compagnies
         options_compagnie = [
             "Desjardins",
             "Mcdo",
@@ -104,9 +114,15 @@ class VueGererEmp(ttk.Frame):
     def clic_bouton_annuler(self):
         self.vue_gestion.fermer_module_emp()
 
-    def supprimer_emp(self, message):
+    def supprimer_emp(self, evt):
+        identification = self.identifiant_input.get()
+        # représente l'identifiant
+        # TODO utiliser l'identifiant pour supprimer l'employé de la base de donnée
         print('Employé supprimé!')
         self.vue_gestion.fermer_module_emp()
+
+    def afficher_erreur(self):
+        pass
 
     def clic_bouton_sauvegarder(self):
         nom = self.nom_input.get()
@@ -114,6 +130,7 @@ class VueGererEmp(ttk.Frame):
         identification = self.identifiant_input.get()
         role = self.titre_input.get()
         permission = self.niveau_acces_selectionne
+        # TODO utiliser l'identifiant comme clé pour update ou ajouter les informations de l'employé dans la base de donnée
         if len(nom) > 0 and len(prenom) > 0 and len(identification) > 0 and len(role) > 0:
             print ("nom = "+ nom + ", " +
                    "prenom = "+ prenom + ", " +
