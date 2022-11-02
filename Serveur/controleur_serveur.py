@@ -24,7 +24,6 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.AFFICHER_MODULES: self.afficher_modules,
             utils.GET_MODULE: self.get_module
         }
 
@@ -70,7 +69,7 @@ class Controleur_Serveur:
         try:
             return Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
                                        id_compagnie=id_compagnie, titre="admin", permission=1, genre=genre,
-                                       nom_access="Super Admin")
+                                       nom_access="Super_Admin")
 
         except:
             return Exception
@@ -106,17 +105,15 @@ class Controleur_Serveur:
     def liaison_acces_module(self, form):
         pass
 
-    def afficher_modules(self, form):
-        return Dao().insert_modules()
-
-    def get_module(self,form):
+    def get_module(self, form):
         module = ["stuff"]
-        #for range in Dao.select_all_modules_of_compagnie(1):
+        # for range in Dao.select_all_modules_of_compagnie(1):
         #    module.append(range)
         return module
 
 
-
 if __name__ == "__main__":
     Dao().creer_bd()
-
+    Dao().ajouter_acces_super_admin()
+    Dao().ajouter_modules_initiaux()
+    Dao().ajouter_lien_acces_module_super_admin()

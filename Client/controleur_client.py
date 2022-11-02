@@ -29,7 +29,6 @@ class Controleur_Client:
         self.vue.master.destroy()
         ModuleGestion(self)
 
-
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
     # les reliera au controleur_serveur qui, lui
@@ -92,6 +91,7 @@ class Controleur_Client:
             utils.FONCTION: utils.GET_ACCESS
         }
         return self.appel_serveur(a)
+
     def get_module(self):
         a = {
             utils.FONCTION: utils.GET_MODULE

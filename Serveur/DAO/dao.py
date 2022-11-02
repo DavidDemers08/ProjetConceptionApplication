@@ -79,7 +79,7 @@ class Dao:
         self.cur.execute(SELECT_ID_MODULE, (nom, version))
         return self.cur.fetchone()
 
-    def select_all_modules_of_compagnie(self,id_compagnie):
+    def select_all_modules_of_compagnie(self, id_compagnie):
         self.cur.execute(SELECT_ALL_MODULE_PAR_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
@@ -133,7 +133,6 @@ class Dao:
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchone()
 
-
     def insert_module_pour_compagnie(self, id_compagnie, id_module):
         self.cur.execute(INSERT_MODULE_PAR_COMPAGNIE, (id_compagnie, id_module))
         self.conn.commit()
@@ -155,26 +154,6 @@ class Dao:
         #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
         return self.select_all_membres()
-
-    def insert_modules(self):
-        self.cur.executemany(INSERT_MODULES, [
-            ("gestion", "permet de faire la gestion du personnel", 1.0, "le chemin de traverse", 34.44),
-            ("propriete", "permet de montrer les propriete de la compagnie", 2.0, "le chemin de traverse2", 37.47),
-            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 3.0, "le chemin de traverse3",
-             40.00),
-            ("evenement", "permet de faire la gestion des evenements de la compagnie", 4.0, "le chemin de traverse4",
-             9.99),
-            ("budget", "permet de faire la gestion du budget de la compagnie", 5.0, "le chemin de traverse5", 21.35),
-            ("employe", "permet de faire la gestion des employees de la compagnie", 6.0, "le chemin de traverse6",
-             21.21),
-            ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 7.0,
-             "le chemin de traverse7", 4.20),
-            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 8.0, "le chemin de traverse8",
-             99.66),
-            ("materielle", "permet de faire la gestion du materiel de la compagnie", 9.0, "le chemin de traverse9",
-             23.21)])
-        self.conn.commit()
-        return self.select_all_modules()
 
         # check acces if exist
 
@@ -283,6 +262,41 @@ class Dao:
     def insert_membre_a_acces(self, membre_id, id_access):
         self.cur.execute(INSERT_MEMBRE_A_ACCESS, (membre_id, id_access[0]))
         self.conn.commit()
+
+    def ajouter_acces_super_admin(self):
+        self.cur.execute(INSERT_ACCESS, ("Super_Admin",))
+        self.conn.commit()
+
+    def ajouter_lien_acces_module_super_admin(self):
+
+        self.liste_modules_init = ["gestion", "propriete", "inventaire", "evenement", "budget", "employe","vente_en_ligne", "plaintes", "materielle"]
+
+        for _ in self.liste_modules_init:
+            self.cur.execute(INSERT_MODULE_PAR_ACCESS,(self.get_id_module_init(_,1.0),self.get_id_super_admin()))
+
+        self.conn.commit()
+
+    def ajouter_modules_initiaux(self):
+
+        self.cur.executemany(INSERT_MODULES, [
+            ("gestion", "permet de faire la gestion du personnel", 1.0, "C:\\travail\\gestion", 34.44),
+            ("propriete", "permet de montrer les propriete de la compagnie", 1.0, "le chemin de traverse2", 37.47),
+            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 1.0, "le chemin de traverse3", 40.00),
+            ("evenement", "permet de faire la gestion des evenements de la compagnie", 1.0,"C:\\Users\\1569\\evenement", 9.99),
+            ("budget", "permet de faire la gestion du budget de la compagnie", 1.0, "C:\\Users\\1569\\budget", 21.35),
+            ("employe", "permet de faire la gestion des employees de la compagnie", 1.0, "le chemin de traverse6", 21.21),
+            ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 1.0, "C:\\Users\\1569\\vente_en_ligne", 4.20),
+            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 1.0, "C:\\Users\\1569\\plaintes", 99.66),
+            ("materielle", "permet de faire la gestion du materiel de la compagnie", 1.0, "C:\\Users\\1569\\materielle",23.21)
+        ])
+
+        self.conn.commit()
+
+    def get_id_super_admin(self):
+        return self.cur.execute(SELECT_ACCESS_ID, ("Super_Admin",)).fetchone()[0]
+
+    def get_id_module_init(self,nom,version):
+        return self.cur.execute(SELECT_MODULE_ID, (nom,version)).fetchone()[0]
 
 
 def main():
