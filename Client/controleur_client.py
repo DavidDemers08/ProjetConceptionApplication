@@ -18,16 +18,17 @@ path.append('../Utils')
 class Controleur_Client:
     def __init__(self):
         self.username = None
+        self.module_actuelle = None
+        self.modules = {
+            "login": 0
 
-    def set_vue(self, vue):
-        self.vue = vue
+        }
+        self.set_module("login")
 
-    def set_vue_gestion(self, vue_gestion):
-        self.vue_gestion = vue_gestion
-
-    def afficher_gestion(self):
-        self.vue.master.destroy()
-        ModuleGestion(self)
+    def set_module(self, nom_module: str) -> None:
+        self.module_actuelle.vider_vue()
+        self.module_actuelle = self.modules[nom_module]
+        self.module_actuelle.remplir_vue()
 
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui

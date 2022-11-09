@@ -4,11 +4,11 @@ from tkinter import ttk
 
 from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
+from Client.vues_refactor_tests.vue import Vue
 
-class VueGestion(ttk.Frame):
+class VueGestion(Vue):
     def __init__(self, parent):
         super().__init__(parent)
-        self.controleur = None
         self.remplir_vue_gestion()
 
 

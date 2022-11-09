@@ -1,24 +1,25 @@
-from tkinter import Tk
 from traceback import print_exc
+from tkinter import Tk
 
-from Client.vues.vue_paiement import VuePaiement
 from Client.controleur_client import Controleur_Client
+from Client.vues.vue_initiale import Vue
 
 
-class ModulePaiement(Tk):
+class Module(Tk):
     def __init__(self):
         super().__init__()
         controleur = Controleur_Client()
 
-        vue_paiement = VuePaiement(self, controleur)
-        vue_paiement.grid(row=3, column=3, padx=10, pady=10)
-
-        controleur.set_vue(vue_paiement)
+        vue = Vue(self)
+        vue.grid(row=0, column=0, padx=10, pady=10)
+        vue.set_controleur(controleur)
+        controleur.set_vue(vue)
+        #controleur.creation_modules()
 
 
 def main():
     try:
-        module = ModulePaiement()
+        module = Module()
         module.mainloop()
     except:
         print_exc()
