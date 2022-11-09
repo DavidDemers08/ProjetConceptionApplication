@@ -54,7 +54,10 @@ class Controleur_Serveur:
     def identifier_usager(self, form):
         nom = form[utils.NOM_USAGER]
         mdp = form[utils.MDP]
-        return Dao().identifier_usager(nom, mdp)
+        try:
+            return Dao().identifier_usager(nom, mdp)
+        except:
+            return False
 
     def voir_infos_usager(self, form):
         compagnies = Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
