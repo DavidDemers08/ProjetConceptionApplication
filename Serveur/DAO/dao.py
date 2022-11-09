@@ -16,7 +16,8 @@ class Dao:
         CREER_MEMBRE_DANS_COMPAGNIE,
         CREER_MODULE_PAR_ACCESS,
         CREER_ACCESS_PAR_MEMBRE,
-        CREER_MODULE_PAR_COMPAGNIE
+        CREER_MODULE_PAR_COMPAGNIE,
+        CREER_VEHICULE_PAR_COMPAGNIE
     ]
     __detruire = [
         DROP_MODULE_PAR_COMPAGNIE,
@@ -26,7 +27,8 @@ class Dao:
         DROP_ACCESS,
         DROP_MODULES,
         DROP_MEMBRE,
-        DROP_COMPAGNIE
+        DROP_COMPAGNIE,
+        DROP_VEHICULE_PAR_COMPAGNIE
     ]
 
     def __init__(self):
@@ -111,6 +113,10 @@ class Dao:
     def select_all_membres_de_compagnie(self, nom_compagnie):
         id_compagnie = self.select_id_of_compagnie(nom_compagnie)
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
+
+    def select_nom_compagnie(self, id_compagnie):
+        self.cur.execute(SELECT_NOM_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
     def select_all_modules_all_compagnies(self):

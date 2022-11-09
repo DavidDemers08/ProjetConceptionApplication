@@ -50,6 +50,7 @@ SELECT_COMPAGNIES = 'SELECT * FROM compagnie'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie WHERE id=?'
 SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
 DELETE_COMPAGNIE = 'DELETE FROM compagnie WHERE id=?'
+SELECT_NOM_COMPAGNIE = 'SELECT nom FROM compagnie WHERE id=?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
@@ -181,3 +182,27 @@ SELECT_ALL_ACCES_POUR_ALL_MEMBRES = 'SELECT * FROM access_par_membre'
 SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
 DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id_access=?'
 SELECT_ID_MEMBRE_WITH_USERNAME = 'SELECT id FROM membre WHERE identifiant = ?'
+
+# *********************** VEHICULE PAR COMPAGNIE ************************* #
+CREER_VEHICULE_PAR_COMPAGNIE = '''
+CREATE TABLE IF NOT EXISTS vehicule_par_compagnie
+(
+    id_vehicule INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id_compagnie  INTEGER NOT NULL,
+    annee_modele  INTEGER NOT NULL,
+    marque TEXT NOT NULL UNIQUE,
+    modele TEXT NOT NULL UNIQUE,
+    kilometrage INTEGER NOT NULL,
+    type TEXT NOT NULL ,
+
+    FOREIGN KEY(id_compagnie) REFERENCES compagnie(id)
+    
+)
+'''
+DROP_VEHICULE_PAR_COMPAGNIE = 'DROP TABLE IF EXISTS vehicule_par_compagnie'
+INSERT_VEHICULE_PAR_COMPAGNIE = 'INSERT INTO vehicule_par_compagnie(' \
+                                'id_comganie, annee_modele,marque,modele,kilometrage,type' \
+                                ') VALUES(?,?,?,?,?,?)'
+
+SELECT_ALL_VEHICULE_PAR_COMPAGNIE = 'SELECT * FROM vehicule_par_compagnie'
+DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
