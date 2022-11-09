@@ -21,12 +21,9 @@ GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
 
-
 AFFICHER_MEMBRES = "afficher_membres"
 
-
 AFFICHER_COMPAGNIES = "afficher_compagnies"
-
 
 CREER_ACCES = 'creer_acces'
 NOM_ACCES = 'nom_acces'
@@ -35,3 +32,5 @@ AFFICHER_MODULES = "afficher_modules"
 
 GET_MODULE = "get_module"
 GET_ACCESS = "get_access"
+
+SELECT_MODULES_WITH_ACCESS_OF_USER = "select_modules_with_access_of_user"

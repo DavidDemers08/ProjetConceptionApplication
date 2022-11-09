@@ -5,7 +5,6 @@ import json
 from sys import path
 
 from Client.modules.module_gestion import ModuleGestion
-from Client.vues.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -73,23 +72,18 @@ class Controleur_Client:
 
         return self.appel_serveur(a)
 
-    def creation_acces_admin(self):
-        a = {
-            utils.FONCTION: utils.NOM_ACCES,
-            utils.NOM_ACCES: 'Super Administrateur'
-        }
-        self.appel_serveur(a)
-
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
         }
         return self.appel_serveur(a)
 
-    def get_access(self):
+    def select_modules_with_access_of_user(self):
         a = {
-            utils.FONCTION: utils.GET_ACCESS
+            utils.FONCTION: utils.SELECT_MODULES_WITH_ACCESS_OF_USER,
+            utils.NOM_USAGER: self.username
         }
+
         return self.appel_serveur(a)
 
     def get_module(self):

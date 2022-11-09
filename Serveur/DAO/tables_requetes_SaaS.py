@@ -66,7 +66,8 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 )
 '''
 DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
-INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
+INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(' \
+                               '?, ?, ?) '
 
 SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
@@ -79,6 +80,24 @@ UPDATE membre_dans_compagnie
 WHERE id_membre = ? AND id_compagnie = ?
 '''
 
+SELECT_MODULES_MATCHING_ACCESS_OF_USERNAME = '''
+    
+    SELECT 
+        modules.nom AS nom_modules
+    
+    FROM 
+        module_par_access
+    
+    INNER JOIN 
+        modules ON id_module = modules.id 
+    
+    INNER JOIN access_par_membre ON id_access  = access_par_membre.id_access
+    
+    INNER JOIN membre ON access_par_membre.id_membre = membre.id
+    
+    WHERE membre.identifiant = ?
+    
+'''
 # ***************** MODULES *********************
 
 CREER_MODULE = '''
@@ -125,7 +144,6 @@ SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE = 'SELECT * FROM module_par_compagnie'
 SELECT_ALL_MODULE_PAR_COMPAGNIE = 'SELECT * FROM module_par_compagnie WHERE id_compagnie=?'
 
 DELETE_ACCESS_POUR_COMPAGNIE = 'DELETE FROM module_par_compagnie WHERE id_module=? AND id_compagnie=?'
-
 
 # ***************** ACCÈS *********************
 CREER_ACCESS = '''

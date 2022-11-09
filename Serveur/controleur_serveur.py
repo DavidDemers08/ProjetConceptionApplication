@@ -4,11 +4,11 @@ from Utils import utils
 import json
 
 
-#path.append('./DAO')
+# path.append('./DAO')
 # from Serveur.DAO.dao import Dao
 
 
-#spath.append('../Utils')
+# spath.append('../Utils')
 
 
 # import Utils.utils as utils
@@ -24,7 +24,8 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.GET_MODULE: self.get_module
+            utils.GET_MODULE: self.get_module,
+            utils.SELECT_MODULES_WITH_ACCESS_OF_USER: self.select_modules_with_access_of_user
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -68,7 +69,7 @@ class Controleur_Serveur:
                            prenom: str):
         try:
             return Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
-                                       id_compagnie=id_compagnie, titre="admin", permission=1, genre=genre,
+                                       id_compagnie=id_compagnie, titre="admin", permission='ALL', genre=genre,
                                        nom_access="Super_Admin")
 
         except:
@@ -110,6 +111,9 @@ class Controleur_Serveur:
         # for range in Dao.select_all_modules_of_compagnie(1):
         #    module.append(range)
         return module
+
+    def select_modules_with_access_of_user(self, form: dict):
+        return Dao().select_modules_matching_username(form[utils.NOM_USAGER])
 
 
 if __name__ == "__main__":
