@@ -140,18 +140,7 @@ class Dao:
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: int,
                       nom_access: str):
         cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
-        # self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
         self.conn.commit()
-        # check acces if exist
-        # id_access_initial = self.get_access_id(nom_access)
-        #
-        # if id_access_initial is None:
-        #     self.insert_acces(nom_access)
-        #     id_access = self.get_access_id(nom_access)
-        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
-        # else:
-        #     id_access = id_access_initial
-        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
         return self.select_all_membres()
 

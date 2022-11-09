@@ -80,6 +80,22 @@ class Controleur_Client:
         }
         self.appel_serveur(a)
 
+    def creer_usager(self,prenom,nom,identification,mdp,titre,genre,compagnie,permission,acced):
+        a = {
+            utils.PRENOM: prenom,
+            utils.NOM: nom,
+            utils.IDENTIFIANT: identification,
+            utils.MDP: mdp,
+            utils.TITRE: titre,
+            utils.GENRE: genre,
+            utils.ID_COMPAGNIE: compagnie,
+            utils.PERMISSION: permission,
+            utils.NOM_ACCES: acced,
+            utils.FONCTION : utils.CREER_USAGER
+        }
+
+        return self.appel_serveur(a)
+
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
@@ -98,6 +114,12 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_all_id_compagnie_utilisateur(self,username):
+        a = {
+            utils.FONCTION : utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
+            utils.NOM_USAGER : username
+        }
+        return  self.appel_serveur(a)
 
 # test
 def main():

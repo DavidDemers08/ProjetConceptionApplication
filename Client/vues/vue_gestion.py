@@ -94,11 +94,9 @@ class VueGestion(ttk.Frame):
         infos_module = self.dictionnaire_module[record[0]]
         infos_module()
 
-
-
     def start_module_gerer_emp(self, params):
         self.gerer_emp_module = Toplevel()
-        vue = VueGererEmp(self, params)
+        vue = VueGererEmp(self, params, self.controleur)
         vue.place(height=500, width=500)
         self.gerer_emp_module.geometry("500x500")
         self.gerer_emp_module.title("Gestion Employé")

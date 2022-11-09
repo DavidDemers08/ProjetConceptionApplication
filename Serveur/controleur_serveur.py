@@ -24,7 +24,9 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.GET_MODULE: self.get_module
+            utils.GET_MODULE: self.get_module,
+            utils.VOIR_COMPAGNIE_ID_UTILISATEUR:self.voir_compagnie_id_utilisateur,
+            utils.CREER_USAGER: self.creer_usager
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -57,12 +59,15 @@ class Controleur_Serveur:
 
     def creer_usager(self, form):
         prenom = form[utils.PRENOM]
+        nom = form[utils.NOM]
         identifiant = form[utils.IDENTIFIANT]
         mdp = form[utils.MDP]
         titre = form[utils.TITRE]
         genre = form[utils.GENRE]
         id_compagnie = form[utils.ID_COMPAGNIE]
         permission = form[utils.PERMISSION]
+        access = form[utils.NOM_ACCES]
+        return Dao().insert_membre(prenom,nom,identifiant,mdp,titre,genre,id_compagnie,permission,access)
 
     def creer_compte_admin(self, identifiant: str, mdp_admin: str, id_compagnie: int, genre: str, nom: str,
                            prenom: str):
@@ -70,7 +75,6 @@ class Controleur_Serveur:
             return Dao().insert_membre(prenom=prenom, nom=nom, identifiant=identifiant, mdp=mdp_admin,
                                        id_compagnie=id_compagnie, titre="admin", permission=1, genre=genre,
                                        nom_access="Super_Admin")
-
         except:
             return Exception
 
@@ -86,6 +90,9 @@ class Controleur_Serveur:
         for rangee in Dao().select_all_compagnies():
             compagnie.append(rangee)
         return compagnie
+
+    def voir_compagnie_id_utilisateur(self,form):
+        return Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
 
     def voir_membre_all_compagnie(self, form):
         membre = []
