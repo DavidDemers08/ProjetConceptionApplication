@@ -1,14 +1,14 @@
 from sys import path
-import json
-
 from Serveur.DAO.dao import Dao
 from Utils import utils
+import json
 
-path.append('./DAO')
+
+#path.append('./DAO')
 # from Serveur.DAO.dao import Dao
 
 
-path.append('../Utils')
+#spath.append('../Utils')
 
 
 # import Utils.utils as utils

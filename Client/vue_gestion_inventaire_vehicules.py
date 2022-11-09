@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from vue_gerer_emp import VueGererEmp
+from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class VueGestionInventaireVehicules(ttk.Frame):

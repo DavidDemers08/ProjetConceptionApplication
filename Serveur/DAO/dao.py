@@ -1,6 +1,6 @@
 import sqlite3
-from dao_modules import *
-from tables_requetes_SaaS import *
+from Serveur.DAO.dao_modules import *
+from Serveur.DAO.tables_requetes_SaaS import *
 
 
 # singleton pas possible car:
