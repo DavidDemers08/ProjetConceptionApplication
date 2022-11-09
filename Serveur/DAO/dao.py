@@ -16,7 +16,8 @@ class Dao:
         CREER_MEMBRE_DANS_COMPAGNIE,
         CREER_MODULE_PAR_ACCESS,
         CREER_ACCESS_PAR_MEMBRE,
-        CREER_MODULE_PAR_COMPAGNIE
+        CREER_MODULE_PAR_COMPAGNIE,
+        CREER_VEHICULE_PAR_COMPAGNIE
     ]
     __detruire = [
         DROP_MODULE_PAR_COMPAGNIE,
@@ -26,7 +27,8 @@ class Dao:
         DROP_ACCESS,
         DROP_MODULES,
         DROP_MEMBRE,
-        DROP_COMPAGNIE
+        DROP_COMPAGNIE,
+        DROP_VEHICULE_PAR_COMPAGNIE
     ]
 
     def __init__(self):

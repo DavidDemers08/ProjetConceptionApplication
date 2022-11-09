@@ -1,4 +1,6 @@
 from sys import path
+
+import Utils.utils
 from Serveur.DAO.dao import Dao
 from Utils import utils
 import json
@@ -25,7 +27,9 @@ class Controleur_Serveur:
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
             utils.GET_MODULE: self.get_module,
-            utils.VOIR_INFOS_USAGER: self.voir_infos_usager
+            utils.VOIR_INFOS_USAGER: self.voir_infos_usager,
+            utils.CHERCHER_COMPAGNIE: self.chercher_compagnie
+
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -37,6 +41,11 @@ class Controleur_Serveur:
         fonction = self.fonctions[fonction_str]
         infos = fonction(request_form)
         return json.dumps(infos)
+
+
+    def chercher_compagnie(self, form):
+        nom_ville = form[utils.NOM_VILLE]
+        return Dao().select_id_of_compagnie(nom_ville)
 
     # instance de sqlite3 doit être utilisée dans le même
     # thread que celui de sa création

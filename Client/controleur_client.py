@@ -59,6 +59,12 @@ class Controleur_Client:
         }
         return self.appel_serveur(infos)
 
+    def rechercher_compagnie(self, nom_ville):
+        a = {
+            utils.FONCTION : utils.CHERCHER_COMPAGNIE,
+            utils.NOM_VILLE: nom_ville
+        }
+        return self.appel_serveur(a)
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
