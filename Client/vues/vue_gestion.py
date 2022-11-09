@@ -8,18 +8,26 @@ from Client.vues.vue_gerer_emp import VueGererEmp
 class VueGestion(ttk.Frame):
     def __init__(self, parent, controleur):
         super().__init__(parent)
+        self.acces = None
+        self.controleur = None
+
         self.controleur = controleur
         self.remplir_vue_gestion()
+        self.liste_modules = []
 
 
         from Client.modules.module_paiement import ModulePaiement
-        self.dictionnaire_module =  {
-              "Gestion Budget": ModulePaiement,
-              "Gestion Inventaire": ModulePaiement,
-              "Gestion Événements": ModulePaiement,
-              "Gestion Propriétés": ModulePaiement
-            }
+        self.dictionnaire_module = {
+            "Gestion Budget": ModulePaiement,
+            "Gestion Inventaire": ModulePaiement,
+            "Gestion Événements": ModulePaiement,
+            "Gestion Propriétés": ModulePaiement
+        }
 
+    def set_controleur(self, controleur):
+        self.controleur = controleur
+        self.liste_modules = self.controleur.select_modules_with_access_of_user()
+        print(self.liste_modules)
 
     def remplir_vue_gestion(self):
 
@@ -41,7 +49,8 @@ class VueGestion(ttk.Frame):
         self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
         self.lWidth = int(self.canevas_list.winfo_width() / 3)
 
-        self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre', command=lambda: self.start_module_gerer_emp(None))
+        self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre',
+                                                command=lambda: self.start_module_gerer_emp(None))
         self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
 
         # self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
@@ -59,7 +68,7 @@ class VueGestion(ttk.Frame):
         self.bouton_gerer_employe.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
         colonnes = ('Nom', 'Identifiant', 'Permission', 'Rôle')
         self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
-                                             selectmode='browse')
+                                  selectmode='browse')
 
         data = []
         # TODO utiliser de vrais employés
@@ -75,15 +84,14 @@ class VueGestion(ttk.Frame):
         self.liste.heading('Permission', text='Permission')
         self.liste.heading('Rôle', text='Rôle')
 
-        self.liste.column('Rôle', anchor='center', stretch=NO,width=150)
-        self.liste.column('Identifiant', anchor='center',stretch=NO,width=150)
-        self.liste.column('Permission', anchor='center',stretch=NO,width=150)
-        self.liste.column('Nom', anchor='center',stretch=NO,width=150)
+        self.liste.column('Rôle', anchor='center', stretch=NO, width=150)
+        self.liste.column('Identifiant', anchor='center', stretch=NO, width=150)
+        self.liste.column('Permission', anchor='center', stretch=NO, width=150)
+        self.liste.column('Nom', anchor='center', stretch=NO, width=150)
 
         for emp in data:
             self.liste.insert('', tk.END, values=emp)
         self.liste.place(x=0, y=0)
-
 
     def populate_list(self):
         pass
@@ -139,7 +147,7 @@ class VueGestion(ttk.Frame):
 
         colonnes = ('Modules',)
         self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
-                                             selectmode='browse')
+                                  selectmode='browse')
         self.liste.heading('Modules', text='Modules disponibles:')
 
         data = []
@@ -153,8 +161,6 @@ class VueGestion(ttk.Frame):
             self.liste.insert('', tk.END, values=module)
         self.liste.place(x=0, y=0)
         self.liste.bind("<Double-1>", self.start_module)
-
-
 
     def clic_bouton_annuler(self):
         self.var_nom.set('')
