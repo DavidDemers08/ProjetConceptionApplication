@@ -21,6 +21,7 @@ GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
 
+CHERCHER_COMPAGNIE = 'chercher_compagnie'
 
 AFFICHER_MEMBRES = "afficher_membres"
 
