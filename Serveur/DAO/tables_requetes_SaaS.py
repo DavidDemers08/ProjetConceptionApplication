@@ -50,6 +50,7 @@ SELECT_COMPAGNIES = 'SELECT * FROM compagnie'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie WHERE id=?'
 SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
 DELETE_COMPAGNIE = 'DELETE FROM compagnie WHERE id=?'
+SELECT_NOM_COMPAGNIE = 'SELECT nom FROM compagnie WHERE id=?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 

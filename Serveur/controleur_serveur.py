@@ -24,7 +24,8 @@ class Controleur_Serveur:
             utils.AFFICHER_MEMBRES: self.afficher_membres,
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
-            utils.GET_MODULE: self.get_module
+            utils.GET_MODULE: self.get_module,
+            utils.VOIR_INFOS_USAGER: self.voir_infos_usager
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -43,6 +44,14 @@ class Controleur_Serveur:
         nom = form[utils.NOM_USAGER]
         mdp = form[utils.MDP]
         return Dao().identifier_usager(nom, mdp)
+
+    def voir_infos_usager(self, form):
+        compagnies = Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
+        employes = []
+        for compagnie in compagnies:
+            nom_compagnie = Dao().select_nom_compagnie(compagnie[1])
+            employes.append(Dao().select_all_membres_de_compagnie(nom_compagnie))
+        return employes
 
     def creer_compte_ville(self, form) -> str:
         try:
@@ -80,6 +89,8 @@ class Controleur_Serveur:
             membre.append(rangee)
             print(rangee)
         return membre
+
+
 
     def voir_compagnie(self, form):
         compagnie = []

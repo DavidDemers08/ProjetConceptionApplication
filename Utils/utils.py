@@ -21,8 +21,10 @@ GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
 
-
+VOIR_INFOS_USAGER = "voir_infos_usager"
 AFFICHER_MEMBRES = "afficher_membres"
+SELECT_ALL_COMPAGNIES_DE_MEMBRE = "select_all_compagnies_de_membre"
+ID_MEMBRE="id_membre"
 
 
 AFFICHER_COMPAGNIES = "afficher_compagnies"
