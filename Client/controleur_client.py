@@ -69,6 +69,13 @@ class Controleur_Client:
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
+    def afficher_compagnie_de_membre(self, membre):
+        infos = {
+            utils.NOM_USAGER: membre,
+            utils.FONCTION: utils.VOIR_INFOS_USAGER
+        }
+        return self.appel_serveur(infos)
+
     def afficher_membres(self):
         a = {utils.FONCTION: utils.AFFICHER_MEMBRES}
 

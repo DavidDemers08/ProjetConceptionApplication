@@ -115,6 +115,10 @@ class Dao:
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
+    def select_nom_compagnie(self, id_compagnie):
+        self.cur.execute(SELECT_NOM_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
+
     def select_all_modules_all_compagnies(self):
         self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE)
         return self.cur.fetchall()
