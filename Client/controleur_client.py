@@ -58,9 +58,22 @@ class Controleur_Client:
         }
         return self.appel_serveur(infos)
 
+    def rechercher_compagnie(self, nom_ville):
+        a = {
+            utils.FONCTION : utils.CHERCHER_COMPAGNIE,
+            utils.NOM_VILLE: nom_ville
+        }
+        return self.appel_serveur(a)
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
+
+    def afficher_compagnie_de_membre(self, membre):
+        infos = {
+            utils.NOM_USAGER: membre,
+            utils.FONCTION: utils.VOIR_INFOS_USAGER
+        }
+        return self.appel_serveur(infos)
 
     def afficher_membres(self):
         a = {utils.FONCTION: utils.AFFICHER_MEMBRES}
@@ -71,7 +84,28 @@ class Controleur_Client:
         a = {utils.FONCTION: utils.AFFICHER_COMPAGNIES}
 
         return self.appel_serveur(a)
+    def creation_acces_admin(self):
+        a = {
+            utils.FONCTION: utils.NOM_ACCES,
+            utils.NOM_ACCES: 'Super Administrateur'
+        }
+        self.appel_serveur(a)
 
+    def creer_usager(self,prenom,nom,identification,mdp,titre,genre,compagnie,permission,acced):
+        a = {
+            utils.PRENOM: prenom,
+            utils.NOM: nom,
+            utils.IDENTIFIANT: identification,
+            utils.MDP: mdp,
+            utils.TITRE: titre,
+            utils.GENRE: genre,
+            utils.ID_COMPAGNIE: compagnie,
+            utils.PERMISSION: permission,
+            utils.NOM_ACCES: acced,
+            utils.FONCTION : utils.CREER_USAGER
+        }
+
+        return self.appel_serveur(a)
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
@@ -92,6 +126,12 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_all_id_compagnie_utilisateur(self,username):
+        a = {
+            utils.FONCTION : utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
+            utils.NOM_USAGER : username
+        }
+        return  self.appel_serveur(a)
 
 # test
 def main():

@@ -18,7 +18,8 @@ class Dao:
         CREER_MEMBRE_DANS_COMPAGNIE,
         CREER_MODULE_PAR_ACCESS,
         CREER_ACCESS_PAR_MEMBRE,
-        CREER_MODULE_PAR_COMPAGNIE
+        CREER_MODULE_PAR_COMPAGNIE,
+        CREER_VEHICULE_PAR_COMPAGNIE
     ]
     __detruire = [
         DROP_MODULE_PAR_COMPAGNIE,
@@ -28,7 +29,8 @@ class Dao:
         DROP_ACCESS,
         DROP_MODULES,
         DROP_MEMBRE,
-        DROP_COMPAGNIE
+        DROP_COMPAGNIE,
+        DROP_VEHICULE_PAR_COMPAGNIE
     ]
 
     def __init__(self):
@@ -116,6 +118,10 @@ class Dao:
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
+    def select_nom_compagnie(self, id_compagnie):
+        self.cur.execute(SELECT_NOM_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
+
     def select_all_modules_all_compagnies(self):
         self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE)
         return self.cur.fetchall()
@@ -143,6 +149,8 @@ class Dao:
     def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str,
                       nom_access: str):
         try:
+            cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
+            self.conn.commit()
 
             cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
             self.conn.commit()

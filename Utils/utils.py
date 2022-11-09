@@ -20,17 +20,21 @@ REGION = "region"
 GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
-
+IDENTIFIANT = "idantifiant"
+TITRE = "titre"
+PERMISSION = "permission"
+ID_COMPAGNIE = "id_compagnie"
+VOIR_INFOS_USAGER = "voir_infos_usager"
+CHERCHER_COMPAGNIE = 'chercher_compagnie'
 AFFICHER_MEMBRES = "afficher_membres"
-
+SELECT_ALL_COMPAGNIES_DE_MEMBRE = "select_all_compagnies_de_membre"
+ID_MEMBRE="id_membre"
 AFFICHER_COMPAGNIES = "afficher_compagnies"
-
 CREER_ACCES = 'creer_acces'
 NOM_ACCES = 'nom_acces'
-
 AFFICHER_MODULES = "afficher_modules"
-
 GET_MODULE = "get_module"
 GET_ACCESS = "get_access"
-
 SELECT_MODULES_WITH_ACCESS_OF_USER = "select_modules_with_access_of_user"
+CREER_USAGER = "creer_usager"
+VOIR_COMPAGNIE_ID_UTILISATEUR = "voir_compagnie_id_utilisateur"

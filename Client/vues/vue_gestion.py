@@ -6,12 +6,15 @@ from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class VueGestion(ttk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, controleur):
         super().__init__(parent)
         self.acces = None
         self.controleur = None
+
+        self.controleur = controleur
         self.remplir_vue_gestion()
         self.liste_modules = []
+
 
         from Client.modules.module_paiement import ModulePaiement
         self.dictionnaire_module = {
@@ -70,7 +73,10 @@ class VueGestion(ttk.Frame):
         data = []
         # TODO utiliser de vrais employés
         # Ici on append dans le data de faux employés avec la boucle
+        a = self.controleur.afficher_compagnie_de_membre(self.controleur.username)
+        print(a)
         for n in range(1, 50):
+
             data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
 
         self.liste.heading('Nom', text='Nom')
@@ -99,7 +105,7 @@ class VueGestion(ttk.Frame):
 
     def start_module_gerer_emp(self, params):
         self.gerer_emp_module = Toplevel()
-        vue = VueGererEmp(self, params)
+        vue = VueGererEmp(self, params, self.controleur)
         vue.place(height=500, width=500)
         self.gerer_emp_module.geometry("500x500")
         self.gerer_emp_module.title("Gestion Employé")
