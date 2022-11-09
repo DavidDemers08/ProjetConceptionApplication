@@ -75,6 +75,11 @@ class Dao:
     def select_id_of_compagnie(self, name):
         self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
         return self.cur.fetchone()[0]
+        try:
+            self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
+            return self.cur.fetchone()
+        except:
+            return False
 
     def get_membre_id(self, identifiant):
         self.cur.execute(SELECT_ID_MEMBRE, (identifiant,))
