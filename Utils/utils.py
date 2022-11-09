@@ -20,6 +20,10 @@ REGION = "region"
 GENRE = "genre"
 PRENOM = "prenom"
 NOM = "nom"
+IDENTIFIANT = "idantifiant"
+TITRE = "titre"
+PERMISSION = "permission"
+ID_COMPAGNIE = "id_compagnie"
 
 
 VOIR_INFOS_USAGER = "voir_infos_usager"
@@ -40,3 +44,6 @@ AFFICHER_MODULES = "afficher_modules"
 
 GET_MODULE = "get_module"
 GET_ACCESS = "get_access"
+CREER_USAGER = "creer_usager"
+
+VOIR_COMPAGNIE_ID_UTILISATEUR = "voir_compagnie_id_utilisateur"
