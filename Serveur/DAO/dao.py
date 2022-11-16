@@ -1,4 +1,6 @@
 import sqlite3
+import traceback
+
 from Serveur.DAO.dao_modules import *
 from Serveur.DAO.tables_requetes_SaaS import *
 
@@ -16,9 +18,11 @@ class Dao:
         CREER_MEMBRE_DANS_COMPAGNIE,
         CREER_MODULE_PAR_ACCESS,
         CREER_ACCESS_PAR_MEMBRE,
-        CREER_MODULE_PAR_COMPAGNIE
+        CREER_MODULE_PAR_COMPAGNIE,
+        CREER_VEHICULE_PAR_COMPAGNIE
     ]
     __detruire = [
+        DROP_VEHICULE_PAR_COMPAGNIE,
         DROP_MODULE_PAR_COMPAGNIE,
         DROP_ACCESS_PAR_MEMBRE,
         DROP_MODULE_PAR_ACCESS,
@@ -32,7 +36,8 @@ class Dao:
     def __init__(self):
         self.chemin_bd = BD_GEST_MEDIA
         self.connexion()
-        # self.Inventaire = Inventaire(self.cur, self.conn, Dao.__creer, Dao.__detruire) ----> exemple de creation de classe pour un module
+        # self.Inventaire = Inventaire(self.cur, self.conn, Dao.__creer, Dao.__detruire) ----> exemple de creation de
+        # classe pour un module
 
     def __del__(self):
         self.deconnexion()
@@ -61,15 +66,18 @@ class Dao:
 
     def select_id_membre_with_username(self, username):
         self.cur.execute(SELECT_ID_MEMBRE_WITH_USERNAME, (username,))
-        return self.cur.fetchall()
+        return self.cur.fetchone()[0]
 
     def select_all_compagnies(self):
         self.cur.execute(SELECT_COMPAGNIES)
         return self.cur.fetchall()
 
     def select_id_of_compagnie(self, name):
-        self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
-        return self.cur.fetchone()
+        try:
+            self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
+            return self.cur.fetchone()[0]
+        except:
+            return False
 
     def get_membre_id(self, identifiant):
         self.cur.execute(SELECT_ID_MEMBRE, (identifiant,))
@@ -113,6 +121,10 @@ class Dao:
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
+    def select_nom_compagnie(self, id_compagnie):
+        self.cur.execute(SELECT_NOM_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
+
     def select_all_modules_all_compagnies(self):
         self.cur.execute(SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE)
         return self.cur.fetchall()
@@ -129,6 +141,10 @@ class Dao:
         self.cur.execute(SELECT_ALL_ACCES_POUR_ALL_MEMBRES)
         return self.cur.fetchall()
 
+    def select_all_vehicules(self):
+        self.cur.execute(SELECT_ALL_VEHICULE_PAR_COMPAGNIE)
+        return self.cur.fetchall()
+
     def get_access_id(self, nom):
         self.cur.execute(SELECT_ACCESS_ID, (nom,))
         return self.cur.fetchone()
@@ -137,25 +153,26 @@ class Dao:
         self.cur.execute(INSERT_MODULE_PAR_COMPAGNIE, (id_compagnie, id_module))
         self.conn.commit()
 
-    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: int,
+    def insert_membre(self, prenom, nom, identifiant, mdp, titre, genre, id_compagnie: int, permission: str,
                       nom_access: str):
-        cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
-        # self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
-        self.conn.commit()
-        # check acces if exist
-        # id_access_initial = self.get_access_id(nom_access)
-        #
-        # if id_access_initial is None:
-        #     self.insert_acces(nom_access)
-        #     id_access = self.get_access_id(nom_access)
-        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
-        # else:
-        #     id_access = id_access_initial
-        #     self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+        try:
+            cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
+            self.conn.commit()
+            self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
+            self.conn.commit()
 
-        return self.select_all_membres()
+            id_access_initial = self.get_access_id(nom_access)
 
-        # check acces if exist
+            if id_access_initial is None:
+                self.insert_acces(nom_access)
+                id_access = self.get_access_id(nom_access)
+                self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+            else:
+                id_access = id_access_initial
+                self.insert_membre_a_acces(self.cur.lastrowid, id_access)
+
+        except Exception:
+            traceback.print_exc()
 
     def id_access_initial(self, nom_access):
         id_access_initial = self.get_access_id(nom_access)
@@ -170,10 +187,12 @@ class Dao:
             self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
     def insert_compagnie(self, nom, pays, province, region):
-        self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
-        self.conn.commit()
-        # TODO j'ai besoin de l'ID de la compagnie pour ajouter l'admin
-        return self.select_all_compagnies()
+        try:
+            self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
+            self.conn.commit()
+            return self.cur.execute(SELECT_ID_COMPAGNIE, (nom,)).fetchone()[0]
+        except:
+            return False
 
     def insert_membre_dans_compagnie(self, id_compagnie, id_membre, permission_membre):
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
@@ -191,6 +210,9 @@ class Dao:
             tuple_array.append((id_module, id_acces))
         self.cur.executemany(INSERT_MODULE_PAR_ACCESS, tuple_array)
         self.conn.commit()
+    def insert_vehicule_dans_compagnie(self,id_compagnie,annee_modele,marque,modele,kilometrage,type):
+        self.cur.execute(INSERT_VEHICULE_PAR_COMPAGNIE, (id_compagnie, annee_modele,marque,modele,kilometrage,type))
+        self.conn.commit()
 
     # ***************** DELETE
     def delete_membre(self, identifiant):
@@ -201,7 +223,8 @@ class Dao:
     def delete_access(self, nom):
         id_access = self.get_access_id(nom)
         self.cur.execute(DELETE_ACCESS, (nom, id_access))
-
+    def delete_vehicule(self,id_vehicule,id_compagnie):
+        self.cur.execute(DELETE_VEHICULE_PAR_COMPAGNIE, (id_vehicule, id_compagnie))
     # ***************** UPDATE
     def update_membre(self, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
         id_membre = self.get_membre_id(identifiant)
@@ -215,7 +238,9 @@ class Dao:
         id_compagnie = self.select_id_of_compagnie(nom_compagnie)
         self.cur.execute(UPDATE_PERMISSION_MEMBRE, (permission_membre, id_membre, id_compagnie))
         self.conn.commit()
-
+    def update_vehicule(self,annee_modele,marque,modele,kilometrage,type,id_vehicule,id_compagnie):
+        self.cur.execute(UPDATE_VEHICULE_COMPAGNIE, (annee_modele, marque,modele,kilometrage,type,id_vehicule, id_compagnie))
+        self.conn.commit()
     # ***************** AUTRES
     def identifier_usager(self, nom, mdp):
         # sql = '''
@@ -240,7 +265,7 @@ class Dao:
             ON module_par_compagnie.id_module = modules.id
         WHERE id_compagnie != ?
         '''
-        return self.cur.execute(sql,(id_compagnie,)).fetchall()
+        return self.cur.execute(sql, (id_compagnie,)).fetchall()
 
     def insert_module(self, nom, version, prix_mensuel, chemin_executable, derscription="Aucune Description"):
         self.cur.execute(INSERT_MODULES, (nom, derscription, version, chemin_executable, prix_mensuel))
@@ -265,29 +290,45 @@ class Dao:
 
     def ajouter_acces_super_admin(self):
         self.cur.execute(INSERT_ACCESS, ("Super_Admin",))
+
         self.conn.commit()
+        return self.cur.fetchall()
 
     def ajouter_lien_acces_module_super_admin(self):
 
-        self.liste_modules_init = ["gestion", "propriete", "inventaire", "evenement", "budget", "employe","vente_en_ligne", "plaintes", "materielle"]
+        self.liste_modules_init = ["gestion", "propriete", "inventaire", "evenement", "budget", "employe",
+                                   "vente_en_ligne", "plaintes", "materielle"]
 
         for _ in self.liste_modules_init:
-            self.cur.execute(INSERT_MODULE_PAR_ACCESS,(self.get_id_module_init(_,1.0),self.get_id_super_admin()))
+            self.cur.execute(INSERT_MODULE_PAR_ACCESS, (self.get_id_module_init(_, 1.0), self.get_id_super_admin()))
 
         self.conn.commit()
+
+    def select_modules_matching_username(self, username: str):
+        pass
+        # self.cur.execute(SELECT_MODULES_MATCHING_ACCESS_OF_USERNAME, (username,))
+        # return self.cur.fetchall()
 
     def ajouter_modules_initiaux(self):
 
         self.cur.executemany(INSERT_MODULES, [
             ("gestion", "permet de faire la gestion du personnel", 1.0, "C:\\travail\\gestion", 34.44),
             ("propriete", "permet de montrer les propriete de la compagnie", 1.0, "le chemin de traverse2", 37.47),
-            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 1.0, "le chemin de traverse3", 40.00),
-            ("evenement", "permet de faire la gestion des evenements de la compagnie", 1.0,"C:\\Users\\1569\\evenement", 9.99),
+            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 1.0, "le chemin de traverse3",
+             40.00),
+            (
+                "evenement", "permet de faire la gestion des evenements de la compagnie", 1.0,
+                "C:\\Users\\1569\\evenement",
+                9.99),
             ("budget", "permet de faire la gestion du budget de la compagnie", 1.0, "C:\\Users\\1569\\budget", 21.35),
-            ("employe", "permet de faire la gestion des employees de la compagnie", 1.0, "le chemin de traverse6", 21.21),
-            ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 1.0, "C:\\Users\\1569\\vente_en_ligne", 4.20),
-            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 1.0, "C:\\Users\\1569\\plaintes", 99.66),
-            ("materielle", "permet de faire la gestion du materiel de la compagnie", 1.0, "C:\\Users\\1569\\materielle",23.21)
+            ("employe", "permet de faire la gestion des employees de la compagnie", 1.0, "le chemin de traverse6",
+             21.21),
+            ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 1.0,
+             "C:\\Users\\1569\\vente_en_ligne", 4.20),
+            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 1.0, "C:\\Users\\1569\\plaintes",
+             99.66),
+            ("materielle", "permet de faire la gestion du materiel de la compagnie", 1.0, "C:\\Users\\1569\\materielle",
+             23.21)
         ])
 
         self.conn.commit()
@@ -295,8 +336,11 @@ class Dao:
     def get_id_super_admin(self):
         return self.cur.execute(SELECT_ACCESS_ID, ("Super_Admin",)).fetchone()[0]
 
-    def get_id_module_init(self,nom,version):
-        return self.cur.execute(SELECT_MODULE_ID, (nom,version)).fetchone()[0]
+    def get_id_module_init(self, nom, version):
+        return self.cur.execute(SELECT_MODULE_ID, (nom, version)).fetchone()[0]
+
+    def select_id_access(self, username):
+        return self.cur.execute(SELECT_ACCESS_ID_WITH_USERNAME, (username,)).fetchall()
 
 
 def main():

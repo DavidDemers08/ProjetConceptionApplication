@@ -3,6 +3,8 @@ import urllib.parse
 import json
 
 from sys import path
+
+from Client.modules.module_gestion import ModuleGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -14,19 +16,19 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
-        self.username = None
-        self.module_actuelle = None
-        self.modules = {
-            "login": 0
+        self.user_id = None
+        self.accesses = []
 
-        }
-        #self.set_module("login")
+    def set_vue(self, vue):
+        self.vue = vue
 
-    def set_module(self, nom_module: str) -> None:
-        if self.module_actuelle is not None:
-            self.module_actuelle.vider_vue()
-        self.module_actuelle = self.modules[nom_module]
-        self.module_actuelle.remplir_vue()
+
+    def set_vue_gestion(self, vue_gestion):
+        self.vue_gestion = vue_gestion
+
+    def afficher_gestion(self):
+        self.vue.master.destroy()
+        ModuleGestion(self)
 
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
@@ -60,13 +62,21 @@ class Controleur_Client:
 
     def rechercher_compagnie(self, nom_ville):
         a = {
-            utils.FONCTION : utils.CHERCHER_COMPAGNIE,
+            utils.FONCTION: utils.CHERCHER_COMPAGNIE,
             utils.NOM_VILLE: nom_ville
         }
         return self.appel_serveur(a)
+
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
+
+    def afficher_compagnie_de_membre(self, membre):
+        infos = {
+            utils.NOM_USAGER: membre,
+            utils.FONCTION: utils.VOIR_INFOS_USAGER
+        }
+        return self.appel_serveur(infos)
 
     def afficher_membres(self):
         a = {utils.FONCTION: utils.AFFICHER_MEMBRES}
@@ -85,21 +95,61 @@ class Controleur_Client:
         }
         self.appel_serveur(a)
 
+    def creer_usager(self, prenom, nom, identification, mdp, titre, genre, compagnie, permission, acced):
+        a = {
+            utils.PRENOM: prenom,
+            utils.NOM: nom,
+            utils.IDENTIFIANT: identification,
+            utils.MDP: mdp,
+            utils.TITRE: titre,
+            utils.GENRE: genre,
+            utils.ID_COMPAGNIE: compagnie,
+            utils.PERMISSION: permission,
+            utils.NOM_ACCES: acced,
+            utils.FONCTION: utils.CREER_USAGER
+        }
+
+        return self.appel_serveur(a)
+
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
         }
         return self.appel_serveur(a)
 
-    def get_access(self):
+    def select_modules_with_access_of_user(self):
         a = {
-            utils.FONCTION: utils.GET_ACCESS
+            utils.FONCTION: utils.SELECT_MODULES_WITH_ACCESS_OF_USER,
+            utils.NOM_USAGER: self.username
         }
+
         return self.appel_serveur(a)
 
     def get_module(self):
         a = {
             utils.FONCTION: utils.GET_MODULE
+        }
+        return self.appel_serveur(a)
+
+    def get_all_id_compagnie_utilisateur(self, username):
+        a = {
+            utils.FONCTION: utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
+            utils.NOM_USAGER: username
+        }
+        return self.appel_serveur(a)
+
+    def get_access(self):
+        a = {
+            utils.FONCTION: utils.GET_ACCESS,
+            utils.ID_MEMBRE: self.user_id
+
+        }
+        return self.appel_serveur(a)
+
+    def get_username_id(self, username):
+        a = {
+            utils.FONCTION: utils.GET_USERNAME_ID,
+            utils.NOM_USAGER: username
         }
         return self.appel_serveur(a)
 

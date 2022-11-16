@@ -1,5 +1,6 @@
 import sqlite3
-from Serveur.DAO.tables_requetes_SaaS  import *
+from Serveur.DAO.tables_requetes_SaaS import *
+
 
 class DaoModule(object):
     def __init__(self, cursor, connexion, creer: list, detruire: list):

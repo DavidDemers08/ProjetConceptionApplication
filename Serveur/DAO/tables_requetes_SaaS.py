@@ -50,6 +50,7 @@ SELECT_COMPAGNIES = 'SELECT * FROM compagnie'
 SELECT_COMPAGNIE = 'SELECT * FROM compagnie WHERE id=?'
 SELECT_ID_COMPAGNIE = 'SELECT id FROM compagnie WHERE nom=?'
 DELETE_COMPAGNIE = 'DELETE FROM compagnie WHERE id=?'
+SELECT_NOM_COMPAGNIE = 'SELECT nom FROM compagnie WHERE id=?'
 
 # ***************** MEMBRE DANS COMPAGNIE *********************
 
@@ -66,7 +67,8 @@ CREATE TABLE IF NOT EXISTS membre_dans_compagnie
 )
 '''
 DROP_MEMBRE_DANS_COMPAGNIE = 'DROP TABLE IF EXISTS membre_dans_compagnie'
-INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(?, ?, ?)'
+INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, id_membre, permission_membre) VALUES(' \
+                               '?, ?, ?) '
 
 SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
@@ -79,6 +81,24 @@ UPDATE membre_dans_compagnie
 WHERE id_membre = ? AND id_compagnie = ?
 '''
 
+SELECT_MODULES_MATCHING_ACCESS_OF_USERNAME = '''
+    
+    SELECT 
+        modules.nom AS nom_modules
+    
+    FROM 
+        module_par_access
+    
+    INNER JOIN 
+        modules ON id_module = modules.id 
+    
+    INNER JOIN access_par_membre ON id_access  = access_par_membre.id_access
+    
+    INNER JOIN membre ON access_par_membre.id_membre = membre.id
+    
+    WHERE membre.identifiant = ?
+    
+'''
 # ***************** MODULES *********************
 
 CREER_MODULE = '''
@@ -125,7 +145,6 @@ SELECT_ALL_MODULE_PAR_ALL_COMPAGNIE = 'SELECT * FROM module_par_compagnie'
 SELECT_ALL_MODULE_PAR_COMPAGNIE = 'SELECT * FROM module_par_compagnie WHERE id_compagnie=?'
 
 DELETE_ACCESS_POUR_COMPAGNIE = 'DELETE FROM module_par_compagnie WHERE id_module=? AND id_compagnie=?'
-
 
 # ***************** ACCÈS *********************
 CREER_ACCESS = '''
@@ -181,3 +200,45 @@ SELECT_ALL_ACCES_POUR_ALL_MEMBRES = 'SELECT * FROM access_par_membre'
 SELECT_ALL_MEMBRES_POUR_ACCESS = 'SELECT * FROM access_par_membre WHERE id_access=?'
 DELETE_ACCESS_POUR_MEMBRE = 'DELETE FROM access_par_membre WHERE id_membre=? AND id_access=?'
 SELECT_ID_MEMBRE_WITH_USERNAME = 'SELECT id FROM membre WHERE identifiant = ?'
+
+# *********************** VEHICULE PAR COMPAGNIE ************************* #
+CREER_VEHICULE_PAR_COMPAGNIE = '''
+CREATE TABLE IF NOT EXISTS vehicule_par_compagnie
+(
+    id_vehicule INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id_compagnie  INTEGER NOT NULL,
+    annee_modele  INTEGER NOT NULL,
+    marque TEXT NOT NULL UNIQUE,
+    modele TEXT NOT NULL UNIQUE,
+    kilometrage INTEGER NOT NULL,
+    type TEXT NOT NULL ,
+
+    FOREIGN KEY(id_compagnie) REFERENCES compagnie(id)
+    
+)
+'''
+DROP_VEHICULE_PAR_COMPAGNIE = 'DROP TABLE IF EXISTS vehicule_par_compagnie'
+INSERT_VEHICULE_PAR_COMPAGNIE = 'INSERT INTO vehicule_par_compagnie(' \
+                                'id_compagnie, annee_modele,marque,modele,kilometrage,type' \
+                                ') VALUES(?,?,?,?,?,?)'
+
+SELECT_ALL_VEHICULE_PAR_COMPAGNIE = 'SELECT * FROM vehicule_par_compagnie'
+
+DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM vehicule_par_compagnie WHERE id_vehicule=? AND id_compagnie=?'
+UPDATE_VEHICULE_COMPAGNIE = ''' 
+UPDATE vehicule_par_compagnie
+    SET annee_modele = ?,
+    marque = ?,
+    modele = ?,
+    kilometrage = ?,
+    type = ?
+    WHERE id_vehicule = ? and id_compagnie = ?
+'''
+
+DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
+
+SELECT_ACCESS_ID_WITH_USERNAME = 'SELECT id_access ' \
+                                 'FROM access_par_membre ' \
+                                 'WHERE id_membre = ? ' \
+                                 ''
+

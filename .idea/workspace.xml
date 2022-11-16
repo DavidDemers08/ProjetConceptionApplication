@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0789ab53-e2a6-458f-a7d7-9752d4bfbba9" name="Changes" comment="" />
+    <list default="true" id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="david">
+      <change beforePath="$PROJECT_DIR$/Client/controleur_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/controleur_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/modules/gestion_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/gestion_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/modules/module_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/module_gestion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/vues/vue_initiale.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_initiale.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/DAO/dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/dao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/controleur_serveur.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/controleur_serveur.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/gestion_media.db" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/gestion_media.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/utils.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../../Python39/Lib/site-packages/flask/app.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectId" id="2HJOUsCldQQR8MAzT424kO5Gjaf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\1736555\PycharmProjects\ProjetConceptionApplication\Client\vues" />
-      <recent name="C:\Users\1736555\PycharmProjects\ProjetConceptionApplication\Client\modules_refactors_test" />
-      <recent name="C:\Users\1736555\PycharmProjects\ProjetConceptionApplication\Client\modules_refactor_finit" />
-    </key>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="enabled" value="false" />
   </component>
   <component name="RunManager" selected="Python.module_initial">
-    <configuration name="module_ajout_modules" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="controleur_serveur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -27,32 +65,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules_refactor_finit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules_refactor_finit/module_ajout_modules.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="module_gestion" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjetConceptionApplication" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules_refactor_finit" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules_refactor_finit/module_gestion.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/controleur_serveur.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -69,32 +86,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules_refactor_finit" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules_refactor_finit/module_initial.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="module_paiement" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjetConceptionApplication" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules_refactor_finit" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules_refactor_finit/module_paiement.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/module_initial.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -124,17 +120,84 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tester_tables_dao" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjetConceptionApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur/DAO" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/DAO/tester_tables_dao.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.module_initial" />
-        <item itemvalue="Python.module_gestion" />
-        <item itemvalue="Python.module_ajout_modules" />
         <item itemvalue="Python.serveur" />
-        <item itemvalue="Python.module_paiement" />
+        <item itemvalue="Python.controleur_serveur" />
+        <item itemvalue="Python.module_initial" />
+        <item itemvalue="Python.tester_tables_dao" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="" />
+      <created>1667999739477</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667999739477</updated>
+    </task>
+    <task id="LOCAL-00001" summary="david">
+      <created>1668015592443</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668015592443</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="david" />
+    <option name="LAST_COMMIT_MESSAGE" value="david" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Serveur/controleur_serveur.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Serveur/DAO/dao.py</url>
+          <line>154</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
