@@ -13,7 +13,7 @@ class VueAjoutModules(ttk.Frame):
         self.liste_module.append(["nom module 2", "4s2.45", "2001/91/11"])
         self.liste_module.append(["nom module 3", "42.4a5", "20011/9/11"])
         self.parent = parent
-        self.table = Table(vue=self, lines_array=self.liste_module, modifiable_rows=False)
+        self.table = Table(vue=self,start_row=0,start_column=0, lines_array=self.liste_module, modifiable_rows=False)
         self.remplir_vue()
 
     def set_controleur(self, controleur):
