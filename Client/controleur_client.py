@@ -22,6 +22,7 @@ class Controleur_Client:
     def set_vue(self, vue):
         self.vue = vue
 
+
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion = vue_gestion
 

@@ -10,7 +10,7 @@ class ModulePaiement(Tk):
         super().__init__()
         controleur = Controleur_Client()
 
-        vue_paiement = VuePaiement(self,controleur)
+        vue_paiement = VuePaiement(self, controleur)
         vue_paiement.grid(row=3, column=3, padx=10, pady=10)
 
         controleur.set_vue(vue_paiement)
