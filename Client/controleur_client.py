@@ -115,13 +115,14 @@ class Controleur_Client:
         a = {
             utils.ANNEE: annee,
             utils.MARQUE: marque,
-            utils.IDENTIFIANT: modele,
-            utils.MDP: kilometrage,
-            utils.TITRE: type,
-            utils.ID_COMPAGNIE: compagnie
+            utils.MODELE: modele,
+            utils.KILOMETRAGE: kilometrage,
+            utils.TYPE: type,
+            utils.ID_COMPAGNIE: compagnie,
+            utils.FONCTION: utils.AJOUT_VEHICULE
         }
-
         return self.appel_serveur(a)
+
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES

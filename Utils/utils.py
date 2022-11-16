@@ -43,4 +43,5 @@ MARQUE = "marque"
 MODELE = "modele"
 KILOMETRAGE = "kilometrage"
 TYPE = "type"
+AJOUT_VEHICULE = 'ajout_vehicule'
 

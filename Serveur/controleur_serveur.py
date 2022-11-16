@@ -33,7 +33,10 @@ class Controleur_Serveur:
             utils.VOIR_INFOS_USAGER: self.voir_infos_usager,
             utils.CHERCHER_COMPAGNIE: self.chercher_compagnie,
             utils.GET_ACCESS: self.get_access,
-            utils.GET_USERNAME_ID: self.get_username_id
+            #utils.GET_USERNAME_ID: self.get_username_id,
+            utils.AJOUT_VEHICULE:self.ajout_vehicule
+
+
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -111,7 +114,14 @@ class Controleur_Serveur:
         for rangee in Dao().select_all_compagnies():
             compagnie.append(rangee)
         return compagnie
-
+    def ajout_vehicule(self,form):
+        annee=int(form[utils.ANNEE])
+        marque=form[utils.MARQUE]
+        modele=form[utils.MODELE]
+        kilometrage=int(form[utils.KILOMETRAGE])
+        type=form[utils.TYPE]
+        compagnie=form[utils.ID_COMPAGNIE]
+        return Dao().insert_vehicule_dans_compagnie(id_compagnie=compagnie,annee_modele=annee,marque=marque,modele=modele,kilometrage=kilometrage,type=type)
     def voir_compagnie_id_utilisateur(self, form):
         return Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
 
