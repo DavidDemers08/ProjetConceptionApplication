@@ -1,6 +1,6 @@
 from traceback import print_exc
 from tkinter import Tk
-from Client.vue_ventes_en_ligne import VueOnlineSales
+from Client.vues.vue_ventes_en_ligne import VueOnlineSales
 #from vue_gerer_emp import VueGererEmp
 from Client.controleur_client import Controleur_Client
 
