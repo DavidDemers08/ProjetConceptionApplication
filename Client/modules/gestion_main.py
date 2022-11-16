@@ -10,8 +10,6 @@ class Module_Gestion(Tk):
     def __init__(self):
         super().__init__()
         self.controleur = Controleur_Client()
-
-        # peut-être éventuellement dans une sous-classe
         vue_gestion = VueGestion(self, self.controleur)
         vue_gestion.grid(row=3, column=3, padx=10, pady=10)
         self.controleur.set_vue_gestion(vue_gestion)

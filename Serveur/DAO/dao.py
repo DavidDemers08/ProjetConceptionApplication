@@ -66,18 +66,16 @@ class Dao:
 
     def select_id_membre_with_username(self, username):
         self.cur.execute(SELECT_ID_MEMBRE_WITH_USERNAME, (username,))
-        return self.cur.fetchall()
+        return self.cur.fetchone()[0]
 
     def select_all_compagnies(self):
         self.cur.execute(SELECT_COMPAGNIES)
         return self.cur.fetchall()
 
     def select_id_of_compagnie(self, name):
-        self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
-        return self.cur.fetchone()[0]
         try:
             self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
-            return self.cur.fetchone()
+            return self.cur.fetchone()[0]
         except:
             return False
 
@@ -160,9 +158,6 @@ class Dao:
         try:
             cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
             self.conn.commit()
-
-            cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
-            self.conn.commit()
             self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
             self.conn.commit()
 
@@ -179,8 +174,6 @@ class Dao:
         except Exception:
             traceback.print_exc()
 
-        return self.select_all_acces_membres()
-
     def id_access_initial(self, nom_access):
         id_access_initial = self.get_access_id(nom_access)
 
@@ -194,10 +187,12 @@ class Dao:
             self.insert_membre_a_acces(self.cur.lastrowid, id_access)
 
     def insert_compagnie(self, nom, pays, province, region):
-        self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
-        self.conn.commit()
-        # TODO j'ai besoin de l'ID de la compagnie pour ajouter l'admin
-        return self.select_all_compagnies()
+        try:
+            self.cur.execute(INSERT_COMPAGNIE, (nom, pays, province, region))
+            self.conn.commit()
+            return self.cur.execute(SELECT_ID_COMPAGNIE, (nom,)).fetchone()[0]
+        except:
+            return False
 
     def insert_membre_dans_compagnie(self, id_compagnie, id_membre, permission_membre):
         self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, id_membre, permission_membre))
@@ -343,6 +338,9 @@ class Dao:
 
     def get_id_module_init(self, nom, version):
         return self.cur.execute(SELECT_MODULE_ID, (nom, version)).fetchone()[0]
+
+    def select_id_access(self, username):
+        return self.cur.execute(SELECT_ACCESS_ID_WITH_USERNAME, (username,)).fetchall()
 
 
 def main():

@@ -11,7 +11,6 @@ class Vue(ttk.Frame):
         self.controleur = None
         self.remplir_vue()
         self.parent = parent
-        #print(self.controleur.creation_modules())
 
     def set_controleur(self, controleur):
         self.controleur = controleur
@@ -54,9 +53,9 @@ class Vue(ttk.Frame):
         if self.controleur:
             # message d'erreur par controleur ou par vue?
             reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
-            print(reponse)
             if reponse:
-                self.controleur.username = self.var_nom.get()
+                self.controleur.user_id = self.controleur.get_username_id(self.var_nom.get())
+                self.controleur.accesses = self.controleur.get_access()
                 self.controleur.afficher_gestion()
             else:
                 self.afficher_erreur(f'Nom ou mot de passe incorrects')
@@ -190,7 +189,6 @@ class Vue(ttk.Frame):
         nom = self.var_nom_admin.get()
         prenom = self.var_prenom_admin.get()
 
-        print(mdp, verif_mdp)
         if mdp == verif_mdp:
             args = {Utils.utils.NOM_VILLE: nom_compagnie,
                     Utils.utils.NOM_USAGER: uti_admin,
