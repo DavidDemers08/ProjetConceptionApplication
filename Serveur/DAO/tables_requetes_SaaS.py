@@ -224,3 +224,8 @@ INSERT_VEHICULE_PAR_COMPAGNIE = 'INSERT INTO vehicule_par_compagnie(' \
 
 SELECT_ALL_VEHICULE_PAR_COMPAGNIE = 'SELECT * FROM vehicule_par_compagnie'
 DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
+
+SELECT_ACCESS_ID_WITH_USERNAME = 'SELECT id_access ' \
+                                 'FROM access_par_membre ' \
+                                 'WHERE id_membre = ? ' \
+                                 ''

@@ -13,8 +13,6 @@ class ModuleGestion(Tk):
         vue = VueGestion(self, controleur)
         vue.grid(row=0, column=0, padx=10, pady=10)
         parent.set_vue(vue)
-        print(controleur.username)
-
 
 
 def main():

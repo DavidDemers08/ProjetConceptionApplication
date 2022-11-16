@@ -16,7 +16,8 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
-        self.username = None
+        self.user_id = None
+        self.accesses = []
 
     def set_vue(self, vue):
         self.vue = vue
@@ -60,10 +61,11 @@ class Controleur_Client:
 
     def rechercher_compagnie(self, nom_ville):
         a = {
-            utils.FONCTION : utils.CHERCHER_COMPAGNIE,
+            utils.FONCTION: utils.CHERCHER_COMPAGNIE,
             utils.NOM_VILLE: nom_ville
         }
         return self.appel_serveur(a)
+
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
@@ -84,6 +86,7 @@ class Controleur_Client:
         a = {utils.FONCTION: utils.AFFICHER_COMPAGNIES}
 
         return self.appel_serveur(a)
+
     def creation_acces_admin(self):
         a = {
             utils.FONCTION: utils.NOM_ACCES,
@@ -91,7 +94,7 @@ class Controleur_Client:
         }
         self.appel_serveur(a)
 
-    def creer_usager(self,prenom,nom,identification,mdp,titre,genre,compagnie,permission,acced):
+    def creer_usager(self, prenom, nom, identification, mdp, titre, genre, compagnie, permission, acced):
         a = {
             utils.PRENOM: prenom,
             utils.NOM: nom,
@@ -102,10 +105,11 @@ class Controleur_Client:
             utils.ID_COMPAGNIE: compagnie,
             utils.PERMISSION: permission,
             utils.NOM_ACCES: acced,
-            utils.FONCTION : utils.CREER_USAGER
+            utils.FONCTION: utils.CREER_USAGER
         }
 
         return self.appel_serveur(a)
+
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
@@ -126,12 +130,28 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
-    def get_all_id_compagnie_utilisateur(self,username):
+    def get_all_id_compagnie_utilisateur(self, username):
         a = {
-            utils.FONCTION : utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
-            utils.NOM_USAGER : username
+            utils.FONCTION: utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
+            utils.NOM_USAGER: username
         }
-        return  self.appel_serveur(a)
+        return self.appel_serveur(a)
+
+    def get_access(self):
+        a = {
+            utils.FONCTION: utils.GET_ACCESS,
+            utils.ID_MEMBRE: self.user_id
+
+        }
+        return self.appel_serveur(a)
+
+    def get_username_id(self, username):
+        a = {
+            utils.FONCTION: utils.GET_USERNAME_ID,
+            utils.NOM_USAGER: username
+        }
+        return self.appel_serveur(a)
+
 
 # test
 def main():
