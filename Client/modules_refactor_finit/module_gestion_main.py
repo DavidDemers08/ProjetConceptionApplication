@@ -1,30 +1,27 @@
-from tkinter import Tk
 from traceback import print_exc
-from Client.vues.vue_gestion import VueGestion
+from Client.AbstractClasses.Module import Module
+from Client.AbstractClasses.Vue import Vue
+
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+
 from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
-from Client.vues_refactor_tests.vue import Vue
 
 
-class ModuleGestion(Tk):
-    def __init__(self, parent):
-        super().__init__()
-        controleur = parent
+class Module_Gestion(Module):
 
-        vue = VueGestion(self)
-        vue.grid(row=0, column=0, padx=10, pady=10)
-        vue.set_controleur(controleur)
-        parent.set_vue(vue)
-        print(controleur.username)
+    def __init__(self, controleur):
+        super().__init__(controleur)
+
+    def set_vue(self):
+        return Module_Gestion.VueGestion(self, row=3, column=3, padx=10, pady=10)
 
     class VueGestion(Vue):
 
-        def __init__(self, parent):
-            super().__init__(parent)
-            self.remplir_vue_gestion()
+        def __init__(self, parent, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent, row, column, padx, pady)
 
             self.dictionnaire_module = {
                 "Gestion Budget": ModulePaiement,
@@ -32,7 +29,6 @@ class ModuleGestion(Tk):
                 "Gestion Événements": ModulePaiement,
                 "Gestion Propriétés": ModulePaiement
             }
-
 
         def remplir_vue(self):
             self.data = ("1", "2", "3", "4")
@@ -56,7 +52,8 @@ class ModuleGestion(Tk):
 
             self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre',
                                                     command=lambda: self.start_module_gerer_emp(None))
-            self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
+            self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe',
+                                                   command=self.clic_bouton_gestion_employe)
 
             # self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
 
@@ -188,9 +185,13 @@ class ModuleGestion(Tk):
             self.label_message['text'] = ''
 
 
+
+
 def main():
     try:
-        module = ModuleGestion()
+        controleur = None
+        module = Module_Gestion(controleur)
+        module.show_vue()
         module.mainloop()
     except:
         print_exc()

@@ -3,9 +3,6 @@ import urllib.parse
 import json
 
 from sys import path
-
-from Client.modules.module_gestion import ModuleGestion
-from Client.vues.vue_gestion import VueGestion
 from Utils import utils
 
 path.append('../Utils')
@@ -23,10 +20,11 @@ class Controleur_Client:
             "login": 0
 
         }
-        self.set_module("login")
+        #self.set_module("login")
 
     def set_module(self, nom_module: str) -> None:
-        self.module_actuelle.vider_vue()
+        if self.module_actuelle is not None:
+            self.module_actuelle.vider_vue()
         self.module_actuelle = self.modules[nom_module]
         self.module_actuelle.remplir_vue()
 

@@ -1,10 +1,8 @@
-from tkinter import Tk
 from traceback import print_exc
 from tkinter import ttk
 import tkinter as tk
-from Client.vues.vue_ajout_modules import VueAjoutModules
-from Client.modules_refactors_test.Module import Module
-from Client.vues_refactor_tests.vue import Vue
+from Client.AbstractClasses.Module import Module
+from Client.AbstractClasses.Vue import Vue
 from Utils.Table import Table
 
 
@@ -14,11 +12,11 @@ class ModuleAjoutModules(Module):
         super().__init__(controleur)
 
     def set_vue(self):
-        return VueAjoutModules(self)
+        return ModuleAjoutModules.VueAjoutModules(self, row=3, column=3, padx=10, pady=10)
 
     class VueAjoutModules(Vue):
-        def __init__(self, parent):
-            super().__init__(parent)
+        def __init__(self, parent, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent, row, column, padx, pady)
 
             self.liste_module = []
             ###test pour remplir liste module
@@ -47,9 +45,13 @@ class ModuleAjoutModules(Module):
             self.liste_module = self.table.update_lines()
 
 
+
+
 def main():
     try:
-        module = ModuleAjoutModules()
+        controleur = None
+        module = ModuleAjoutModules(controleur)
+        module.show_vue()
         module.mainloop()
     except:
         print_exc()
