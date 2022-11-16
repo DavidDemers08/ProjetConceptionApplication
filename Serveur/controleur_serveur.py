@@ -33,13 +33,26 @@ class Controleur_Serveur:
             utils.CHERCHER_COMPAGNIE: self.chercher_compagnie,
             utils.GET_ACCESS: self.get_access,
             utils.GET_USERNAME_ID: self.get_username_id,
-            utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id
+
+            utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id,
+
+            utils.NOM_COMPAGNIE: self.nom_compagnie,
+            utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie
         }
 
     # Le nom de la fonction voulue est envoyée
     # par le controleur_client et reçu par le
     # controleur_serveur dans le request.form
     # la réponse de la BD est JSON-ifiée
+
+    def chercher_employes_compagnie(self, form):
+        id_comp = Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])[0][1]
+        nomcomp = Dao().select_nom_compagnie(id_comp)
+        users = Dao().select_all_membres_de_compagnie(nomcomp)
+        return users
+
+
+
     def reponse(self, request_form):
         fonction_str = request_form[utils.FONCTION]
         fonction = self.fonctions[fonction_str]
@@ -61,7 +74,7 @@ class Controleur_Serveur:
             return False
 
     def voir_infos_usager(self, form):
-        compagnies = Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
+        compagnies = Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])
         employes = []
         for compagnie in compagnies:
             nom_compagnie = Dao().select_nom_compagnie(compagnie[1])
@@ -113,7 +126,7 @@ class Controleur_Serveur:
         return compagnie
 
     def voir_compagnie_id_utilisateur(self, form):
-        return Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
+        return Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])
 
     def voir_membre_all_compagnie(self, form):
         membre = []
@@ -148,8 +161,12 @@ class Controleur_Serveur:
     def get_username_id(self, form):
         return Dao().select_id_membre_with_username(form[utils.NOM_USAGER])
 
+
     def get_module_with_access_id(self, form):
         return Dao().select_modules_with_access_id(form[utils.ACCESS_ID])
+
+    def nom_compagnie(self,form):
+        return Dao().select_nom_compagnie(form[utils.ID_COMPAGNIE])
 
 
 if __name__ == "__main__":

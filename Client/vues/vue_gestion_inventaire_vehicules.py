@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+
+from Client.vues.frame_ajout_vehicule import AjoutVehicule
 from Client.vues.vue_gerer_emp import VueGererEmp
 from Utils.Table import Table
 
@@ -32,7 +34,7 @@ class VueGestionInventaireVehicules(ttk.Frame):
         self.button_historique_vehicules = ttk.Button(self, text='Historique de vehicules', width = 25)
         self.button_historique_vehicules.grid(row=4, column=1, padx=30, pady=20)
 
-        self.button_ajout_vehicule = ttk.Button(self, text='Ajout de vehicules', width = 25)
+        self.button_ajout_vehicule = ttk.Button(self, text='Ajout de vehicules', width = 25,command=self.frame_ajout_vehicule)
         self.button_ajout_vehicule.grid(row=5, column=1, padx=30, pady=20)
 
         self.button_supression_vehicule = ttk.Button(self, text='Supression de vehicules', width = 25)
@@ -56,7 +58,12 @@ class VueGestionInventaireVehicules(ttk.Frame):
     def lancer_gestion_materielle(self):
         pass
 
-
+    def frame_ajout_vehicule(self):
+        self.gerer_emp_module = Toplevel()
+        vue = AjoutVehicule(self, self.controleur)
+        vue.place(height=500, width=500)
+        self.gerer_emp_module.geometry("500x500")
+        self.gerer_emp_module.title("Gestion Employé")
 
     def clic_bouton_annuler(self):
         self.var_nom.set('')

@@ -44,3 +44,12 @@ GET_USERNAME_ID = 'get_username_id'
 GET_MODULE_WITH_ACCESS_ID = 'get_module_with_access_id'
 
 ACCESS_ID = 'access_id'
+
+NOM_COMPAGNIE = "nom_compagnie"
+CHERCHER_EMPLOYES_COMPAGNIE = "chercher_employes_compagnie"
+
+ANNEE = "annee"
+MARQUE = "marque"
+MODELE = "modele"
+KILOMETRAGE = "kilometrage"
+TYPE = "type"

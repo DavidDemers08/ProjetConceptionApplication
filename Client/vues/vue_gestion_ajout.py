@@ -92,9 +92,7 @@ class VueGestionAjout(ttk.Frame):
     def get_data(self):
         info ={}
 
-
         info['nom'] = self.entry_nom.get()
-
         info['prenom'] = self.entry_prenom.get()
         info['identifiant'] = self.entry_indentifiant.get()
         info['mdp'] = self.entry_mdp.get()
@@ -102,9 +100,6 @@ class VueGestionAjout(ttk.Frame):
         info['permission'] = self.entry_permisson.get()
         info['titre'] = self.entry_titre.get()
         info['genre'] = self.combo_genre.get()
-
-
-
 
         self.validate_info(info)
         print(info)

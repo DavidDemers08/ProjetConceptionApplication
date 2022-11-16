@@ -20,6 +20,7 @@ DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
 INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
 
 SELECT_MEMBRES = 'SELECT * FROM membre'
+SELECT_INFOS_MEMBRES_BY_ID = 'SELECT * FROM membre WHERE id=?'
 SELECT_MEMBRE = 'SELECT * FROM membre WHERE identifiant=? AND mdp =?'
 SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
 DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'
@@ -219,11 +220,24 @@ CREATE TABLE IF NOT EXISTS vehicule_par_compagnie
 '''
 DROP_VEHICULE_PAR_COMPAGNIE = 'DROP TABLE IF EXISTS vehicule_par_compagnie'
 INSERT_VEHICULE_PAR_COMPAGNIE = 'INSERT INTO vehicule_par_compagnie(' \
-                                'id_comganie, annee_modele,marque,modele,kilometrage,type' \
+                                'id_compagnie, annee_modele,marque,modele,kilometrage,type' \
                                 ') VALUES(?,?,?,?,?,?)'
 
 SELECT_ALL_VEHICULE_PAR_COMPAGNIE = 'SELECT * FROM vehicule_par_compagnie'
+
+DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM vehicule_par_compagnie WHERE id_vehicule=? AND id_compagnie=?'
+UPDATE_VEHICULE_COMPAGNIE = ''' 
+UPDATE vehicule_par_compagnie
+    SET annee_modele = ?,
+    marque = ?,
+    modele = ?,
+    kilometrage = ?,
+    type = ?
+    WHERE id_vehicule = ? and id_compagnie = ?
+'''
+
 DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
+
 
 SELECT_ACCESS_ID_WITH_USER_ID = 'SELECT id_access ' \
                                 'FROM access_par_membre ' \
@@ -235,3 +249,7 @@ FROM module_par_access
 INNER JOIN modules on module_par_access.id_module = modules.id
 WHERE id_access = ?
 '''
+SELECT_ACCESS_ID_WITH_USERNAME = 'SELECT id_access ' \
+                                 'FROM access_par_membre ' \
+                                 'WHERE id_membre = ? ' \
+                                 ''

@@ -22,8 +22,12 @@ class Controleur_Client:
         self.modules = None
 
 
+        self.company_id = 5
+        self.accesses = []
+
     def set_vue(self, vue):
         self.vue = vue
+
 
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion = vue_gestion
@@ -69,13 +73,20 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_employes_de_compagnie(self, user_id):
+        a = {
+            utils.FONCTION: utils.CHERCHER_EMPLOYES_COMPAGNIE,
+            utils.ID_MEMBRE: self.user_id
+        }
+        return self.appel_serveur(a)
+
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
-    def afficher_compagnie_de_membre(self, membre):
+    def afficher_compagnie_de_membre(self,):
         infos = {
-            utils.NOM_USAGER: membre,
+            utils.ID_MEMBRE: self.user_id,
             utils.FONCTION: utils.VOIR_INFOS_USAGER
         }
         return self.appel_serveur(infos)
@@ -113,6 +124,17 @@ class Controleur_Client:
 
         return self.appel_serveur(a)
 
+    def ajouter_vehicule(self, annee, marque, modele, kilometrage, type, compagnie):
+        a = {
+            utils.ANNEE: annee,
+            utils.MARQUE: marque,
+            utils.IDENTIFIANT: modele,
+            utils.MDP: kilometrage,
+            utils.TITRE: type,
+            utils.ID_COMPAGNIE: compagnie
+        }
+
+        return self.appel_serveur(a)
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
@@ -133,10 +155,17 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
-    def get_all_id_compagnie_utilisateur(self, username):
+    def get_all_id_compagnie_utilisateur(self, user_id):
         a = {
             utils.FONCTION: utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
-            utils.NOM_USAGER: username
+            utils.ID_MEMBRE: user_id
+        }
+        return self.appel_serveur(a)
+
+    def get_name_compagnie_byid(self,compagnie_id):
+        a = {
+            utils.FONCTION: utils.NOM_COMPAGNIE,
+            utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)
 

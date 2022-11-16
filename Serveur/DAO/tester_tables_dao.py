@@ -19,6 +19,10 @@ def insert(dao):
     dao.insert_module('League', '4.20', '50.80', 'C:\\Users\\1569047\\Pictures')
     achat_module(dao, 1, 1)
     achat_module(dao, 1, 2)
+    dao.insert_vehicule_dans_compagnie(id_compagnie=1,annee_modele=1996,marque="Ferrari",modele="Red",kilometrage=54,
+                                       type="SportsCar")
+    dao.update_vehicule(annee_modele=2000,marque="Ferrari",modele="Red",kilometrage=54,
+                                      type="SportsCar",id_vehicule=1,id_compagnie=1)
 
 
 def achat_module(dao, id_compagnie, id_module):
@@ -44,6 +48,9 @@ def select_main_tables(dao):
 
     print('\nAccès')
     for rangee in dao.select_all_access():
+        print(rangee)
+    print('\nVehicules')
+    for rangee in dao.select_all_vehicules():
         print(rangee)
 
 
