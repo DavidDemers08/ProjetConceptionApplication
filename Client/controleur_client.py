@@ -17,6 +17,7 @@ path.append('../Utils')
 class Controleur_Client:
     def __init__(self):
         self.user_id = None
+        self.company_id = 5
         self.accesses = []
 
     def set_vue(self, vue):
@@ -66,13 +67,20 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_employes_de_compagnie(self, user_id):
+        a = {
+            utils.FONCTION: utils.CHERCHER_EMPLOYES_COMPAGNIE,
+            utils.ID_MEMBRE: self.user_id
+        }
+        return self.appel_serveur(a)
+
     def creer_compte_ville(self, **args_ville):
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
-    def afficher_compagnie_de_membre(self, membre):
+    def afficher_compagnie_de_membre(self,):
         infos = {
-            utils.NOM_USAGER: membre,
+            utils.ID_MEMBRE: self.user_id,
             utils.FONCTION: utils.VOIR_INFOS_USAGER
         }
         return self.appel_serveur(infos)
@@ -130,10 +138,17 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
-    def get_all_id_compagnie_utilisateur(self, username):
+    def get_all_id_compagnie_utilisateur(self, user_id):
         a = {
             utils.FONCTION: utils.VOIR_COMPAGNIE_ID_UTILISATEUR,
-            utils.NOM_USAGER: username
+            utils.ID_MEMBRE: user_id
+        }
+        return self.appel_serveur(a)
+
+    def get_name_compagnie_byid(self,compagnie_id):
+        a = {
+            utils.FONCTION: utils.NOM_COMPAGNIE,
+            utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)
 

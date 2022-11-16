@@ -72,6 +72,10 @@ class Dao:
         self.cur.execute(SELECT_COMPAGNIES)
         return self.cur.fetchall()
 
+
+
+
+
     def select_id_of_compagnie(self, name):
         try:
             self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
@@ -101,8 +105,7 @@ class Dao:
         return self.cur.fetchall()
 
     # retourne tous les compagnies d'un membre en particulier
-    def select_all_compagnie_de_membre(self, identifiant):
-        id_membre = self.get_membre_id(identifiant)
+    def select_all_compagnie_de_membre(self,id_membre):
         self.cur.execute(SELECT_ALL_COMPAGNIES_DE_MEMBRE, (id_membre,))
         return self.cur.fetchall()
 
@@ -218,8 +221,7 @@ class Dao:
         self.cur.execute(DELETE_ACCESS, (nom, id_access))
 
     # ***************** UPDATE
-    def update_membre(self, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
-        id_membre = self.get_membre_id(identifiant)
+    def update_membre(self, id_membre, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
         if (permission_membre is not None) and (nom_compagnie is not None):
             self.update_permission_membre(id_membre, nom_compagnie, permission_membre)
 

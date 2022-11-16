@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="david">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/controleur_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/controleur_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/modules/gestion_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/gestion_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/modules/module_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/module_gestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_initiale.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_initiale.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion_ajout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion_ajout.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/DAO/dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/controleur_serveur.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/controleur_serveur.py" afterDir="false" />
@@ -35,9 +34,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../../../Python39/Lib/site-packages/flask/app.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -143,9 +139,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.module_initial" />
         <item itemvalue="Python.serveur" />
         <item itemvalue="Python.controleur_serveur" />
-        <item itemvalue="Python.module_initial" />
         <item itemvalue="Python.tester_tables_dao" />
       </list>
     </recent_temporary>
@@ -188,14 +184,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Serveur/controleur_serveur.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/Client/vues/vue_gerer_emp.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Serveur/DAO/dao.py</url>
-          <line>154</line>
-          <option name="timeStamp" value="6" />
+          <line>72</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

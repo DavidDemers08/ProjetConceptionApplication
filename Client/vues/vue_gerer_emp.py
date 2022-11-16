@@ -42,12 +42,22 @@ class VueGererEmp(ttk.Frame):
         clicked.set(options[0])
 
         #TODO mettre des vrais compagnies
+        options_compagnie_id = self.controleur.get_all_id_compagnie_utilisateur(self.controleur.user_id)[0]
+        options_compagnie = []
+        compteur = 0
 
-        options_compagnie = [
-            self.controleur.get_all_id_compagnie_utilisateur(self.controleur.username)
-        ]
+        for id_com in options_compagnie_id:
+            options_compagnie.append(self.controleur.get_name_compagnie_byid(id_com))
+
         clicked_compagnie = StringVar()
-        clicked_compagnie.set(options_compagnie[0])
+        for i in options_compagnie:
+            try:
+                if options_compagnie[compteur][0][0] != "":
+                    clicked_compagnie.set(options_compagnie[compteur][0][0])
+                    compteur += 1
+            except:
+                compteur += 1
+
         self.niveau_acces_selectionne = self.data[4]
         self.compagnie_selectionnee = self.data[5]
 
@@ -102,7 +112,13 @@ class VueGererEmp(ttk.Frame):
         self.niveau_acces_input.place(x=200, y=220)
 
         if self.permission > 0:
-            self.compagnie_input = OptionMenu(self, clicked_compagnie, *options_compagnie, command=self.compagnie_update)
+            compteur = 0
+            for i in options_compagnie:
+                try:
+                    self.compagnie_input = OptionMenu(self, clicked_compagnie, *options_compagnie[compteur][0], command=self.compagnie_update)
+                    compteur += 1
+                except:
+                    compteur += 1
             self.compagnie_input.place(x=200, y=260)
             self.compagnie = Label(self, text="Compagnie")
             self.compagnie.place(x=100, y=260)
@@ -113,8 +129,6 @@ class VueGererEmp(ttk.Frame):
         self.bouton_annuler = Button(self, text="Annuler", command=self.clic_bouton_annuler)
         self.bouton_annuler.place(x=120, y=300)
 
-        ##self.bouton_supprimer = Button(self, text="Supprimer", command=self.supprimer_emp)
-        ##self.bouton_supprimer.place(x=200, y=300)
 
     def compagnie_update(self, arg):
         self.compagnie_selectionnee = arg
