@@ -5,6 +5,7 @@ from traceback import print_exc
 from Client.vues.vue_gestion import VueGestion
 
 
+
 class ModuleGestion(Tk):
     def __init__(self, parent):
         super().__init__()
@@ -17,6 +18,7 @@ class ModuleGestion(Tk):
 
 def main():
     try:
+
         module = ModuleGestion()
         module.mainloop()
     except:

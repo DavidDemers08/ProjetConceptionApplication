@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="david">
-      <change beforePath="$PROJECT_DIR$/Client/controleur_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/controleur_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/modules/gestion_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/gestion_main.py" afterDir="false" />
+    <list default="true" id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="ajouter vehicule dans DB">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/modules/module_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/modules/module_gestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vue_gestion_inventaire_vehicules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_initiale.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_initiale.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/DAO/dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/dao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/controleur_serveur.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/controleur_serveur.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/gestion_media.db" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/gestion_media.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -52,11 +50,19 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="ReaderModeSettings">
     <option name="enabled" value="false" />
   </component>
-  <component name="RunManager" selected="Python.module_initial">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\1379916\Documents\ProjetConceptionApplication\Client\vues" />
+      <recent name="C:\Users\1379916\Documents\ProjetConceptionApplication\Client\modules" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.gestion_inventaire_vehicules">
     <configuration name="controleur_serveur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,7 +84,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="module_initial" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="gestion_inventaire_vehicules" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -90,7 +96,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/module_initial.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/gestion_inventaire_vehicules.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="module_paiement (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjetConceptionApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules_refactor" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules_refactor/module_paiement.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -120,7 +147,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tester_tables_dao" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="vue_gestion_inventaire_vehicules" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -128,11 +155,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur/DAO" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/vues" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/DAO/tester_tables_dao.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/vues/vue_gestion_inventaire_vehicules.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -143,10 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.gestion_inventaire_vehicules" />
         <item itemvalue="Python.serveur" />
         <item itemvalue="Python.controleur_serveur" />
-        <item itemvalue="Python.module_initial" />
-        <item itemvalue="Python.tester_tables_dao" />
+        <item itemvalue="Python.vue_gestion_inventaire_vehicules" />
+        <item itemvalue="Python.module_paiement (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -166,7 +194,42 @@
       <option name="project" value="LOCAL" />
       <updated>1668015592443</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="mettre bon fichier dans bon folder">
+      <created>1668605300954</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668605300954</updated>
+    </task>
+    <task id="LOCAL-00003" summary="modifier import pour etre fonctionnel">
+      <created>1668606925337</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668606925337</updated>
+    </task>
+    <task id="LOCAL-00004" summary="creation/suppresion/modification de vehicule dans le dao fonctionnel">
+      <created>1668611226655</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668611226655</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ajout frame pour ajouter vehicule">
+      <created>1668615524689</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668615524689</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ajouter vehicule dans DB">
+      <created>1668619892943</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668619892943</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,20 +245,40 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="david" />
-    <option name="LAST_COMMIT_MESSAGE" value="david" />
+    <MESSAGE value="mettre bon fichier dans bon folder" />
+    <MESSAGE value="modifier import pour etre fonctionnel" />
+    <MESSAGE value="creation/suppresion/modification de vehicule dans le dao fonctionnel" />
+    <MESSAGE value="ajout frame pour ajouter vehicule" />
+    <MESSAGE value="ajouter vehicule dans DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajouter vehicule dans DB" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Serveur/controleur_serveur.py</url>
-          <line>77</line>
+          <line>80</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Serveur/DAO/dao.py</url>
-          <line>154</line>
+          <line>156</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Client/vues/frame_ajout_vehicule.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Client/controleur_client.py</url>
+          <line>123</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Serveur/controleur_serveur.py</url>
+          <line>119</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
