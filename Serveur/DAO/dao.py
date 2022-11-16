@@ -329,8 +329,11 @@ class Dao:
     def get_id_module_init(self, nom, version):
         return self.cur.execute(SELECT_MODULE_ID, (nom, version)).fetchone()[0]
 
-    def select_id_access(self, username):
-        return self.cur.execute(SELECT_ACCESS_ID_WITH_USERNAME, (username,)).fetchall()
+    def select_id_access(self, user_id):
+        return self.cur.execute(SELECT_ACCESS_ID_WITH_USER_ID, (user_id,)).fetchone()[0]
+
+    def select_modules_with_access_id(self, access_id):
+        return self.cur.execute(SELECT_MODULES_WITH_ACCESS_ID, (access_id,)).fetchall()
 
 
 def main():

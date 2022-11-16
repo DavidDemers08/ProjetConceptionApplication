@@ -27,13 +27,13 @@ class Controleur_Serveur:
             utils.AFFICHER_COMPAGNIES: self.afficher_compagnies,
             utils.CREER_ACCES: self.creer_acces,
             utils.GET_MODULE: self.get_module,
-            utils.SELECT_MODULES_WITH_ACCESS_OF_USER: self.select_modules_with_access_of_user,
             utils.VOIR_COMPAGNIE_ID_UTILISATEUR: self.voir_compagnie_id_utilisateur,
             utils.CREER_USAGER: self.creer_usager,
             utils.VOIR_INFOS_USAGER: self.voir_infos_usager,
             utils.CHERCHER_COMPAGNIE: self.chercher_compagnie,
             utils.GET_ACCESS: self.get_access,
-            utils.GET_USERNAME_ID: self.get_username_id
+            utils.GET_USERNAME_ID: self.get_username_id,
+            utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -145,12 +145,16 @@ class Controleur_Serveur:
     def get_access(self, form):
         return Dao().select_id_access(form[utils.ID_MEMBRE])
 
-    def get_username_id(self,form):
+    def get_username_id(self, form):
         return Dao().select_id_membre_with_username(form[utils.NOM_USAGER])
+
+    def get_module_with_access_id(self, form):
+        return Dao().select_modules_with_access_id(form[utils.ACCESS_ID])
 
 
 if __name__ == "__main__":
-    Dao().creer_bd()
-    Dao().ajouter_acces_super_admin()
-    Dao().ajouter_modules_initiaux()
-    Dao().ajouter_lien_acces_module_super_admin()
+    # Dao().creer_bd()
+    # Dao().ajouter_acces_super_admin()
+    # Dao().ajouter_modules_initiaux()
+    # Dao().ajouter_lien_acces_module_super_admin()
+    pass
