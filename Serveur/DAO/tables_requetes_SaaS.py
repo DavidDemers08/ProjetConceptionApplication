@@ -20,6 +20,7 @@ DROP_MEMBRE = 'DROP TABLE IF EXISTS membre'
 INSERT_MEMBRE = 'INSERT INTO membre(prenom, nom, identifiant, mdp, titre,genre) VALUES(?, ?, ?, ?, ?, ?)'
 
 SELECT_MEMBRES = 'SELECT * FROM membre'
+SELECT_INFOS_MEMBRES_BY_ID = 'SELECT * FROM membre WHERE id=?'
 SELECT_MEMBRE = 'SELECT * FROM membre WHERE identifiant=? AND mdp =?'
 SELECT_ID_MEMBRE = 'SELECT id FROM membre WHERE identifiant=?'
 DELETE_MEMBRE = 'DELETE FROM membre WHERE identifiant=?'

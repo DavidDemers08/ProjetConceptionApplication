@@ -38,9 +38,12 @@ GET_ACCESS = "get_access"
 SELECT_MODULES_WITH_ACCESS_OF_USER = "select_modules_with_access_of_user"
 CREER_USAGER = "creer_usager"
 VOIR_COMPAGNIE_ID_UTILISATEUR = "voir_compagnie_id_utilisateur"
+
+NOM_COMPAGNIE = "nom_compagnie"
+CHERCHER_EMPLOYES_COMPAGNIE = "chercher_employes_compagnie"
+
 ANNEE = "annee"
 MARQUE = "marque"
 MODELE = "modele"
 KILOMETRAGE = "kilometrage"
 TYPE = "type"
-
