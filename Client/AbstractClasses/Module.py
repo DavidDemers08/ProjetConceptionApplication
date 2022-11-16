@@ -3,6 +3,7 @@ from tkinter import Tk
 
 
 class Module(Tk, ABC):
+
     def __init__(self, controleur=None):
         super().__init__()
         self.controleur = controleur
