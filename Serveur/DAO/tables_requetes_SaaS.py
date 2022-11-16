@@ -220,13 +220,26 @@ CREATE TABLE IF NOT EXISTS vehicule_par_compagnie
 '''
 DROP_VEHICULE_PAR_COMPAGNIE = 'DROP TABLE IF EXISTS vehicule_par_compagnie'
 INSERT_VEHICULE_PAR_COMPAGNIE = 'INSERT INTO vehicule_par_compagnie(' \
-                                'id_comganie, annee_modele,marque,modele,kilometrage,type' \
+                                'id_compagnie, annee_modele,marque,modele,kilometrage,type' \
                                 ') VALUES(?,?,?,?,?,?)'
 
 SELECT_ALL_VEHICULE_PAR_COMPAGNIE = 'SELECT * FROM vehicule_par_compagnie'
+
+DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM vehicule_par_compagnie WHERE id_vehicule=? AND id_compagnie=?'
+UPDATE_VEHICULE_COMPAGNIE = ''' 
+UPDATE vehicule_par_compagnie
+    SET annee_modele = ?,
+    marque = ?,
+    modele = ?,
+    kilometrage = ?,
+    type = ?
+    WHERE id_vehicule = ? and id_compagnie = ?
+'''
+
 DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
 
 SELECT_ACCESS_ID_WITH_USERNAME = 'SELECT id_access ' \
                                  'FROM access_par_membre ' \
                                  'WHERE id_membre = ? ' \
                                  ''
+

@@ -16,8 +16,8 @@ class VueGen():
         btn_rspan = dim[1]
         btn_command = command
 
-        btn_name = ttk.Button(parent,  text=btn_text, width=btn_width)
-        btn_name.grid(row=btn_row, column=btn_col, columnspan=btn_cspan, rowspan=btn_rspan, pady=(20, 0), sticky=tk.E)
+        btn_name = ttk.Button(parent,  text=btn_text, width=btn_width,)
+        btn_name.grid(row=btn_row, column=btn_col, columnspan=btn_cspan, rowspan=btn_rspan, pady=(10, 10),padx=(10,10), sticky=tk.E)
 
     def generate_label(parent,name, text, width,borderwidth,relief, anchor,pos, dim ):
         lbl_name = name+'_label'
@@ -34,5 +34,5 @@ class VueGen():
 
         lbl_name = ttk.Label(parent, text=lbl_text, width=lbl_width, borderwidth=lbl_bwitdh, relief=lbl_relief)
         lbl_name.config(anchor=lbl_anchor)
-        lbl_name.grid(row=lbl_row, column=lbl_col, pady=(20, 0))
+        lbl_name.grid(row=lbl_row, column=lbl_col,columnspan=lbl_cspan,rowspan=lbl_rspan, pady=(10, 10),padx=(10,10))
 

@@ -2,22 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0609bd8f-9056-4acb-94c1-f5101075a25e" name="Changes" comment="david">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/modules/module_getion_proprietes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/vues/vue_gestion_proprietes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-09_08_39__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/controleur_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/controleur_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gerer_emp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/vues/vue_gestion_ajout.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/vues/vue_gestion_ajout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/DAO/dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/dao.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/DAO/tables_requetes_SaaS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/controleur_serveur.py" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/controleur_serveur.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/gestion_media.db" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/gestion_media.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/fonction_util_vue.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/fonction_util_vue.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -52,29 +54,8 @@
   <component name="ReaderModeSettings">
     <option name="enabled" value="false" />
   </component>
-  <component name="RunManager" selected="Python.module_initial">
-    <configuration name="controleur_serveur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="ProjetConceptionApplication" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/controleur_serveur.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="module_initial" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.module_getion_proprietes">
+    <configuration name="gestion_inventaire_vehicules" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -86,7 +67,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/module_initial.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/gestion_inventaire_vehicules.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -95,7 +76,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="serveur" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="module_getion_proprietes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -103,11 +84,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/serveur.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/module_getion_proprietes.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -116,7 +97,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tester_tables_dao" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="module_paiement" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ProjetConceptionApplication" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -124,11 +105,53 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur/DAO" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/modules" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Serveur/DAO/tester_tables_dao.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/modules/module_paiement.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="vue_gestion_proprietes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjetConceptionApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/vues" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/vues/vue_gestion_proprietes.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="vue_paiement" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ProjetConceptionApplication" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Client/vues" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Client/vues/vue_paiement.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,10 +162,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.module_initial" />
-        <item itemvalue="Python.serveur" />
-        <item itemvalue="Python.controleur_serveur" />
-        <item itemvalue="Python.tester_tables_dao" />
+        <item itemvalue="Python.module_getion_proprietes" />
+        <item itemvalue="Python.vue_gestion_proprietes" />
+        <item itemvalue="Python.module_paiement" />
+        <item itemvalue="Python.vue_paiement" />
+        <item itemvalue="Python.gestion_inventaire_vehicules" />
       </list>
     </recent_temporary>
   </component>

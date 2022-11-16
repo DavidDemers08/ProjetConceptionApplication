@@ -23,6 +23,7 @@ class Controleur_Client:
     def set_vue(self, vue):
         self.vue = vue
 
+
     def set_vue_gestion(self, vue_gestion):
         self.vue_gestion = vue_gestion
 
@@ -118,6 +119,17 @@ class Controleur_Client:
 
         return self.appel_serveur(a)
 
+    def ajouter_vehicule(self, annee, marque, modele, kilometrage, type, compagnie):
+        a = {
+            utils.ANNEE: annee,
+            utils.MARQUE: marque,
+            utils.IDENTIFIANT: modele,
+            utils.MDP: kilometrage,
+            utils.TITRE: type,
+            utils.ID_COMPAGNIE: compagnie
+        }
+
+        return self.appel_serveur(a)
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
