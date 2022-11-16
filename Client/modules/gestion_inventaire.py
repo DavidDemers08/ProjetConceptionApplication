@@ -1,7 +1,7 @@
 from traceback import print_exc
 from tkinter import Tk
-from vue_gestion_inventaire import VueGestionInventaire
-from controleur_client import Controleur_Client
+from Client.vues.vue_gestion_inventaire import VueGestionInventaire
+from Client.controleur_client import Controleur_Client
 
 class Module_Gestion(Tk):
     def __init__(self):
