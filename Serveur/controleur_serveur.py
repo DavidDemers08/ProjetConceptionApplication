@@ -28,10 +28,12 @@ class Controleur_Serveur:
             utils.CREER_ACCES: self.creer_acces,
             utils.GET_MODULE: self.get_module,
             utils.SELECT_MODULES_WITH_ACCESS_OF_USER: self.select_modules_with_access_of_user,
-            utils.VOIR_COMPAGNIE_ID_UTILISATEUR:self.voir_compagnie_id_utilisateur,
+            utils.VOIR_COMPAGNIE_ID_UTILISATEUR: self.voir_compagnie_id_utilisateur,
             utils.CREER_USAGER: self.creer_usager,
             utils.VOIR_INFOS_USAGER: self.voir_infos_usager,
-            utils.CHERCHER_COMPAGNIE: self.chercher_compagnie
+            utils.CHERCHER_COMPAGNIE: self.chercher_compagnie,
+            utils.GET_ACCESS: self.get_access,
+            utils.GET_USERNAME_ID: self.get_username_id
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -43,7 +45,6 @@ class Controleur_Serveur:
         fonction = self.fonctions[fonction_str]
         infos = fonction(request_form)
         return json.dumps(infos)
-
 
     def chercher_compagnie(self, form):
         nom_ville = form[utils.NOM_VILLE]
@@ -69,12 +70,11 @@ class Controleur_Serveur:
 
     def creer_compte_ville(self, form) -> str:
         try:
-            Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE], form[utils.REGION])
-            id_compagnie = Dao().select_id_of_compagnie(form[utils.NOM_VILLE])
-
-            return self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
-                                           genre=form[utils.GENRE], mdp_admin=form[utils.MDP],
-                                           identifiant=form[utils.NOM_USAGER])
+            id_compagnie = Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE],
+                                                  form[utils.REGION])
+            self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
+                                    genre=form[utils.GENRE], mdp_admin=form[utils.MDP],
+                                    identifiant=form[utils.NOM_USAGER])
         except:
             return "Impossible d'ajouter votre compagnie"
 
@@ -88,7 +88,7 @@ class Controleur_Serveur:
         id_compagnie = form[utils.ID_COMPAGNIE]
         permission = form[utils.PERMISSION]
         access = form[utils.NOM_ACCES]
-        return Dao().insert_membre(prenom,nom,identifiant,mdp,titre,genre,id_compagnie,permission,access)
+        return Dao().insert_membre(prenom, nom, identifiant, mdp, titre, genre, id_compagnie, permission, access)
 
     def creer_compte_admin(self, identifiant: str, mdp_admin: str, id_compagnie: int, genre: str, nom: str,
                            prenom: str):
@@ -106,15 +106,13 @@ class Controleur_Serveur:
             print(rangee)
         return membre
 
-
-
     def voir_compagnie(self, form):
         compagnie = []
         for rangee in Dao().select_all_compagnies():
             compagnie.append(rangee)
         return compagnie
 
-    def voir_compagnie_id_utilisateur(self,form):
+    def voir_compagnie_id_utilisateur(self, form):
         return Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])
 
     def voir_membre_all_compagnie(self, form):
@@ -143,6 +141,12 @@ class Controleur_Serveur:
 
     def select_modules_with_access_of_user(self, form: dict):
         return Dao().select_modules_matching_username(form[utils.NOM_USAGER])
+
+    def get_access(self, form):
+        return Dao().select_id_access(form[utils.ID_MEMBRE])
+
+    def get_username_id(self,form):
+        return Dao().select_id_membre_with_username(form[utils.NOM_USAGER])
 
 
 if __name__ == "__main__":

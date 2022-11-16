@@ -8,13 +8,9 @@ from Client.vues.vue_gerer_emp import VueGererEmp
 class VueGestion(ttk.Frame):
     def __init__(self, parent, controleur):
         super().__init__(parent)
-        self.acces = None
-        self.controleur = None
-
         self.controleur = controleur
         self.remplir_vue_gestion()
         self.liste_modules = []
-
 
         from Client.modules.module_paiement import ModulePaiement
         self.dictionnaire_module = {
@@ -24,12 +20,9 @@ class VueGestion(ttk.Frame):
             "Gestion Propriétés": ModulePaiement
         }
 
-    def set_controleur(self, controleur):
-        self.controleur = controleur
-        self.liste_modules = self.controleur.select_modules_with_access_of_user()
-        print(self.liste_modules)
-
     def remplir_vue_gestion(self):
+
+
 
         self.data = ("1", "2", "3", "4")
         self.data1 = ("allo", "bigg", "toast")
@@ -76,7 +69,6 @@ class VueGestion(ttk.Frame):
         a = self.controleur.afficher_compagnie_de_membre(self.controleur.username)
         print(a)
         for n in range(1, 50):
-
             data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
 
         self.liste.heading('Nom', text='Nom')
