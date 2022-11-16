@@ -16,7 +16,12 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
+        self.dict_modules = {}
+        self.access = None
         self.user_id = None
+        self.modules = None
+
+
         self.company_id = 5
         self.accesses = []
 
@@ -178,6 +183,14 @@ class Controleur_Client:
             utils.NOM_USAGER: username
         }
         return self.appel_serveur(a)
+
+    def get_modules_with_access(self):
+        self.modules = self.appel_serveur({utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
+        for idx,nom in self.modules:
+            self.dict_modules[nom] = idx
+
+        print(self.dict_modules)
+
 
 
 # test

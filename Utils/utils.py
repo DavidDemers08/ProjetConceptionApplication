@@ -39,6 +39,12 @@ SELECT_MODULES_WITH_ACCESS_OF_USER = "select_modules_with_access_of_user"
 CREER_USAGER = "creer_usager"
 VOIR_COMPAGNIE_ID_UTILISATEUR = "voir_compagnie_id_utilisateur"
 
+GET_USERNAME_ID = 'get_username_id'
+
+GET_MODULE_WITH_ACCESS_ID = 'get_module_with_access_id'
+
+ACCESS_ID = 'access_id'
+
 NOM_COMPAGNIE = "nom_compagnie"
 CHERCHER_EMPLOYES_COMPAGNIE = "chercher_employes_compagnie"
 

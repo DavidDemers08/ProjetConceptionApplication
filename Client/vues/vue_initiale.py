@@ -55,7 +55,11 @@ class Vue(ttk.Frame):
             reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
             if reponse:
                 self.controleur.user_id = self.controleur.get_username_id(self.var_nom.get())
-                self.controleur.accesses = self.controleur.get_access()
+                self.controleur.access = self.controleur.get_access()
+
+                print(self.controleur.user_id)
+                print(self.controleur.access)
+
                 self.controleur.afficher_gestion()
             else:
                 self.afficher_erreur(f'Nom ou mot de passe incorrects')

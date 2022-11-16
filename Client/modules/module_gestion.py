@@ -17,7 +17,8 @@ class ModuleGestion(Tk):
 
 def main():
     try:
-        module = ModuleGestion()
+        controleur = None
+        module = ModuleGestion(controleur)
         module.mainloop()
     except:
         print_exc()
