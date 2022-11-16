@@ -113,13 +113,13 @@ class Controleur_Client:
 
     def ajouter_vehicule(self, annee, marque, modele, kilometrage, type, compagnie):
         a = {
+            utils.FONCTION: utils.AJOUT_VEHICULE,
             utils.ANNEE: annee,
             utils.MARQUE: marque,
             utils.MODELE: modele,
             utils.KILOMETRAGE: kilometrage,
             utils.TYPE: type,
-            utils.ID_COMPAGNIE: compagnie,
-            utils.FONCTION: utils.AJOUT_VEHICULE
+            utils.ID_COMPAGNIE: compagnie
         }
         return self.appel_serveur(a)
 

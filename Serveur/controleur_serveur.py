@@ -121,6 +121,7 @@ class Controleur_Serveur:
         kilometrage=int(form[utils.KILOMETRAGE])
         type=form[utils.TYPE]
         compagnie=form[utils.ID_COMPAGNIE]
+        #TODO test avec compagnie qui existe parce que mes tests companige existait pas donc erreur
         return Dao().insert_vehicule_dans_compagnie(id_compagnie=compagnie,annee_modele=annee,marque=marque,modele=modele,kilometrage=kilometrage,type=type)
     def voir_compagnie_id_utilisateur(self, form):
         return Dao().select_all_compagnie_de_membre(form[utils.NOM_USAGER])

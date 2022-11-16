@@ -42,6 +42,6 @@ ANNEE = "annee"
 MARQUE = "marque"
 MODELE = "modele"
 KILOMETRAGE = "kilometrage"
-TYPE = "type"
-AJOUT_VEHICULE = 'ajout_vehicule'
 
+AJOUT_VEHICULE = 'ajout_vehicule'
+TYPE = "type"

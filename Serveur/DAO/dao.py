@@ -239,6 +239,7 @@ class Dao:
         self.cur.execute(UPDATE_PERMISSION_MEMBRE, (permission_membre, id_membre, id_compagnie))
         self.conn.commit()
     def update_vehicule(self,annee_modele,marque,modele,kilometrage,type,id_vehicule,id_compagnie):
+        #TODO verifier si call fonctionne theoriquement OUI dans le test
         self.cur.execute(UPDATE_VEHICULE_COMPAGNIE, (annee_modele, marque,modele,kilometrage,type,id_vehicule, id_compagnie))
         self.conn.commit()
     # ***************** AUTRES
