@@ -6,13 +6,14 @@ from tkinter import *
 from tkinter import ttk
 
 
-class Module_Gestion(Module):
+class ModuleGestionAjout(Module):
 
     def __init__(self, controleur, master_frame):
         super().__init__(controleur, master_frame)
 
     def set_vue(self):
         return Module_Gestion.VueGestionAjout(self, self.master_frame, row=9, column=4, padx=10, pady=10)
+
 
     class VueGestionAjout(Vue):
 
@@ -167,7 +168,7 @@ class Module_Gestion(Module):
 def main():
     try:
         controleur = None
-        module = Module_Gestion(controleur)
+        module = ModuleGestionAjout(controleur)
         module.show_vue()
         module.mainloop()
     except:
