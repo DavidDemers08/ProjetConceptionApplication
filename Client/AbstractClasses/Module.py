@@ -2,18 +2,17 @@ from abc import ABC, abstractmethod
 from tkinter import Tk
 
 
-class Module(Tk, ABC):
+class Module(ABC):
 
-    def __init__(self, controleur=None):
-        super().__init__()
+    def __init__(self, controleur, master_frame):
         self.controleur = controleur
+        self.master_frame = master_frame
         self.vue = None
 
     def show_vue(self):
         self.vue = self.set_vue()
         self.vue.set_controleur(self.controleur)
-        if self.controleur is None:
-            self.vue.remplir_vue()
+        self.vue.remplir_vue()
         #self.controleur.set_vue_gestion(self.vue)
 
     @abstractmethod
@@ -24,6 +23,6 @@ class Module(Tk, ABC):
         pass
 
     def vider_vue(self):
-        pass
+        self.vue.vider_frame()
 
 

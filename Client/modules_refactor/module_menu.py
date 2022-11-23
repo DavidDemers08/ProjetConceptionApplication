@@ -12,16 +12,16 @@ from Client.modules.module_paiement import ModulePaiement
 
 class ModuleGestion(Module):
 
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, parent, master_frame):
+        super().__init__(parent, master_frame)
 
     def set_vue(self):
-        return ModuleGestion.VueGestion(self, row=0, column=0, padx=10, pady=10)
+        return ModuleGestion.VueGestion(self, self.master_frame, row=0, column=0, padx=10, pady=10)
 
     class VueGestion(Vue):
 
-        def __init__(self, parent, row: int, column: int, padx: int, pady: int):
-            super().__init__(parent, row, column, padx, pady)
+        def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent, master_frame, row, column, padx, pady)
 
             self.click_button = {
                 "propriete": self.clic_bouton_propriete,
@@ -40,21 +40,18 @@ class ModuleGestion(Module):
             self.data1 = ("allo", "bigg", "toast")
             # self.listWidt
             #  =int(self.winfo_width()/3)
-            # for i in self.controleur.dict_modules:
-            #     # if i in self.dict_boutons.keys():
-            #     #     pass
-            #     pass
             compteur_column = 0
             for i in self.controleur.dict_modules.keys():
                 ttk.Button(self, text=i, command=self.click_button[i]).grid(row=0, column=compteur_column,
                                                                             pady=(20, 0), sticky=tk.E)
                 compteur_column += 1
 
+
         def delete_lists(self):
             self.canevas_list.destroy()
             self.bouton_gerer_employe.grid_remove()
             self.bouton_ajouter_membre.grid_remove()
-            self.canevas_list = tk.Canvas(self, height=200, width=600, bg='white')
+            self.canevas_list = tk.Canvas(self.master_frame, height=200, width=600, bg='white')
             self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
 
         def clic_bouton_membre(self):
