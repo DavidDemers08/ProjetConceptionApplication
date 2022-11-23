@@ -23,7 +23,7 @@ class ModuleAjoutModules(Module):
             self.liste_module.append(["nom module 1", "42.45", "2001/9/11"])
             self.liste_module.append(["nom module 2", "4s2.45", "2001/91/11"])
             self.liste_module.append(["nom module 3", "42.4a5", "20011/9/11"])
-            self.table = Table(vue=self, lines_array=self.liste_module, modifiable_rows=False)
+            self.table = Table(vue=self, lines_array=self.liste_module, modifiable_rows=False,start_row=2,start_column=0)
 
         def remplir_vue(self):
             self.heading = ttk.Label(self.master_frame, text='Ajout de Module', style='Heading.TLabel')
@@ -36,7 +36,7 @@ class ModuleAjoutModules(Module):
             self.exp_date = ttk.Label(self.master_frame, text="Date d'expiration")
             self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
 
-            self.remplir_grid_module()
+#            self.remplir_grid_module()
             self.table.create()
             if self.table.modifiable_rows:
                 self.parent.bind('<Return>', lambda e: self.update_liste_modules())
