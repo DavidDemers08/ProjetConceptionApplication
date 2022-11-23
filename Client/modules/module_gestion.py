@@ -2,7 +2,7 @@ from tkinter import Tk
 
 from traceback import print_exc
 
-from Client.vues.vue_gestion import VueGestion
+from Client.vues.vue_gestion_OLD import VueGestion
 
 
 class ModuleGestion(Tk):

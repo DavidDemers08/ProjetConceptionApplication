@@ -2,7 +2,7 @@ from traceback import print_exc
 from tkinter import Tk
 
 from Client.controleur_client import Controleur_Client
-from Client.vues.vue_gestion import VueGestion
+from Client.vues.vue_gestion_OLD import VueGestion
 from Client.vues.vue_gerer_emp import VueGererEmp
 
 
