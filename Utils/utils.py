@@ -23,9 +23,9 @@ NOM = "nom"
 IDENTIFIANT = "identifiant"
 TITRE = "titre"
 PERMISSION = "permission"
-ID_COMPAGNIE = "id_compagnie"
 VOIR_INFOS_USAGER = "voir_infos_usager"
 CHERCHER_COMPAGNIE = 'chercher_compagnie'
+GET_MODULE_ID_BY_USER_ID = 'get_module_id_by_user_id'
 AFFICHER_MEMBRES = "afficher_membres"
 SELECT_ALL_COMPAGNIES_DE_MEMBRE = "select_all_compagnies_de_membre"
 ID_MEMBRE = "id_membre"
@@ -45,6 +45,7 @@ GET_MODULE_WITH_ACCESS_ID = 'get_module_with_access_id'
 
 ACCESS_ID = 'access_id'
 
+ID_COMPAGNIE = "id_compagnie"
 NOM_COMPAGNIE = "nom_compagnie"
 CHERCHER_EMPLOYES_COMPAGNIE = "chercher_employes_compagnie"
 

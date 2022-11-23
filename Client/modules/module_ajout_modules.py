@@ -2,13 +2,13 @@ from tkinter import Tk
 from traceback import print_exc
 
 from Client.vues.vue_ajout_modules import VueAjoutModules
-from Client.controleur_client import Controleur_Client
+from Client.controleurclient import ControleurClient
 
 
 class ModuleAjoutModules(Tk):
     def __init__(self):
         super().__init__()
-        controleur = Controleur_Client()
+        controleur = ControleurClient()
         vue_ajout_modules = VueAjoutModules(self)
         vue_ajout_modules.grid(row=3, column=3, padx=10, pady=10)
         vue_ajout_modules.set_controleur(controleur)

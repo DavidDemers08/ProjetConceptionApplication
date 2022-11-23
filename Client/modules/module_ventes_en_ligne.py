@@ -2,12 +2,12 @@ from traceback import print_exc
 from tkinter import Tk
 from Client.vues.vue_ventes_en_ligne import VueOnlineSales
 #from vue_gerer_emp import VueGererEmp
-from Client.controleur_client import Controleur_Client
+from Client.controleurclient import ControleurClient
 
 class Module_Ventes_En_ligne(Tk):
     def __init__(self):
         super().__init__()
-        self.controleur = Controleur_Client()
+        self.controleur = ControleurClient()
 
         # peut-être éventuellement dans une sous-classe
         vue_ventes_en_ligne = VueOnlineSales(self)

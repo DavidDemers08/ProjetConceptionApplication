@@ -12,7 +12,7 @@ class ModuleGestionAjout(Module):
         super().__init__(controleur, master_frame)
 
     def set_vue(self):
-        return Module_Gestion.VueGestionAjout(self, self.master_frame, row=9, column=4, padx=10, pady=10)
+        return ModuleGestionAjout.VueGestionAjout(self, self.master_frame, row=9, column=4, padx=10, pady=10)
 
 
     class VueGestionAjout(Vue):

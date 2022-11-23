@@ -125,7 +125,7 @@ SELECT_MODULES = 'SELECT * FROM modules'
 SELECT_MODULE = 'SELLECT * FROM modules WHERE id=?'
 SELECT_MODULE_ID = 'SELECT id FROM modules WHERE nom=? AND version=?'
 DELETE_MODULE = 'DELETE FROM modules WHERE nom=? AND version=?'
-
+SELECT_MODULE_ID_WITH_USER_ID = 'SELECT id_compagnie FROM membre_dans_compagnie WHERE id_membre = ?'
 # ***************** MODULE PAR COMPAGNIE*********************
 
 CREER_MODULE_PAR_COMPAGNIE = '''

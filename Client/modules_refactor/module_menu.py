@@ -10,15 +10,15 @@ from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 
-class ModuleGestion(Module):
+class ModuleMenu(Module):
 
     def __init__(self, parent, master_frame):
         super().__init__(parent, master_frame)
 
     def set_vue(self):
-        return ModuleGestion.VueGestion(self, self.master_frame, row=0, column=0, padx=10, pady=10)
+        return ModuleMenu.VueMenu(self, self.master_frame, row=0, column=0, padx=10, pady=10)
 
-    class VueGestion(Vue):
+    class VueMenu(Vue):
 
         def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
             super().__init__(parent, master_frame, row, column, padx, pady)
@@ -42,7 +42,7 @@ class ModuleGestion(Module):
             #  =int(self.winfo_width()/3)
             compteur_column = 0
             for i in self.controleur.dict_modules.keys():
-                ttk.Button(self, text=i, command=self.click_button[i]).grid(row=0, column=compteur_column,
+                ttk.Button(self.master_frame, text=i, command=self.click_button[i]).grid(row=0, column=compteur_column,
                                                                             pady=(20, 0), sticky=tk.E)
                 compteur_column += 1
 
@@ -59,9 +59,9 @@ class ModuleGestion(Module):
             # self.canevas_list = tk.Canvas(self, height=200, bg='white')
             # self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
             # self.lWidth = int(self.canevas_list.winfo_width() / 3)
-            self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre',
+            self.bouton_ajouter_membre = ttk.Button(self.master_frame, text='Ajouter Membre',
                                                     command=lambda: self.start_module_gerer_emp(None))
-            self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
+            self.bouton_gerer_employe = ttk.Button(self.master_frame, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
 
             #
 
@@ -71,9 +71,9 @@ class ModuleGestion(Module):
             self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                       selectmode='browse')
             self.canevas_list.create_window(0, 0, window=self.liste, width=200, height=200)
-            ttk.Button(self, text='Ajouter Membre',
+            ttk.Button(self.master_frame, text='Ajouter Membre',
                        command=lambda: self.start_module_gerer_emp(None)),
-            ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
+            ttk.Button(self.master_frame, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
 
             data = []
             # TODO utiliser de vrais employés

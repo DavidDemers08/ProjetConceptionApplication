@@ -33,10 +33,11 @@ class Controleur_Serveur:
             utils.CHERCHER_COMPAGNIE: self.chercher_compagnie,
             utils.GET_ACCESS: self.get_access,
             utils.GET_USERNAME_ID: self.get_username_id,
+            utils.GET_MODULE_ID_BY_USER_ID:self.get_module_id_by_user_id,
 
             utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id,
 
-            utils.NOM_COMPAGNIE: self.nom_compagnie,
+            utils.ID_COMPAGNIE: self.id_compagnie,
             utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie
         }
 
@@ -81,13 +82,14 @@ class Controleur_Serveur:
             employes.append(Dao().select_all_membres_de_compagnie(nom_compagnie))
         return employes
 
-    def creer_compte_ville(self, form) -> str:
+    def creer_compte_ville(self, form):
         try:
             id_compagnie = Dao().insert_compagnie(form[utils.NOM_VILLE], form[utils.PAYS], form[utils.PROVINCE],
                                                   form[utils.REGION])
-            self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
+            id_user = self.creer_compte_admin(nom=form[utils.NOM], prenom=form[utils.PRENOM], id_compagnie=id_compagnie,
                                     genre=form[utils.GENRE], mdp_admin=form[utils.MDP],
                                     identifiant=form[utils.NOM_USAGER])
+            return id_compagnie, id_user
         except:
             return "Impossible d'ajouter votre compagnie"
 
@@ -167,6 +169,12 @@ class Controleur_Serveur:
 
     def nom_compagnie(self,form):
         return Dao().select_nom_compagnie(form[utils.ID_COMPAGNIE])
+
+    def id_compagnie(self, form):
+        return Dao().select_id_of_compagnie(form[utils.NOM_COMPAGNIE])
+
+    def get_module_id_by_user_id(self,form):
+        return Dao().select_module_id_by_user_id(form[utils.IDENTIFIANT])
 
 
 if __name__ == "__main__":
