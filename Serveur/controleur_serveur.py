@@ -170,8 +170,8 @@ class Controleur_Serveur:
 
 
 if __name__ == "__main__":
-    # Dao().creer_bd()
-    # Dao().ajouter_acces_super_admin()
-    # Dao().ajouter_modules_initiaux()
-    # Dao().ajouter_lien_acces_module_super_admin()
+    Dao().creer_bd()
+    Dao().ajouter_acces_super_admin()
+    Dao().ajouter_modules_initiaux()
+    Dao().ajouter_lien_acces_module_super_admin()
     pass
