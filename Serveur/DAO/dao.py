@@ -105,7 +105,7 @@ class Dao:
         return self.cur.fetchall()
 
     # retourne tous les compagnies d'un membre en particulier
-    def select_all_compagnie_de_membre(self,id_membre):
+    def select_all_compagnie_de_membre(self, id_membre):
         self.cur.execute(SELECT_ALL_COMPAGNIES_DE_MEMBRE, (id_membre,))
         return self.cur.fetchall()
 

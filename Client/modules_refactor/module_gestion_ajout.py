@@ -6,81 +6,104 @@ from tkinter import *
 from tkinter import ttk
 
 
-class Module_Gestion(Module):
+class ModuleGestionAjout(Module):
 
-    def __init__(self, controleur):
-        super().__init__(controleur)
+    def __init__(self, controleur, master_frame):
+        super().__init__(controleur, master_frame)
 
     def set_vue(self):
-        return Module_Gestion.VueGestionAjout(self, row=9, column=4, padx=10, pady=10)
+        return Module_Gestion.VueGestionAjout(self, self.master_frame, row=9, column=4, padx=10, pady=10)
+
 
 
     class VueGestionAjout(Vue):
 
-        def __init__(self, parent, row: int, column: int, padx: int, pady: int):
-            super().__init__(parent, row, column, padx, pady)
+        def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent, master_frame, row, column, padx, pady)
 
         def remplir_vue(self):
+<<<<<<< HEAD
             #self.photo_pwd = PhotoImage(file=r"..\Media\Images\show_pwd.png", width=20, height=20)
             self.titre_module = ttk.Label(self, text='Ajout Membre')
+=======
+            self.photo_pwd = PhotoImage(file=r"..\Media\Images\show_pwd.png", width=20, height=20)
+            self.titre_module = ttk.Label(self.master_frame, text='Ajout Membre')
+>>>>>>> fcddb1d13076520ca714d10027ce1c6de9913ef9
             self.titre_module.grid(row=0, column=1, sticky=tk.W)
-            self.label_nom = ttk.Label(self, text='Nom :', width=25)
+            self.label_nom = ttk.Label(self.master_frame, text='Nom :', width=25)
             self.label_nom.grid(row=1, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_nom = ttk.Entry(self, )
+            self.entry_nom = ttk.Entry(self.master_frame, )
             self.entry_nom.grid(row=1, column=2, pady=(20, 0), sticky=tk.E)
-            self.label_prenom = ttk.Label(self, text='Prenom :', width=25)
+            self.label_prenom = ttk.Label(self.master_frame, text='Prenom :', width=25)
             self.label_prenom.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_prenom = ttk.Entry(self)
+            self.entry_prenom = ttk.Entry(self.master_frame)
             self.entry_prenom.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
-            self.label_identifiant = ttk.Label(self, text='Identifiant :', width=25)
+            self.label_identifiant = ttk.Label(self.master_frame, text='Identifiant :', width=25)
             self.label_identifiant.grid(row=3, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_indentifiant = ttk.Entry(self)
+            self.entry_indentifiant = ttk.Entry(self.master_frame)
             self.entry_indentifiant.grid(row=3, column=2, pady=(20, 0), sticky=tk.E)
-            self.label_mdp = ttk.Label(self, text='Mot de passe :', width=25)
+            self.label_mdp = ttk.Label(self.master_frame, text='Mot de passe :', width=25)
             self.label_mdp.grid(row=4, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_mdp = ttk.Entry(self, show='*')
+            self.entry_mdp = ttk.Entry(self.master_frame, show='*')
             self.entry_mdp.grid(row=4, column=2, pady=(20, 0), sticky=tk.E)
+<<<<<<< HEAD
             #self.view_mdp = ttk.Button(self, image=self.photo_pwd)
             #self.view_mdp.grid(row=4, column=3, sticky=tk.E)
+=======
+            self.view_mdp = ttk.Button(self.master_frame, image=self.photo_pwd)
+            self.view_mdp.grid(row=4, column=3, sticky=tk.E)
+>>>>>>> fcddb1d13076520ca714d10027ce1c6de9913ef9
 
-            self.label_confirmation_mdp = ttk.Label(self, text='Confirmation mot de passe:', width=25)
+            self.label_confirmation_mdp = ttk.Label(self.master_frame, text='Confirmation mot de passe:', width=25)
             self.label_confirmation_mdp.grid(row=5, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_confirmation_mdp = ttk.Entry(self, show='*')
+            self.entry_confirmation_mdp = ttk.Entry(self.master_frame, show='*')
             self.entry_confirmation_mdp.grid(row=5, column=2, pady=(20, 0), sticky=tk.E)
+<<<<<<< HEAD
             #self.view_mdp_conf = ttk.Button(self, image=self.photo_pwd)
             #self.view_mdp_conf.grid(row=5, column=3, sticky=tk.E)
+=======
+            self.view_mdp_conf = ttk.Button(self.master_frame, image=self.photo_pwd)
+            self.view_mdp_conf.grid(row=5, column=3, sticky=tk.E)
+>>>>>>> fcddb1d13076520ca714d10027ce1c6de9913ef9
 
-            self.label_permission = ttk.Label(self, text='Permission:', width=25)
+            self.label_permission = ttk.Label(self.master_frame, text='Permission:', width=25)
             self.label_permission.grid(row=6, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_permisson = ttk.Entry(self)
+            self.entry_permisson = ttk.Entry(self.master_frame)
             self.entry_permisson.grid(row=6, column=2, pady=(20, 0), sticky=tk.E)
 
-            self.label_titre = ttk.Label(self, text='Titre :', width=25)
+            self.label_titre = ttk.Label(self.master_frame, text='Titre :', width=25)
             self.label_titre.grid(row=7, column=0, pady=(20, 0), sticky=tk.E)
-            self.entry_titre = ttk.Entry(self)
+            self.entry_titre = ttk.Entry(self.master_frame)
             self.entry_titre.grid(row=7, column=2, pady=(20, 0), sticky=tk.E)
 
-            self.label_genre = ttk.Label(self, text='Genre :', width=25)
+            self.label_genre = ttk.Label(self.master_frame, text='Genre :', width=25)
             self.label_genre.grid(row=8, column=0, pady=(20, 0), sticky=tk.E)
             self.current_var = tk.StringVar()
 
-            self.combo_genre = ttk.Combobox(self, textvariable=self.current_var)
+            self.combo_genre = ttk.Combobox(self.master_frame, textvariable=self.current_var)
             self.combo_genre['values'] = ('********', 'Masculin', 'Feminin', 'Non-binaire', 'Prefere ne pas repondre')
             self.combo_genre.current(0)
             self.combo_genre['state'] = 'readonly'
             self.combo_genre.grid(row=8, column=2, pady=(20, 0), sticky=tk.E)
             self.current_value = self.current_var.get()
 
-            self.entry_indetifiant = ttk.Entry(self)
+            self.entry_indetifiant = ttk.Entry(self.master_frame)
             self.entry_indetifiant.grid(row=3, column=2, pady=(20, 0), sticky=tk.E)
 
-            self.bouton_gestion_membre = ttk.Button(self, text='Sauvegarder', command=self.get_data)
+            self.bouton_gestion_membre = ttk.Button(self.master_frame, text='Sauvegarder', command=self.get_data)
             self.bouton_gestion_membre.grid(row=9, column=2, pady=(20, 0), sticky=tk.E)
 
-            self.bouton_gestion_projet = ttk.Button(self, text='Annuler', command=self.clic_anuller)
+            self.bouton_gestion_projet = ttk.Button(self.master_frame, text='Annuler', command=self.clic_anuller)
             self.bouton_gestion_projet.grid(row=9, column=0, pady=(20, 0), sticky=tk.W)
 
+<<<<<<< HEAD
 
+=======
+        def delete_lists(self):
+            self.canevas_list.destroy()
+            self.canevas_list = tk.Canvas(self.master_frame, height=200, bg='white')
+            self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
+>>>>>>> fcddb1d13076520ca714d10027ce1c6de9913ef9
 
         def clic_sauvegarde(self):
             self.open_popup()
@@ -169,7 +192,7 @@ class Module_Gestion(Module):
 def main():
     try:
         controleur = None
-        module = Module_Gestion(controleur)
+        module = ModuleGestionAjout(controleur)
         module.show_vue()
         module.mainloop()
     except:
