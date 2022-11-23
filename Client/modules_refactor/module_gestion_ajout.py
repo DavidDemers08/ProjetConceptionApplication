@@ -14,13 +14,14 @@ class Module_Gestion(Module):
     def set_vue(self):
         return Module_Gestion.VueGestionAjout(self, row=9, column=4, padx=10, pady=10)
 
+
     class VueGestionAjout(Vue):
 
         def __init__(self, parent, row: int, column: int, padx: int, pady: int):
             super().__init__(parent, row, column, padx, pady)
 
         def remplir_vue(self):
-            self.photo_pwd = PhotoImage(file=r"..\Media\Images\show_pwd.png", width=20, height=20)
+            #self.photo_pwd = PhotoImage(file=r"..\Media\Images\show_pwd.png", width=20, height=20)
             self.titre_module = ttk.Label(self, text='Ajout Membre')
             self.titre_module.grid(row=0, column=1, sticky=tk.W)
             self.label_nom = ttk.Label(self, text='Nom :', width=25)
@@ -39,15 +40,15 @@ class Module_Gestion(Module):
             self.label_mdp.grid(row=4, column=0, pady=(20, 0), sticky=tk.E)
             self.entry_mdp = ttk.Entry(self, show='*')
             self.entry_mdp.grid(row=4, column=2, pady=(20, 0), sticky=tk.E)
-            self.view_mdp = ttk.Button(self, image=self.photo_pwd)
-            self.view_mdp.grid(row=4, column=3, sticky=tk.E)
+            #self.view_mdp = ttk.Button(self, image=self.photo_pwd)
+            #self.view_mdp.grid(row=4, column=3, sticky=tk.E)
 
             self.label_confirmation_mdp = ttk.Label(self, text='Confirmation mot de passe:', width=25)
             self.label_confirmation_mdp.grid(row=5, column=0, pady=(20, 0), sticky=tk.E)
             self.entry_confirmation_mdp = ttk.Entry(self, show='*')
             self.entry_confirmation_mdp.grid(row=5, column=2, pady=(20, 0), sticky=tk.E)
-            self.view_mdp_conf = ttk.Button(self, image=self.photo_pwd)
-            self.view_mdp_conf.grid(row=5, column=3, sticky=tk.E)
+            #self.view_mdp_conf = ttk.Button(self, image=self.photo_pwd)
+            #self.view_mdp_conf.grid(row=5, column=3, sticky=tk.E)
 
             self.label_permission = ttk.Label(self, text='Permission:', width=25)
             self.label_permission.grid(row=6, column=0, pady=(20, 0), sticky=tk.E)
@@ -79,10 +80,7 @@ class Module_Gestion(Module):
             self.bouton_gestion_projet = ttk.Button(self, text='Annuler', command=self.clic_anuller)
             self.bouton_gestion_projet.grid(row=9, column=0, pady=(20, 0), sticky=tk.W)
 
-        def delete_lists(self):
-            self.canevas_list.destroy()
-            self.canevas_list = tk.Canvas(self, height=200, bg='white')
-            self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
+
 
         def clic_sauvegarde(self):
             self.open_popup()
@@ -90,25 +88,29 @@ class Module_Gestion(Module):
         def get_data(self):
             info = {}
 
-            info['nom'] = self.entry_nom.get()
 
             info['prenom'] = self.entry_prenom.get()
+            info['nom'] = self.entry_nom.get()
             info['identifiant'] = self.entry_indentifiant.get()
             info['mdp'] = self.entry_mdp.get()
             info['confirmer_mdp'] = self.entry_confirmation_mdp.get()
             info['permission'] = self.entry_permisson.get()
             info['titre'] = self.entry_titre.get()
             info['genre'] = self.combo_genre.get()
+            info['id_compagnie'] = 0
 
-            self.validate_info(info)
-            print(info)
+
+            #self.validate_info(info)
+            #self.controleur.insert_membre(self,info['prenom'],info['nom'],info['identifiant'],info['mdp'],info['titre'],info['genre'],info['id_compagnie'],info['permission'],)
+            #print(info)
 
         def validate_info(self, info):
             for key in info.keys():
                 if info[key] == '':
                     pass
                 else:
-                    print(info[key])
+                    pass
+
 
         def open_popup(self):
             # popup = tk.messagebox.showinfo('Sauvegarde','Sauvegarde effectue avec succes')

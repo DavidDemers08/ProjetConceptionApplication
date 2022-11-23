@@ -27,7 +27,7 @@ class ModulePaiement(Module):
             self.liste_module.append(["nom module 1", "42.45", "2001/9/11"])
             self.liste_module.append(["nom module 2", "412.45", "2001/91/11"])
             self.liste_module.append(["nom module 3", "421.45", "20011/9/11"])
-
+            data = self.controleur.
 
 
         def remplir_vue(self):
