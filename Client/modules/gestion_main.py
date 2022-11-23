@@ -1,15 +1,17 @@
 from traceback import print_exc
 from tkinter import Tk
 
-from Client.controleur_client import Controleur_Client
-from Client.vues.vue_gestion_OLD import VueGestion
+
+from Client.controleurclient import ControleurClient
+from Client.vues.vue_gestion import VueGestion
+
 from Client.vues.vue_gerer_emp import VueGererEmp
 
 
 class Module_Gestion(Tk):
     def __init__(self):
         super().__init__()
-        self.controleur = Controleur_Client()
+        self.controleur = ControleurClient()
         vue_gestion = VueGestion(self, self.controleur)
         vue_gestion.grid(row=3, column=3, padx=10, pady=10)
         self.controleur.set_vue_gestion(vue_gestion)

@@ -1,14 +1,14 @@
 from traceback import print_exc
 from tkinter import Tk
 
-from Client.controleur_client import Controleur_Client
+from Client.controleurclient import ControleurClient
 from Client.vues.vue_initiale import Vue
 
 
 class Module(Tk):
     def __init__(self):
         super().__init__()
-        controleur = Controleur_Client()
+        controleur = ControleurClient()
 
         vue = Vue(self)
         vue.grid(row=0, column=0, padx=10, pady=10)

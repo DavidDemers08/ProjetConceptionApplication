@@ -2,13 +2,13 @@ from tkinter import Tk
 from traceback import print_exc
 
 from Client.vues.vue_paiement import VuePaiement
-from Client.controleur_client import Controleur_Client
+
 
 
 class ModulePaiement(Tk):
     def __init__(self):
         super().__init__()
-        controleur = Controleur_Client()
+        controleur = ControleurClient()
 
         vue_paiement = VuePaiement(self, controleur)
         vue_paiement.grid(row=3, column=3, padx=10, pady=10)

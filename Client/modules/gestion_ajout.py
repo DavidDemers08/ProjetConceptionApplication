@@ -1,13 +1,13 @@
 from traceback import print_exc
 from tkinter import Tk
 from Client.vues.vue_gestion_ajout import VueGestionAjout
-from Client.controleur_client import Controleur_Client
+from Client.controleurclient import ControleurClient
 
 
 class Module_Gestion(Tk):
     def __init__(self):
         super().__init__()
-        controleur = Controleur_Client()
+        controleur = ControleurClient()
 
         # peut-être éventuellement dans une sous-classe
         vue_gestion_ajout = VueGestionAjout(self)

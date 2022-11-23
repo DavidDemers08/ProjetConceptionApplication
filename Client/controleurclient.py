@@ -17,8 +17,9 @@ path.append('../Utils')
 
 
 # class Controleur_Client(Controleur):
-class Controleur_Client:
+class ControleurClient:
     def __init__(self):
+        self.dict_modules = {}
         self.access = None
         self.permission: str = ""
         self.user_id: int = -1
@@ -36,7 +37,6 @@ class Controleur_Client:
         self.module_actuelle.show_vue()
 
     ###################################################
-
 
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
@@ -67,6 +67,13 @@ class Controleur_Client:
             utils.MDP: mdp
         }
         return self.appel_serveur(infos)
+
+    def get_module_id_by_user_id(self):
+        a = {
+            utils.FONCTION: utils.GET_MODULE_ID_BY_USER_ID,
+            utils.IDENTIFIANT: self.user_id
+        }
+        return self.appel_serveur(a)
 
     def rechercher_compagnie(self, nom_ville):
         a = {
@@ -165,9 +172,16 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
+    def get_compagnie_id(self, compagnie_name):
+        a = {
+            utils.FONCTION: utils.ID_COMPAGNIE,
+            utils.NOM_COMPAGNIE: compagnie_name
+        }
+        return self.appel_serveur(a)
+
     def get_name_compagnie_byid(self, compagnie_id):
         a = {
-            utils.FONCTION: utils.NOM_COMPAGNIE,
+            utils.FONCTION: utils.ID_COMPAGNIE,
             utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)
@@ -188,6 +202,7 @@ class Controleur_Client:
         return self.appel_serveur(a)
 
     def get_modules_with_access(self):
+
         self.modules = self.appel_serveur(
             {utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
         for idx, nom in self.modules:
@@ -198,7 +213,7 @@ class Controleur_Client:
 
 # test
 def main():
-    c = Controleur_Client()
+    c = ControleurClient()
     d = c.identifier_usager('toto', 'totototo')
     print(d)
 

@@ -2,12 +2,12 @@ from traceback import print_exc
 from tkinter import Tk
 from Client.vues.vue_gestion_proprietes import VueGestionProprietes
 #from vue_gerer_emp import VueGererEmp
-from Client.controleur_client import Controleur_Client
+from Client.controleurclient import ControleurClient
 
 class ModuleGestionProprietes(Tk):
     def __init__(self):
         super().__init__()
-        self.controleur = Controleur_Client()
+        self.controleur = ControleurClient()
 
         vue = VueGestionProprietes(self)
         vue.grid(row=0, column=0)

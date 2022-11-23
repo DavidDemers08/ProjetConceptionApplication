@@ -165,7 +165,6 @@ class Dao:
             self.conn.commit()
 
             id_access_initial = self.get_access_id(nom_access)
-
             if id_access_initial is None:
                 self.insert_acces(nom_access)
                 id_access = self.get_access_id(nom_access)
@@ -173,9 +172,10 @@ class Dao:
             else:
                 id_access = id_access_initial
                 self.insert_membre_a_acces(self.cur.lastrowid, id_access)
-
+            return self.cur.lastrowid
         except Exception:
             traceback.print_exc()
+            return False
 
     def id_access_initial(self, nom_access):
         id_access_initial = self.get_access_id(nom_access)
@@ -307,9 +307,8 @@ class Dao:
         self.conn.commit()
 
     def select_modules_matching_username(self, username: str):
-        pass
-        # self.cur.execute(SELECT_MODULES_MATCHING_ACCESS_OF_USERNAME, (username,))
-        # return self.cur.fetchall()
+        self.cur.execute(SELECT_MODULES_MATCHING_ACCESS_OF_USERNAME, (username,))
+        return self.cur.fetchall()
 
     def ajouter_modules_initiaux(self):
 
@@ -346,6 +345,9 @@ class Dao:
 
     def select_modules_with_access_id(self, access_id):
         return self.cur.execute(SELECT_MODULES_WITH_ACCESS_ID, (access_id,)).fetchall()
+
+    def select_module_id_by_user_id(self, user_id):
+        return self.cur.execute(SELECT_MODULE_ID_WITH_USER_ID, (user_id,)).fetchone()[0]
 
 
 def main():
