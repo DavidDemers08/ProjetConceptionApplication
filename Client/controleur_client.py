@@ -1,11 +1,14 @@
 import urllib.request
 import urllib.parse
 import json
-
+from tkinter import *
 from sys import path
+from tkinter import ttk
 
 from Client.modules.module_gestion import ModuleGestion
 from Utils import utils
+from Client.AbstractClasses.Module import Module
+from Client.modules_refactor.module_initial import ModuleInitial
 
 path.append('../Utils')
 
@@ -16,25 +19,24 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class Controleur_Client:
     def __init__(self):
-        self.dict_modules = {}
         self.access = None
-        self.user_id = None
-        self.modules = None
+        self.permission: str = ""
+        self.user_id: int = -1
+        self.company_id: int = -1
+        self.module_actuelle = None
+        self.master_frame = ttk.Frame()
+        self.set_module(ModuleInitial(self, self.master_frame))
+        self.master_frame.mainloop()
 
+    ###################################################
+    def set_module(self, module: Module):
+        if self.module_actuelle is not None:
+            self.module_actuelle.vider_vue()
+        self.module_actuelle = module
+        self.module_actuelle.show_vue()
 
-        self.company_id = 5
-        self.accesses = []
+    ###################################################
 
-    def set_vue(self, vue):
-        self.vue = vue
-
-
-    def set_vue_gestion(self, vue_gestion):
-        self.vue_gestion = vue_gestion
-
-    def afficher_gestion(self):
-        self.vue.master.destroy()
-        ModuleGestion(self)
 
     # On prépare et on envoie les infos, incluant
     # le nom de la fonction, au serveur_web, qui, lui
@@ -84,7 +86,7 @@ class Controleur_Client:
         args_ville[utils.FONCTION] = utils.CREER_COMPTE_VILLE
         return self.appel_serveur(args_ville)
 
-    def afficher_compagnie_de_membre(self,):
+    def afficher_compagnie_de_membre(self, ):
         infos = {
             utils.ID_MEMBRE: self.user_id,
             utils.FONCTION: utils.VOIR_INFOS_USAGER
@@ -135,6 +137,7 @@ class Controleur_Client:
         }
 
         return self.appel_serveur(a)
+
     def creation_modules(self):
         a = {
             utils.FONCTION: utils.AFFICHER_MODULES
@@ -162,7 +165,7 @@ class Controleur_Client:
         }
         return self.appel_serveur(a)
 
-    def get_name_compagnie_byid(self,compagnie_id):
+    def get_name_compagnie_byid(self, compagnie_id):
         a = {
             utils.FONCTION: utils.NOM_COMPAGNIE,
             utils.ID_COMPAGNIE: compagnie_id
@@ -185,12 +188,12 @@ class Controleur_Client:
         return self.appel_serveur(a)
 
     def get_modules_with_access(self):
-        self.modules = self.appel_serveur({utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
-        for idx,nom in self.modules:
+        self.modules = self.appel_serveur(
+            {utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
+        for idx, nom in self.modules:
             self.dict_modules[nom] = idx
 
         print(self.dict_modules)
-
 
 
 # test
