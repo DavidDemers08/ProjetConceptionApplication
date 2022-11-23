@@ -7,6 +7,7 @@ import tkinter as tk
 from tkinter import ttk
 
 import Utils.utils
+from Client.controleurclient import ControleurClient
 
 
 class ModuleInitial(Module):
@@ -60,7 +61,7 @@ class ModuleInitial(Module):
                 print(reponse)
                 if reponse:
                     self.controleur.username = self.var_nom.get()
-                    self.controleur.afficher_gestion()
+                    self.controleur.afficher_menu()
                 else:
                     self.afficher_erreur(f'Nom ou mot de passe incorrects')
 
@@ -132,7 +133,8 @@ class ModuleInitial(Module):
 
         def clic_bouton_enregistrer_ville(self):
             nom_compagnie = self.var_nom_compagnie.get()
-            if self.controleur.rechercher_compagnie(nom_compagnie) is None:
+            print(self.controleur.rechercher_compagnie(nom_compagnie))
+            if not self.controleur.rechercher_compagnie(nom_compagnie):
                 self.vider_frame()
                 self.afficher_enregistrement_admin()
             else:
@@ -208,6 +210,8 @@ class ModuleInitial(Module):
 
                 if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
                     reponse = self.controleur.creer_compte_ville(**args)
+                self.vider_frame()
+                self.remplir_vue()
             else:
                 print("Les deux cases des mots de passe ne sont pas identiques")
 
@@ -217,7 +221,7 @@ class ModuleInitial(Module):
 
 def main():
     try:
-        controleur = None
+        controleur = ControleurClient()
         module = ModuleInitial(controleur)
         module.show_vue()
         module.mainloop()
