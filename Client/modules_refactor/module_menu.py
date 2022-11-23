@@ -23,11 +23,16 @@ class ModuleGestion(Module):
         def __init__(self, parent, row: int, column: int, padx: int, pady: int):
             super().__init__(parent, row, column, padx, pady)
 
-            self.dictionnaire_module = {
-                "Gestion Budget": ModulePaiement,
-                "Gestion Inventaire": ModulePaiement,
-                "Gestion Événements": ModulePaiement,
-                "Gestion Propriétés": ModulePaiement
+            self.click_button = {
+                "propriete": self.clic_bouton_propriete,
+                "gestion": self.clic_bouton_membre,
+                "inventaire": self.clic_bouton_inventaire,
+                "evenement": self.click_bouton_evenement,
+                "budget": self.click_bouton_budget(),
+                "employe": self.click_bouton_employe,
+                "vente_en_ligne": self.click_bouton_vente_en_ligne,
+                "plaintes": self.click_bouton_plaintes,
+                "materielle": self.clic_bouton_materielle
             }
 
         def remplir_vue(self):
@@ -35,26 +40,15 @@ class ModuleGestion(Module):
             self.data1 = ("allo", "bigg", "toast")
             # self.listWidt
             #  =int(self.winfo_width()/3)
-            self.bouton_gestion_membre = ttk.Button(self, text='Gestion Membre', command=self.clic_bouton_membre)
-            self.bouton_gestion_membre.grid(row=0, column=0, pady=(20, 0), sticky=tk.E)
-
-            self.bouton_gestion_projet = ttk.Button(self, text='Gestion des projets ERP',
-                                                    command=self.clic_bouton_projets)
-            self.bouton_gestion_projet.grid(row=0, column=1, pady=(20, 0), sticky=tk.E)
-
-            self.bouton_gestion_modules = ttk.Button(self, text='Gestion modules', command=self.clic_bouton_modules)
-            self.bouton_gestion_modules.grid(row=0, column=2, pady=(20, 0), sticky=tk.E)
-
-            self.canevas_list = tk.Canvas(self, height=200, bg='white')
-
-            self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
-            self.lWidth = int(self.canevas_list.winfo_width() / 3)
-
-            self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre',
-                                                    command=lambda: self.start_module_gerer_emp(None))
-            self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
-
-            # self.canevas_list.create_window(0, 0, window=self.list, width=200, height=200)
+            # for i in self.controleur.dict_modules:
+            #     # if i in self.dict_boutons.keys():
+            #     #     pass
+            #     pass
+            compteur_column = 0
+            for i in self.controleur.dict_modules.keys():
+                ttk.Button(self, text=i, command=self.click_button[i]).grid(row=0, column=compteur_column,
+                                                                            pady=(20, 0), sticky=tk.E)
+                compteur_column += 1
 
         def delete_lists(self):
             self.canevas_list.destroy()
@@ -65,15 +59,31 @@ class ModuleGestion(Module):
 
         def clic_bouton_membre(self):
             self.delete_lists()
+            # self.canevas_list = tk.Canvas(self, height=200, bg='white')
+            # self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
+            # self.lWidth = int(self.canevas_list.winfo_width() / 3)
+            self.bouton_ajouter_membre = ttk.Button(self, text='Ajouter Membre',
+                                                    command=lambda: self.start_module_gerer_emp(None))
+            self.bouton_gerer_employe = ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
+
+            #
+
             self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
             self.bouton_gerer_employe.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
             colonnes = ('Nom', 'Identifiant', 'Permission', 'Rôle')
             self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                       selectmode='browse')
+            self.canevas_list.create_window(0, 0, window=self.liste, width=200, height=200)
+            ttk.Button(self, text='Ajouter Membre',
+                       command=lambda: self.start_module_gerer_emp(None)),
+            ttk.Button(self, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
 
             data = []
             # TODO utiliser de vrais employés
             # Ici on append dans le data de faux employés avec la boucle
+            a = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
+            print(a)
+
             for n in range(1, 50):
                 data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
 
@@ -103,7 +113,7 @@ class ModuleGestion(Module):
 
         def start_module_gerer_emp(self, params):
             self.gerer_emp_module = Toplevel()
-            vue = VueGererEmp(self, params)
+            vue = VueGererEmp(self, params, self.controleur)
             vue.place(height=500, width=500)
             self.gerer_emp_module.geometry("500x500")
             self.gerer_emp_module.title("Gestion Employé")
@@ -183,8 +193,32 @@ class ModuleGestion(Module):
         def cacher_message(self):
             self.label_message['text'] = ''
 
+        def remplir_modules(self):
+            self.controleur.get_modules_with_access()
 
+        def clic_bouton_propriete(self):
+            pass
 
+        def clic_bouton_inventaire(self):
+            pass
+
+        def click_bouton_evenement(self):
+            pass
+
+        def click_bouton_employe(self):
+            pass
+
+        def click_bouton_vente_en_ligne(self):
+            pass
+
+        def click_bouton_plaintes(self):
+            pass
+
+        def clic_bouton_materielle(self):
+            pass
+
+        def click_bouton_budget(self):
+            pass
 
 
 def main():
