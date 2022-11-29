@@ -16,11 +16,11 @@ class ModuleGestionEmploye(Module):
         super().__init__(controleur, master_frame)
 
     def set_vue(self):
-        return ModuleGestionEmploye.VueGestionEmploye(self, self.master_frame, row=3, column=3, padx=10, pady=10)
+        return ModuleGestionEmploye.VueGestionEmploye(self, self.master_frame, row=1, column=1, padx=10, pady=10)
 
     class VueGestionEmploye(Vue):
-        def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
-            super().__init__(parent, master_frame, row, column, padx, pady)
+        def __init__(self, parent,master_frame, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent,master_frame, row, column, padx, pady)
 
         def remplir_vue(self):
             self.canevas_list = tk.Canvas(self.master_frame, height=200, width=600, bg='white')
@@ -45,8 +45,8 @@ class ModuleGestionEmploye(Module):
             data = []
             # TODO utiliser de vrais employés
             # Ici on append dans le data de faux employés avec la boucle
-            a = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
-            print(a)
+            # a = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
+            #print(a)
 
             for n in range(1, 50):
                 data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))

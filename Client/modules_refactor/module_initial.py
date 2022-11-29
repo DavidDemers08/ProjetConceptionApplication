@@ -3,11 +3,10 @@ from traceback import print_exc
 from Client.AbstractClasses.Module import Module
 from Client.AbstractClasses.Vue import Vue
 
-from Client.modules_refactor.module_menu import ModuleMenu
 import tkinter as tk
 from tkinter import ttk
-import Utils.utils
 
+import Utils.utils
 
 
 class ModuleInitial(Module):
@@ -60,10 +59,8 @@ class ModuleInitial(Module):
                 reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
                 print(reponse)
                 if reponse:
-                    self.controleur.user_id = reponse[0]
-                    self.controleur.company_id = self.controleur.get_module_id_by_user_id()
-                    self.controleur.access = self.controleur.get_access()
-                    self.controleur.set_module(ModuleMenu(self.controleur, self.master_frame))
+                    self.controleur.username = self.var_nom.get()
+                    self.controleur.set_module("menu")
                 else:
                     self.afficher_erreur(f'Nom ou mot de passe incorrects')
 
@@ -135,8 +132,7 @@ class ModuleInitial(Module):
 
         def clic_bouton_enregistrer_ville(self):
             nom_compagnie = self.var_nom_compagnie.get()
-            print(self.controleur.rechercher_compagnie(nom_compagnie))
-            if not self.controleur.rechercher_compagnie(nom_compagnie):
+            if self.controleur.rechercher_compagnie(nom_compagnie) is None:
                 self.vider_frame()
                 self.afficher_enregistrement_admin()
             else:
@@ -211,9 +207,7 @@ class ModuleInitial(Module):
                         }
 
                 if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
-                    self.controleur.company_id, self.controleur.user_id = self.controleur.creer_compte_ville(**args)
-                    self.controleur.access = self.controleur.get_access()
-                    self.controleur.set_module(ModuleMenu(self.controleur, self.master_frame))
+                    reponse = self.controleur.creer_compte_ville(**args)
             else:
                 print("Les deux cases des mots de passe ne sont pas identiques")
 
@@ -223,7 +217,7 @@ class ModuleInitial(Module):
 
 def main():
     try:
-        controleur = ControleurClient()
+        controleur = None
         module = ModuleInitial(controleur)
         module.show_vue()
         module.mainloop()

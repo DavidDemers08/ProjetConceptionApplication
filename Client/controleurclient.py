@@ -4,11 +4,16 @@ import json
 from tkinter import *
 from sys import path
 from tkinter import ttk
-
-from Client.modules.module_gestion import ModuleGestion
+from Client.modules_refactor.module_initial import ModuleInitial
+from Client.modules_refactor.module_gestion_des_modules import ModuleGestionDesModules
+from Client.modules_refactor.module_ajout_modules import ModuleAjoutModules
+from Client.modules_refactor.module_gestion_ajout import ModuleGestionAjout
+from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
+from Client.modules_refactor.module_menu import ModuleMenu
+from Client.modules_refactor.module_paiement import ModulePaiement
+from Client.modules_refactor.moduleventesenligne import ModuleVentesEnLigne
 from Utils import utils
 from Client.AbstractClasses.Module import Module
-from Client.modules_refactor.module_initial import ModuleInitial
 
 path.append('../Utils')
 
@@ -19,21 +24,30 @@ path.append('../Utils')
 # class Controleur_Client(Controleur):
 class ControleurClient:
     def __init__(self):
-        self.dict_modules = {}
+        self.dict_modules = {
+            "menu" : ModuleMenu,
+            "initial" : ModuleInitial,
+            "GestionMembre": ModuleGestionEmploye,
+            "AjoutModules": ModuleAjoutModules,
+            "GestionAjout":ModuleGestionAjout,
+            "ModulePaiement":ModulePaiement,
+            "ModuleGestionDesModules":ModuleGestionDesModules,
+            "ModuleVentesEnLigne":ModuleVentesEnLigne
+        }
         self.access = None
         self.permission: str = ""
         self.user_id: int = -1
         self.company_id: int = -1
         self.module_actuelle = None
         self.master_frame = ttk.Frame()
-        self.set_module(ModuleInitial(self, self.master_frame))
+        self.set_module("initial")
         self.master_frame.mainloop()
 
     ###################################################
-    def set_module(self, module: Module):
+    def set_module(self, module: str):
         if self.module_actuelle is not None:
             self.module_actuelle.vider_vue()
-        self.module_actuelle = module
+        self.module_actuelle = self.dict_modules[module](self,self.master_frame)
         self.module_actuelle.show_vue()
 
     ###################################################

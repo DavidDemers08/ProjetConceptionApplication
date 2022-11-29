@@ -6,13 +6,13 @@ from tkinter import ttk
 from Utils.fonction_util_vue import VueGen
 
 
-class Module_Ventes_En_ligne(Module):
+class ModuleVentesEnLigne(Module):
 
     def __init__(self, controleur, master_frame):
         super().__init__(controleur, master_frame)
 
     def set_vue(self):
-        return Module_Ventes_En_ligne.VueOnlineSales(self, self.master_frame, row=6, column=5, padx=10, pady=10)
+        return ModuleVentesEnLigne.VueOnlineSales(self, self.master_frame, row=6, column=5, padx=10, pady=10)
 
     class VueOnlineSales(Vue):
 
@@ -192,7 +192,7 @@ class Module_Ventes_En_ligne(Module):
 def main():
     try:
         controleur = None
-        module = Module_Ventes_En_ligne(controleur)
+        module = ModuleVentesEnLigne(controleur)
         module.show_vue()
         module.mainloop()
     except:
