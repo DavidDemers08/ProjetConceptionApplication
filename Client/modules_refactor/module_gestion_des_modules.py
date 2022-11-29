@@ -10,13 +10,13 @@ from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 
-class Module_Gestion(Module):
+class ModuleGestionDesModules(Module):
 
     def __init__(self, controleur, master_frame):
         super().__init__(controleur, master_frame)
 
     def set_vue(self):
-        return Module_Gestion.VueGestion(self, self.master_frame, row=3, column=3, padx=10, pady=10)
+        return ModuleGestionDesModules.VueGestion(self, self.master_frame, row=3, column=3, padx=10, pady=10)
 
     class VueGestion(Vue):
 
@@ -35,7 +35,7 @@ class Module_Gestion(Module):
             self.data1 = ("allo", "bigg", "toast")
             # self.listWidt
             #  =int(self.winfo_width()/3)
-            self.bouton_gestion_membre = ttk.Button(self.master_frame, text='Gestion Membre', command=self.clic_bouton_membre)
+            self.bouton_gestion_membre = ttk.Button(self.master_frame, text='Gestion Membre', command=self.controleur.set_module("menu"))
             self.bouton_gestion_membre.grid(row=0, column=0, pady=(20, 0), sticky=tk.E)
 
             self.bouton_gestion_projet = ttk.Button(self.master_frame, text='Gestion des projets ERP',
@@ -190,7 +190,7 @@ class Module_Gestion(Module):
 def main():
     try:
         controleur = None
-        module = Module_Gestion(controleur)
+        module = ModuleGestionDesModules(controleur)
         module.show_vue()
         module.mainloop()
     except:
