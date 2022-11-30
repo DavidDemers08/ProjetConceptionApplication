@@ -36,7 +36,7 @@ class Controleur_Serveur:
             utils.GET_MODULE_ID_BY_USER_ID:self.get_module_id_by_user_id,
 
             utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id,
-
+            utils.NOM_COMPAGNIE: self.nom_compagnie,
             utils.ID_COMPAGNIE: self.id_compagnie,
             utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie
         }
