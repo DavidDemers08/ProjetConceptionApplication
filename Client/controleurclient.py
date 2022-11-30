@@ -25,15 +25,18 @@ path.append('../Utils')
 class ControleurClient:
     def __init__(self):
         self.dict_modules = {
-            "menu" : ModuleMenu,
-            "initial" : ModuleInitial,
+            "menu": ModuleMenu,
+            "initial": ModuleInitial,
             "GestionMembre": ModuleGestionEmploye,
             "AjoutModules": ModuleAjoutModules,
             "GestionAjout":ModuleGestionAjout,
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
             "Gestion Vente En Ligne":ModuleVentesEnLigne
+
         }
+
+        self.dict_modules_idx = {}
         self.access = None
         self.permission: str = ""
         self.user_id: int = -1
@@ -47,7 +50,7 @@ class ControleurClient:
     def set_module(self, module: str):
         if self.module_actuelle is not None:
             self.module_actuelle.vider_vue()
-        self.module_actuelle = self.dict_modules[module](self,self.master_frame)
+        self.module_actuelle = self.dict_modules[module](self, self.master_frame)
         self.module_actuelle.show_vue()
 
     ###################################################
@@ -96,7 +99,7 @@ class ControleurClient:
         }
         return self.appel_serveur(a)
 
-    def get_employes_de_compagnie(self, user_id):
+    def get_employes_de_compagnie(self):
         a = {
             utils.FONCTION: utils.CHERCHER_EMPLOYES_COMPAGNIE,
             utils.ID_MEMBRE: self.user_id
@@ -168,7 +171,7 @@ class ControleurClient:
     def select_modules_with_access_of_user(self):
         a = {
             utils.FONCTION: utils.SELECT_MODULES_WITH_ACCESS_OF_USER,
-            utils.NOM_USAGER: self.username
+            utils.NOM_USAGER: self.user_id
         }
 
         return self.appel_serveur(a)
@@ -220,9 +223,9 @@ class ControleurClient:
         self.modules = self.appel_serveur(
             {utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
         for idx, nom in self.modules:
-            self.dict_modules[nom] = idx
+            self.dict_modules_idx[nom] = idx
 
-        print(self.dict_modules)
+        print(self.dict_modules_idx)
 
 
 # test
