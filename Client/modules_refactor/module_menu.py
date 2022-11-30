@@ -43,7 +43,11 @@ class ModuleMenu(Module):
             #     # if i in self.dict_boutons.keys():
             #     #     pass
             #     pass
-            compteur_column = 0
+
+            ttk.Button(self.master_frame, text="AjoutModule", command=self.click_bouton_ajout_module).grid(row=0, column=0,
+                                                                                     pady=(20, 0), sticky=tk.E)
+
+            compteur_column = 1
             for i in self.controleur.dict_modules_idx.keys():
                 ttk.Button(self.master_frame, text=i, command=self.click_button[i]).grid(row=0, column=compteur_column,
                                                                                          pady=(20, 0), sticky=tk.E)
@@ -167,7 +171,7 @@ class ModuleMenu(Module):
             pass
 
         def clic_bouton_inventaire(self):
-            pass
+            self.controleur.set_module("ModuleInventaire")
 
         def click_bouton_evenement(self):
             pass
@@ -176,7 +180,7 @@ class ModuleMenu(Module):
             pass
 
         def click_bouton_vente_en_ligne(self):
-            pass
+            self.controleur.set_module("Gestion Vente En Ligne")
 
         def click_bouton_plaintes(self):
             pass
@@ -190,6 +194,21 @@ class ModuleMenu(Module):
         def set_vue_module(self, module):
 
             self.controleur.set_module(module)
+
+        def click_bouton_ajout_module(self):
+
+
+            self.module = ttk.Label(self.master_frame, text="Module")
+            self.module.grid(column=0, row=1, sticky=tk.W, padx=50)
+            self.prix = ttk.Label(self.master_frame, text="Prix")
+            self.prix.grid(column=1, row=1, sticky=tk.W, padx=50)
+            self.exp_date = ttk.Label(self.master_frame, text="Date d'expiration")
+            self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
+
+            # self.remplir_grid_module()
+            # self.table.create()
+            # if self.table.modifiable_rows:
+            #     self.parent.bind('<Return>', lambda e: self.update_liste_modules())
 
 
 def main():
