@@ -15,6 +15,8 @@ from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
 from Client.modules_refactor.module_menu import ModuleMenu
 from Client.modules_refactor.module_paiement import ModulePaiement
 from Client.modules_refactor.module_ventes_en_ligne import ModuleVentesEnLigne
+from Client.modules_refactor.module_ajout_membre import ModuleAjoutEmploye
+
 from Utils import utils
 from Client.AbstractClasses.Module import Module
 
@@ -38,6 +40,7 @@ class ControleurClient:
             "Gestion Vente En Ligne":ModuleVentesEnLigne,
             "ModuleInventaire": ModuleInventaire,
             "ModuleVehicule": ModuleVehicule
+            "ModuleAjoutEmploye":ModuleAjoutEmploye
         }
 
         self.dict_modules_idx = {}
@@ -78,6 +81,10 @@ class ControleurClient:
         # qui avait été json-ifié
         return json.loads(reponse.read())
 
+    def add_test_data(self):
+        infos = {utils.FONCTION: utils.ADD_TEST_DATA}
+        return self.appel_serveur(infos)
+
     # Le nom de la fonction voulue est envoyée
     # par le controleur_client et reçu par le
     # controleur_serveur dans le request.form
@@ -93,6 +100,13 @@ class ControleurClient:
         a = {
             utils.FONCTION: utils.GET_MODULE_ID_BY_USER_ID,
             utils.IDENTIFIANT: self.user_id
+        }
+        return self.appel_serveur(a)
+
+    def get_module_id_by_company_id(self):
+        a = {
+            utils.FONCTION: utils.GET_MODULE_ID_BY_COMPANY_ID,
+            utils.ID_COMPAGNIE: self.company_id
         }
         return self.appel_serveur(a)
 
@@ -202,7 +216,7 @@ class ControleurClient:
 
     def get_name_compagnie_byid(self, compagnie_id):
         a = {
-            utils.FONCTION: utils.ID_COMPAGNIE,
+            utils.FONCTION: utils.NOM_COMPAGNIE,
             utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)
