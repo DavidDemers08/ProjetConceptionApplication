@@ -23,7 +23,7 @@ class ModuleGestionEmploye(Module):
             super().__init__(parent,master_frame, row, column, padx, pady)
 
         def remplir_vue(self):
-            self.canevas_list = tk.Canvas(self.master_frame, height=300, width=470, bg='white')
+            self.canevas_list = tk.Canvas(self.master_frame, height=300, width=570, bg='white')
             self.canevas_list.grid(row=1, column=0, columnspan=3, sticky=tk.E)
 
             self.bouton_ajouter_membre = ttk.Button(self.master_frame, text='Ajouter Membre',
@@ -46,16 +46,16 @@ class ModuleGestionEmploye(Module):
             data = []
             # b = self.controleur.test()
             # print(b)
-            employes = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
+            employes = self.controleur.get_employes_de_compagnie()
             if len(employes) > 0:
                 for employe in employes:
                     print(employe)
                     if self.controleur.user_id != employe[0]:
-                        # acces = self.controleur.get_access()
+                        acces = self.controleur.get_access()
                         acces = self.controleur.get_access_by_id(2)
-                        acces = self.controleur.get_access_by_id(int(employe[0]))
+                        # acces = self.controleur.get_access_by_id(int(employe[0]))
                         nom = employe[1] + " " + employe[2]
-                        data.append((f'{nom}', f'{employe[3]}', f'{acces}', f'{employe[6]}'))
+                        data.append((f'{nom}', f'{employe[3]}', f'{acces}', f'{employe[5]}'))
 
 
 
@@ -88,5 +88,3 @@ class ModuleGestionEmploye(Module):
             #self.gerer_emp_module.geometry("500x500")
             #self.gerer_emp_module.title("Gestion Employé")
 
-        def fermer_module_emp(self):
-            self.gerer_emp_module.destroy()

@@ -39,7 +39,7 @@ class ControleurClient:
             "ModuleGestionDesModules":ModuleGestionDesModules,
             "Gestion Vente En Ligne":ModuleVentesEnLigne,
             "ModuleInventaire": ModuleInventaire,
-            "ModuleVehicule": ModuleVehicule
+            "ModuleVehicule": ModuleVehicule,
             "ModuleAjoutEmploye":ModuleAjoutEmploye
         }
 

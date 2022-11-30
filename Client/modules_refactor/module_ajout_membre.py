@@ -191,7 +191,7 @@ class ModuleAjoutEmploye(Module):
                 reponse = self.controleur.creer_usager(prenom, nom, identification, mdp, titre, genre, compagnie,
                                                        permission, acced)
                 print(reponse)
-                self.vue_gestion.fermer_module_emp()
+                self.controleur.set_module("ModuleAjoutEmploye")
 
             else:
                 print("Un des champs ne respecte pas les conditions")
