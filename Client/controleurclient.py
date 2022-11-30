@@ -32,7 +32,7 @@ class ControleurClient:
             "GestionAjout":ModuleGestionAjout,
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
-            "ModuleVentesEnLigne":ModuleVentesEnLigne
+            "ModuleVentesEnLigne": ModuleVentesEnLigne
         }
         self.access = None
         self.permission: str = ""
@@ -47,7 +47,7 @@ class ControleurClient:
     def set_module(self, module: str):
         if self.module_actuelle is not None:
             self.module_actuelle.vider_vue()
-        self.module_actuelle = self.dict_modules[module](self,self.master_frame)
+        self.module_actuelle = self.dict_modules[module](self, self.master_frame)
         self.module_actuelle.show_vue()
 
     ###################################################
@@ -71,6 +71,10 @@ class ControleurClient:
         # qui avait été json-ifié
         return json.loads(reponse.read())
 
+    def add_test_data(self):
+        infos = {utils.FONCTION: utils.ADD_TEST_DATA}
+        return self.appel_serveur(infos)
+
     # Le nom de la fonction voulue est envoyée
     # par le controleur_client et reçu par le
     # controleur_serveur dans le request.form
@@ -86,6 +90,13 @@ class ControleurClient:
         a = {
             utils.FONCTION: utils.GET_MODULE_ID_BY_USER_ID,
             utils.IDENTIFIANT: self.user_id
+        }
+        return self.appel_serveur(a)
+
+    def get_module_id_by_company_id(self):
+        a = {
+            utils.FONCTION: utils.GET_MODULE_ID_BY_COMPANY_ID,
+            utils.ID_COMPAGNIE: self.company_id
         }
         return self.appel_serveur(a)
 
