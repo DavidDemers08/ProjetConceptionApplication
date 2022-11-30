@@ -58,6 +58,7 @@ class ModuleInitial(Module):
                 reponse = self.controleur.identifier_usager(self.var_nom.get(), self.var_mdp.get())
                 print(reponse)
                 if reponse:
+                    self.controleur.username = self.var_nom.get()
                     self.controleur.user_id = self.controleur.get_username_id(self.var_nom.get())
                     self.controleur.company_id = self.controleur
                     self.controleur.access = self.controleur.get_access()
@@ -104,8 +105,6 @@ class ModuleInitial(Module):
             return
 
         def afficher_enregistrer(self):
-
-
             self.label_nom_compagnie = ttk.Label(self.master_frame, text='Nom Compagnie ')
             self.label_nom_compagnie.grid(row=1, column=0, pady=(5, 0), sticky=tk.E)
             self.var_nom_compagnie = tk.StringVar()
@@ -225,6 +224,9 @@ class ModuleInitial(Module):
 
             else:
                 print("Les deux cases des mots de passe ne sont pas identiques")
+
+
+
 
 
 def main():
