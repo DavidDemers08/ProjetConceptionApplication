@@ -4,6 +4,9 @@ import json
 from tkinter import *
 from sys import path
 from tkinter import ttk
+
+from Client.modules_refactor.module_vehicule import ModuleVehicule
+from Client.modules_refactor.module_inv import ModuleInventaire
 from Client.modules_refactor.module_initial import ModuleInitial
 from Client.modules_refactor.module_gestion_des_modules import ModuleGestionDesModules
 from Client.modules_refactor.module_ajout_modules import ModuleAjoutModules
@@ -11,7 +14,9 @@ from Client.modules_refactor.module_gestion_ajout import ModuleGestionAjout
 from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
 from Client.modules_refactor.module_menu import ModuleMenu
 from Client.modules_refactor.module_paiement import ModulePaiement
-from Client.modules_refactor.moduleventesenligne import ModuleVentesEnLigne
+from Client.modules_refactor.module_ventes_en_ligne import ModuleVentesEnLigne
+from Client.modules_refactor.module_ajout_membre import ModuleAjoutEmploye
+
 from Utils import utils
 from Client.AbstractClasses.Module import Module
 
@@ -25,15 +30,20 @@ path.append('../Utils')
 class ControleurClient:
     def __init__(self):
         self.dict_modules = {
-            "menu" : ModuleMenu,
-            "initial" : ModuleInitial,
+            "menu": ModuleMenu,
+            "initial": ModuleInitial,
             "GestionMembre": ModuleGestionEmploye,
             "AjoutModules": ModuleAjoutModules,
             "GestionAjout":ModuleGestionAjout,
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
-            "ModuleVentesEnLigne":ModuleVentesEnLigne
+            "Gestion Vente En Ligne":ModuleVentesEnLigne,
+            "ModuleInventaire": ModuleInventaire,
+            "ModuleVehicule": ModuleVehicule
+            "ModuleAjoutEmploye":ModuleAjoutEmploye
         }
+
+        self.dict_modules_idx = {}
         self.access = None
         self.permission: str = ""
         self.user_id: int = -1
@@ -47,7 +57,7 @@ class ControleurClient:
     def set_module(self, module: str):
         if self.module_actuelle is not None:
             self.module_actuelle.vider_vue()
-        self.module_actuelle = self.dict_modules[module](self,self.master_frame)
+        self.module_actuelle = self.dict_modules[module](self, self.master_frame)
         self.module_actuelle.show_vue()
 
     ###################################################
@@ -71,6 +81,10 @@ class ControleurClient:
         # qui avait été json-ifié
         return json.loads(reponse.read())
 
+    def add_test_data(self):
+        infos = {utils.FONCTION: utils.ADD_TEST_DATA}
+        return self.appel_serveur(infos)
+
     # Le nom de la fonction voulue est envoyée
     # par le controleur_client et reçu par le
     # controleur_serveur dans le request.form
@@ -89,6 +103,13 @@ class ControleurClient:
         }
         return self.appel_serveur(a)
 
+    def get_module_id_by_company_id(self):
+        a = {
+            utils.FONCTION: utils.GET_MODULE_ID_BY_COMPANY_ID,
+            utils.ID_COMPAGNIE: self.company_id
+        }
+        return self.appel_serveur(a)
+
     def rechercher_compagnie(self, nom_ville):
         a = {
             utils.FONCTION: utils.CHERCHER_COMPAGNIE,
@@ -96,7 +117,7 @@ class ControleurClient:
         }
         return self.appel_serveur(a)
 
-    def get_employes_de_compagnie(self, user_id):
+    def get_employes_de_compagnie(self):
         a = {
             utils.FONCTION: utils.CHERCHER_EMPLOYES_COMPAGNIE,
             utils.ID_MEMBRE: self.user_id
@@ -168,7 +189,7 @@ class ControleurClient:
     def select_modules_with_access_of_user(self):
         a = {
             utils.FONCTION: utils.SELECT_MODULES_WITH_ACCESS_OF_USER,
-            utils.NOM_USAGER: self.username
+            utils.NOM_USAGER: self.user_id
         }
 
         return self.appel_serveur(a)
@@ -195,7 +216,7 @@ class ControleurClient:
 
     def get_name_compagnie_byid(self, compagnie_id):
         a = {
-            utils.FONCTION: utils.ID_COMPAGNIE,
+            utils.FONCTION: utils.NOM_COMPAGNIE,
             utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)
@@ -238,9 +259,9 @@ class ControleurClient:
         self.modules = self.appel_serveur(
             {utils.FONCTION: utils.GET_MODULE_WITH_ACCESS_ID, utils.ACCESS_ID: self.access})
         for idx, nom in self.modules:
-            self.dict_modules[nom] = idx
+            self.dict_modules_idx[nom] = idx
 
-        print(self.dict_modules)
+        print(self.dict_modules_idx)
 
 
 # test
