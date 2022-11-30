@@ -21,7 +21,6 @@ class ModuleInitial(Module):
         def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
             super().__init__(parent, master_frame, row, column, padx, pady)
 
-
         def remplir_vue(self):
             self.label_nom = ttk.Label(self.master_frame,width=15, text='Nom :',relief="groove",borderwidth=4)
             self.label_nom.grid(row=1, column=0, pady=(10,10),padx=(10,10), sticky=tk.N)
@@ -60,6 +59,9 @@ class ModuleInitial(Module):
                 print(reponse)
                 if reponse:
                     self.controleur.username = self.var_nom.get()
+                    self.controleur.user_id = self.controleur.get_username_id(self.var_nom.get())
+                    self.controleur.company_id = self.controleur
+                    self.controleur.access = self.controleur.get_access()
                     self.controleur.set_module("menu")
                 else:
                     self.afficher_erreur(f'Nom ou mot de passe incorrects')
@@ -103,8 +105,6 @@ class ModuleInitial(Module):
             return
 
         def afficher_enregistrer(self):
-
-
             self.label_nom_compagnie = ttk.Label(self.master_frame, text='Nom Compagnie ')
             self.label_nom_compagnie.grid(row=1, column=0, pady=(5, 0), sticky=tk.E)
             self.var_nom_compagnie = tk.StringVar()
@@ -166,7 +166,8 @@ class ModuleInitial(Module):
             self.label_verif_mdp_admin = ttk.Label(self.master_frame, text='Vérifier le mot de passe ')
             self.label_verif_mdp_admin.grid(row=3, column=0, pady=(5, 0), sticky=tk.E)
             self.var_verif_mdp_admin = tk.StringVar()
-            self.input_verif_mdp_admin = ttk.Entry(self.master_frame, textvariable=self.var_verif_mdp_admin, show="*", width=30)
+            self.input_verif_mdp_admin = ttk.Entry(self.master_frame, textvariable=self.var_verif_mdp_admin, show="*",
+                                                   width=30)
             self.input_verif_mdp_admin.grid(row=3, column=1, sticky=tk.E)
 
             self.label_nom_admin = ttk.Label(self.master_frame, text='Nom ')

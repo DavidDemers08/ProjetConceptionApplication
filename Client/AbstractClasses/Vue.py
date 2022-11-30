@@ -17,7 +17,6 @@ class Vue(ABC):
         self.master_frame = master_frame
         self.master_frame.grid(row=self.row, column=self.column, padx=self.padx, pady=self.pady)
 
-
     def set_controleur(self, controleur):
         self.controleur = controleur
 

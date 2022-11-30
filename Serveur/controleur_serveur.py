@@ -34,11 +34,15 @@ class Controleur_Serveur:
             utils.GET_ACCESS: self.get_access,
             utils.GET_USERNAME_ID: self.get_username_id,
             utils.GET_MODULE_ID_BY_USER_ID:self.get_module_id_by_user_id,
-
+            utils.ADD_TEST_DATA: self.add_test_data,
             utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id,
+            utils.GET_MODULE_ID_BY_COMPANY_ID: self.get_module_id_by_company_id,
+            utils.NOM_COMPAGNIE: self.nom_compagnie,
+            utils.DELETE_MEMBRE: self.delete_membre,
 
             utils.ID_COMPAGNIE: self.id_compagnie,
-            utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie
+            utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie,
+
         }
 
     # Le nom de la fonction voulue est envoyée
@@ -48,9 +52,17 @@ class Controleur_Serveur:
 
     def chercher_employes_compagnie(self, form):
         id_comp = Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])[0][1]
-        nomcomp = Dao().select_nom_compagnie(id_comp)
-        users = Dao().select_all_membres_de_compagnie(nomcomp)
+        nomcomp = Dao().select_nom_compagnie(id_comp)[0][0]
+        users_id = Dao().select_all_id_membres_de_compagnie(nomcomp)
+        users = []
+        for id in users_id:
+            infos = Dao().select_infos_membres_by_id(id[0])
+            users.append(infos[0])
         return users
+
+    def delete_membre(self, form):
+        Dao().delete_membre(form[utils.IDENTIFIANT])
+
 
 
 
@@ -173,13 +185,18 @@ class Controleur_Serveur:
     def id_compagnie(self, form):
         return Dao().select_id_of_compagnie(form[utils.NOM_COMPAGNIE])
 
-    def get_module_id_by_user_id(self,form):
+    def get_module_id_by_user_id(self, form):
         return Dao().select_module_id_by_user_id(form[utils.IDENTIFIANT])
 
+    def get_module_id_by_company_id(self, form):
+        return Dao().select_module_id_by_company_id(form[utils.ID_COMPAGNIE])
+
+    def add_test_data(self, form):
+        return Dao().add_test_data()
 
 if __name__ == "__main__":
     Dao().creer_bd()
     Dao().ajouter_acces_super_admin()
     Dao().ajouter_modules_initiaux()
-    Dao().ajouter_lien_acces_module_super_admin()
+    #Dao().ajouter_lien_acces_module_super_admin()
     pass
