@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-from Client.vues.vue_gerer_emp import VueGererEmp
+#from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 
@@ -104,8 +104,9 @@ class ModuleGestionDesModules(Module):
 
         def start_module_gerer_emp(self, params):
             self.gerer_emp_module = Toplevel()
-            vue = VueGererEmp(self, params)
-            vue.place(height=500, width=500)
+            self.controleur.set_module("GestionMembre")
+            #vue = VueGererEmp(self, params)
+            #vue.place(height=500, width=500)
             self.gerer_emp_module.geometry("500x500")
             self.gerer_emp_module.title("Gestion Employé")
 
@@ -157,7 +158,7 @@ class ModuleGestionDesModules(Module):
             self.liste.column('Modules', anchor='center')
             self.liste.column('Modules', width=600)
             for module in data:
-                self.liste.insert('', tk.END, values=module)
+                self.liste.insert('', tk.END, values=module,command=self.controleur.set_module("ModuleVentesEnLigne"))
             self.liste.place(x=0, y=0)
             self.liste.bind("<Double-1>", self.start_module)
 
