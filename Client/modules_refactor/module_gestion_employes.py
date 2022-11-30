@@ -140,7 +140,7 @@ class ModuleGestionEmploye(Module):
                 self.niveau_acces_selectionne = self.data[4]
                 self.compagnie_selectionnee = self.data[5]
 
-                self.titre_module = Label(self, text="Creation Employé", font=('Times 14'))
+                self.titre_module = Label(self, text="Creation Employé", font='Times 14')
                 self.titre_module.place(x=150, y=10)
 
                 self.prenom = Label(self, text="Prénom")

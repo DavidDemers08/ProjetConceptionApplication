@@ -104,8 +104,9 @@ class ModuleGestionDesModules(Module):
 
         def start_module_gerer_emp(self, params):
             self.gerer_emp_module = Toplevel()
-            vue = VueGererEmp(self, params)
-            vue.place(height=500, width=500)
+            self.controleur.set_module("GestionMembre")
+            #vue = VueGererEmp(self, params)
+            #vue.place(height=500, width=500)
             self.gerer_emp_module.geometry("500x500")
             self.gerer_emp_module.title("Gestion Employé")
 
