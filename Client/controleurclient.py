@@ -12,6 +12,8 @@ from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
 from Client.modules_refactor.module_menu import ModuleMenu
 from Client.modules_refactor.module_paiement import ModulePaiement
 from Client.modules_refactor.module_ventes_en_ligne import ModuleVentesEnLigne
+from Client.modules_refactor.module_ajout_membre import ModuleAjoutEmploye
+
 from Utils import utils
 from Client.AbstractClasses.Module import Module
 
@@ -32,7 +34,8 @@ class ControleurClient:
             "GestionAjout":ModuleGestionAjout,
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
-            "Gestion Vente En Ligne":ModuleVentesEnLigne
+            "Gestion Vente En Ligne":ModuleVentesEnLigne,
+            "ModuleAjoutEmploye":ModuleAjoutEmploye
 
         }
 
@@ -198,7 +201,7 @@ class ControleurClient:
 
     def get_name_compagnie_byid(self, compagnie_id):
         a = {
-            utils.FONCTION: utils.ID_COMPAGNIE,
+            utils.FONCTION: utils.NOM_COMPAGNIE,
             utils.ID_COMPAGNIE: compagnie_id
         }
         return self.appel_serveur(a)

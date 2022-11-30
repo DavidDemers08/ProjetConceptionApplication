@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-from Client.vues.vue_gerer_emp import VueGererEmp
+#from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 

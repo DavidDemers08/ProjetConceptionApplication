@@ -72,10 +72,6 @@ class Dao:
         self.cur.execute(SELECT_COMPAGNIES)
         return self.cur.fetchall()
 
-
-
-
-
     def select_id_of_compagnie(self, name):
         try:
             self.cur.execute(SELECT_ID_COMPAGNIE, (name,))
@@ -213,8 +209,9 @@ class Dao:
             tuple_array.append((id_module, id_acces))
         self.cur.executemany(INSERT_MODULE_PAR_ACCESS, tuple_array)
         self.conn.commit()
-    def insert_vehicule_dans_compagnie(self,id_compagnie,annee_modele,marque,modele,kilometrage,type):
-        self.cur.execute(INSERT_VEHICULE_PAR_COMPAGNIE, (id_compagnie, annee_modele,marque,modele,kilometrage,type))
+
+    def insert_vehicule_dans_compagnie(self, id_compagnie, annee_modele, marque, modele, kilometrage, type):
+        self.cur.execute(INSERT_VEHICULE_PAR_COMPAGNIE, (id_compagnie, annee_modele, marque, modele, kilometrage, type))
         self.conn.commit()
 
     # ***************** DELETE
@@ -226,8 +223,10 @@ class Dao:
     def delete_access(self, nom):
         id_access = self.get_access_id(nom)
         self.cur.execute(DELETE_ACCESS, (nom, id_access))
-    def delete_vehicule(self,id_vehicule,id_compagnie):
+
+    def delete_vehicule(self, id_vehicule, id_compagnie):
         self.cur.execute(DELETE_VEHICULE_PAR_COMPAGNIE, (id_vehicule, id_compagnie))
+
     # ***************** UPDATE
     def update_membre(self, id_membre, identifiant, nom, prenom, titre, permission_membre=None, nom_compagnie=None):
         if (permission_membre is not None) and (nom_compagnie is not None):
@@ -240,9 +239,12 @@ class Dao:
         id_compagnie = self.select_id_of_compagnie(nom_compagnie)
         self.cur.execute(UPDATE_PERMISSION_MEMBRE, (permission_membre, id_membre, id_compagnie))
         self.conn.commit()
-    def update_vehicule(self,annee_modele,marque,modele,kilometrage,type,id_vehicule,id_compagnie):
-        self.cur.execute(UPDATE_VEHICULE_COMPAGNIE, (annee_modele, marque,modele,kilometrage,type,id_vehicule, id_compagnie))
+
+    def update_vehicule(self, annee_modele, marque, modele, kilometrage, type, id_vehicule, id_compagnie):
+        self.cur.execute(UPDATE_VEHICULE_COMPAGNIE,
+                         (annee_modele, marque, modele, kilometrage, type, id_vehicule, id_compagnie))
         self.conn.commit()
+
     # ***************** AUTRES
     def identifier_usager(self, nom, mdp):
         # sql = '''

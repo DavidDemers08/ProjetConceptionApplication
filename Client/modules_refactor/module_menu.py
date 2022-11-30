@@ -6,7 +6,7 @@ from Client.AbstractClasses.Vue import Vue
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-from Client.vues.vue_gerer_emp import VueGererEmp
+#from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 
@@ -76,19 +76,19 @@ class ModuleMenu(Module):
             # infos_module = self.dictionnaire_module[record[0]]
             # infos_module()
 
-        def start_module_gerer_emp(self, params):
-            self.gerer_emp_module = Toplevel()
-            vue = VueGererEmp(self, params, self.controleur)
-            vue.place(height=500, width=500)
-            self.gerer_emp_module.geometry("500x500")
-            self.gerer_emp_module.title("Gestion Employé")
-
-        def clic_bouton_gestion_employe(self):
-            selection = self.liste.selection()
-            if selection:
-                item = self.liste.item(selection[0])
-                record = item['values']
-                self.start_module_gerer_emp(record)
+        # def start_module_gerer_emp(self, params):
+        #     #self.gerer_emp_module = Toplevel()
+        #     #vue = VueGererEmp(self, params, self.controleur)
+        #     #vue.place(height=500, width=500)
+        #     #self.gerer_emp_module.geometry("500x500")
+        #     #self.gerer_emp_module.title("Gestion Employé")
+        #
+        # def clic_bouton_gestion_employe(self):
+        #     selection = self.liste.selection()
+        #     if selection:
+        #         item = self.liste.item(selection[0])
+        #         record = item['values']
+        #         self.start_module_gerer_emp(record)
 
         def fermer_module_emp(self):
             self.gerer_emp_module.destroy()
