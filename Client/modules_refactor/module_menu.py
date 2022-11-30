@@ -36,6 +36,7 @@ class ModuleMenu(Module):
             }
 
 
+
         def remplir_vue(self):
             self.data = ("1", "2", "3", "4")
             self.data1 = ("allo", "bigg", "toast")
@@ -119,12 +120,18 @@ class ModuleMenu(Module):
         def populate_list(self):
             pass
 
-        def start_module(self, arg):
-            selection = self.liste.selection()
-            item = self.liste.item(selection[0])
-            record = item['values']
-            infos_module = self.dictionnaire_module[record[0]]
-            infos_module()
+        def start_module(self, event):
+
+            get_id_of_click = self.liste.identify("item",event.x,event.y)
+
+            nom_module = self.liste.item(get_id_of_click, "values")[0]
+
+            self.controleur.set_module(nom_module)
+            # selection = self.liste.selection()
+            # item = self.liste.item(selection[0])
+            # record = item['values']
+            # infos_module = self.dictionnaire_module[record[0]]
+            # infos_module()
 
         def start_module_gerer_emp(self, params):
             self.gerer_emp_module = Toplevel()
@@ -177,11 +184,13 @@ class ModuleMenu(Module):
             data.append(('Gestion Budget',))
             data.append(('Gestion Inventaire',))
             data.append(('Gestion Événements',))
-            data.append(('Gestion Propriétés',))
+            data.append(('Gestion Vente En Ligne',))
             self.liste.column('Modules', anchor='center')
             self.liste.column('Modules', width=600)
+            compteur=0
             for module in data:
-                self.liste.insert('', tk.END, values=module)
+                self.liste.insert('', tk.END, values=module,iid=compteur)
+                compteur +=1
             self.liste.place(x=0, y=0)
             self.liste.bind("<Double-1>", self.start_module)
 
