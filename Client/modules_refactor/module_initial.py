@@ -132,7 +132,7 @@ class ModuleInitial(Module):
 
         def clic_bouton_enregistrer_ville(self):
             nom_compagnie = self.var_nom_compagnie.get()
-            if self.controleur.rechercher_compagnie(nom_compagnie) is None:
+            if self.controleur.rechercher_compagnie(nom_compagnie) is False:
                 self.vider_frame()
                 self.afficher_enregistrement_admin()
             else:
