@@ -236,7 +236,7 @@ UPDATE vehicule_par_compagnie
     WHERE id_vehicule = ? and id_compagnie = ?
 '''
 
-DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
+#DELETE_VEHICULE_PAR_COMPAGNIE = 'DELETE FROM module_par_access WHERE id_vehicule=? AND id_compagnie=?'
 
 
 SELECT_ACCESS_ID_WITH_USER_ID = 'SELECT id_access ' \
@@ -253,3 +253,24 @@ SELECT_ACCESS_ID_WITH_USERNAME = 'SELECT id_access ' \
                                  'FROM access_par_membre ' \
                                  'WHERE id_membre = ? ' \
                                  ''
+# *********************** COMMANDE ************************* #
+
+CREER_COMMANDE_PAR_COMPAGNIE = '''
+CREATE TABLE IF NOT EXISTS commande_par_compagnie
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id_compagnie 
+    date TEXT UNIQUE,
+    paiement TEXTE,
+    prix TEXTE,
+    acheteur TEXTE
+)
+'''
+
+DROP_COMMANDES_PAR_COMPAGNIE  = 'DROP TABLE IF EXISTS commande_par_compagnie'
+
+INSERT_COMMANDES_PAR_COMPAGNIE = 'INSERT INTO commande_par_compagnie(' \
+                                'id_compagnie, date, paiement,prix,acheteur ' \
+                                ') VALUES(?,?,?,?,?)'
+
+SELECT_ALL_COMMANDES_PAR_COMPAGNIE = 'SELECT * FROM commande_par_compagnie'

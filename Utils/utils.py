@@ -54,3 +54,15 @@ MARQUE = "marque"
 MODELE = "modele"
 KILOMETRAGE = "kilometrage"
 TYPE = "type"
+
+# *********************** COMMANDE ************************* #
+CREER_COMMANDE = "creer_commande"
+CHERCHER_COMMANDE = "chercher_commande"
+VERIFIER_COMMANDE = "verifier_commande"
+FINALISER_COMMANDE = "finaliser_commande"
+EFFACER_COMMANDE = "effacer_commande"
+
+DATE = "date"
+PAIEMENT = "paiement"
+PRIX = "prix"
+ACHETEUR = "acheteur"
