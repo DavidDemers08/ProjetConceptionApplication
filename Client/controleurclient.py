@@ -4,6 +4,9 @@ import json
 from tkinter import *
 from sys import path
 from tkinter import ttk
+
+from Client.modules_refactor.module_vehicule import ModuleVehicule
+from Client.modules_refactor.module_inv import ModuleInventaire
 from Client.modules_refactor.module_initial import ModuleInitial
 from Client.modules_refactor.module_gestion_des_modules import ModuleGestionDesModules
 from Client.modules_refactor.module_ajout_modules import ModuleAjoutModules
@@ -35,6 +38,8 @@ class ControleurClient:
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
             "Gestion Vente En Ligne":ModuleVentesEnLigne,
+            "ModuleInventaire": ModuleInventaire,
+            "ModuleVehicule": ModuleVehicule
             "ModuleAjoutEmploye":ModuleAjoutEmploye
         }
 
