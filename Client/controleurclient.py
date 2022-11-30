@@ -32,7 +32,7 @@ class ControleurClient:
             "GestionAjout":ModuleGestionAjout,
             "ModulePaiement":ModulePaiement,
             "ModuleGestionDesModules":ModuleGestionDesModules,
-            "ModuleVentesEnLigne":ModuleVentesEnLigne
+            "Gestion Vente En Ligne":ModuleVentesEnLigne
         }
         self.access = None
         self.permission: str = ""
