@@ -21,6 +21,7 @@ class Controleur_Serveur:
     def __init__(self):
 
         self.fonctions = {
+
             utils.IDENTIFIER_USAGER: self.identifier_usager,
             utils.CREER_COMPTE_VILLE: self.creer_compte_ville,
             utils.AFFICHER_MEMBRES: self.afficher_membres,
@@ -34,8 +35,9 @@ class Controleur_Serveur:
             utils.GET_ACCESS: self.get_access,
             utils.GET_USERNAME_ID: self.get_username_id,
             utils.GET_MODULE_ID_BY_USER_ID:self.get_module_id_by_user_id,
-
+            utils.ADD_TEST_DATA: self.add_test_data,
             utils.GET_MODULE_WITH_ACCESS_ID: self.get_module_with_access_id,
+            utils.GET_MODULE_ID_BY_COMPANY_ID: self.get_module_id_by_company_id,
             utils.NOM_COMPAGNIE: self.nom_compagnie,
             utils.ID_COMPAGNIE: self.id_compagnie,
             utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie
@@ -114,6 +116,8 @@ class Controleur_Serveur:
         except:
             return Exception
 
+
+
     def voir_membre(self, form):
         membre = []
         for rangee in Dao().select_all_membres():
@@ -163,23 +167,27 @@ class Controleur_Serveur:
     def get_username_id(self, form):
         return Dao().select_id_membre_with_username(form[utils.NOM_USAGER])
 
-
     def get_module_with_access_id(self, form):
         return Dao().select_modules_with_access_id(form[utils.ACCESS_ID])
 
-    def nom_compagnie(self,form):
+    def nom_compagnie(self, form):
         return Dao().select_nom_compagnie(form[utils.ID_COMPAGNIE])
 
     def id_compagnie(self, form):
         return Dao().select_id_of_compagnie(form[utils.NOM_COMPAGNIE])
 
-    def get_module_id_by_user_id(self,form):
+    def get_module_id_by_user_id(self, form):
         return Dao().select_module_id_by_user_id(form[utils.IDENTIFIANT])
 
+    def get_module_id_by_company_id(self, form):
+        return Dao().select_module_id_by_company_id(form[utils.ID_COMPAGNIE])
+
+    def add_test_data(self, form):
+        return Dao().add_test_data()
 
 if __name__ == "__main__":
     Dao().creer_bd()
     Dao().ajouter_acces_super_admin()
     Dao().ajouter_modules_initiaux()
-    Dao().ajouter_lien_acces_module_super_admin()
+    #Dao().ajouter_lien_acces_module_super_admin()
     pass

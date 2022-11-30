@@ -315,23 +315,19 @@ class Dao:
     def ajouter_modules_initiaux(self):
 
         self.cur.executemany(INSERT_MODULES, [
-            ("gestion", "permet de faire la gestion du personnel", 1.0, "C:\\travail\\gestion", 34.44),
+            ("GestionMembre", "permet de faire la gestion du personnel", 1.0, "C:\\modules\\gestion\\membre", 0.00),
+            ("AjoutModules", "permet de faire l'achat de modules", 1.0, "C:\\modules\\modules", 0.00),
+            ("GestionAjout", "permet de faire la gestion des ajouts", 1.0, "C:\\modules\\gestionAjout", 0.00),
+            ("ModulePayement", "permet de faire la gestion des payements des modules", 1.0, "C:\\modules\\payement", 0.00),
+            ("ModuleGestionDesModules", "permet de faire la gestion des payements des modules", 1.0, "C:\\travail\\gestion\\modules", 0.00),
+            ("ModulesVentesEnLIgne", "permet la gestion des ventes en ligne", 1.0, "C:\\modules\\ventesEnLignes", 0.00),
+
             ("propriete", "permet de montrer les propriete de la compagnie", 1.0, "le chemin de traverse2", 37.47),
-            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 1.0, "le chemin de traverse3",
-             40.00),
-            (
-                "evenement", "permet de faire la gestion des evenements de la compagnie", 1.0,
-                "C:\\Users\\1569\\evenement",
-                9.99),
-            ("budget", "permet de faire la gestion du budget de la compagnie", 1.0, "C:\\Users\\1569\\budget", 21.35),
-            ("employe", "permet de faire la gestion des employees de la compagnie", 1.0, "le chemin de traverse6",
-             21.21),
-            ("vente_en_ligne", "permet de faire la gestion de vente en ligne de la compagnie", 1.0,
-             "C:\\Users\\1569\\vente_en_ligne", 4.20),
-            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 1.0, "C:\\Users\\1569\\plaintes",
-             99.66),
-            ("materielle", "permet de faire la gestion du materiel de la compagnie", 1.0, "C:\\Users\\1569\\materielle",
-             23.21)
+            ("inventaire", "permet de faire la gestion d'inventaire de la compagnie", 1.0, "le chemin de traverse3", 40.00),
+            ("evenement", "permet de faire la gestion des evenements de la compagnie", 1.0,"C:\\Users\\1569\\evenement", 9.99),
+            ("budget", "permet de faire la gestion du budget de la compagnie", 1.0, "C:\\Users\\1569\\budget", 12.00),
+            ("plaintes", "permet de faire la gestion des plaintes de la compagnie", 1.0, "C:\\Users\\1569\\plaintes", 99.66),
+            ("materielle", "permet de faire la gestion du materiel de la compagnie", 1.0, "C:\\Users\\1569\\materielle", 23.21)
         ])
 
         self.conn.commit()
@@ -349,7 +345,26 @@ class Dao:
         return self.cur.execute(SELECT_MODULES_WITH_ACCESS_ID, (access_id,)).fetchall()
 
     def select_module_id_by_user_id(self, user_id):
-        return self.cur.execute(SELECT_MODULE_ID_WITH_USER_ID, (user_id,)).fetchone()[0]
+        return self.cur.execute(SELECT_MODULE_ID_WITH_USER_ID, (user_id,)).fetchall()
+
+    def add_test_data(self):
+        try:
+            #add your data
+            return True
+        except:
+            return False
+
+    def select_module_id_by_company_id(self, company_id):
+        try:
+            allo = self.cur.execute(SELECT_MODULE_ID_WITH_COMPANY_ID, (company_id,)).fetchall()
+            for a in allo:
+                print(a)
+            return self.cur.execute(SELECT_MODULE_ID_WITH_COMPANY_ID, (company_id,)).fetchall()
+        except ValueError:
+            print("Erreur SQl")
+
+
+
 
 
 def main():
