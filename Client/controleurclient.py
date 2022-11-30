@@ -208,6 +208,30 @@ class ControleurClient:
         }
         return self.appel_serveur(a)
 
+    def get_access_by_id(self, id:int):
+        a = {
+            utils.FONCTION: utils.GET_ACCESS,
+            utils.ID_MEMBRE: id
+
+        }
+        return self.appel_serveur(a)
+
+    def test(self):
+        a = {
+            utils.FONCTION: utils.TEST,
+            utils.ID_MEMBRE: self.user_id
+        }
+        return self.appel_serveur(a)
+
+
+    def delete_membre(self, user_identifiant):
+        a = {
+            utils.FONCTION: utils.DELETE_MEMBRE,
+            utils.IDENTIFIANT: user_identifiant
+        }
+        return self.appel_serveur(a)
+
+
     def get_username_id(self, username):
         a = {
             utils.FONCTION: utils.GET_USERNAME_ID,

@@ -42,14 +42,22 @@ class ModuleGestionEmploye(Module):
                        command=lambda: self.start_module_gerer_emp(None)),
             ttk.Button(self.master_frame, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
 
-            data = []
-            # TODO utiliser de vrais employés
-            # Ici on append dans le data de faux employés avec la boucle
-            # a = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
-            #print(a)
 
-            for n in range(1, 50):
-                data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
+            data = []
+            # b = self.controleur.test()
+            # print(b)
+            employes = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
+            if len(employes) > 0:
+                for employe in employes:
+                    print(employe)
+                    if self.controleur.user_id != employe[0]:
+                        # acces = self.controleur.get_access()
+                        acces = self.controleur.get_access_by_id(2)
+                        acces = self.controleur.get_access_by_id(int(employe[0]))
+                        nom = employe[1] + " " + employe[2]
+                        data.append((f'{nom}', f'{employe[3]}', f'{acces}', f'{employe[6]}'))
+
+
 
             self.liste.heading('Nom', text='Nom')
             self.liste.heading('Identifiant', text='Identifiant')

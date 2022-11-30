@@ -74,6 +74,7 @@ INSERT_MEMBRE_DANS_COMPAGNIE = 'INSERT INTO membre_dans_compagnie(id_compagnie, 
 SELECT_ENTIRE_MEMBRE_DANS_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie'
 SELECT_ALL_COMPAGNIES_DE_MEMBRE = 'SELECT * FROM membre_dans_compagnie WHERE id_membre=?'
 SELECT_ALL_MEMBRES_DE_COMPAGNIE = 'SELECT * FROM membre_dans_compagnie WHERE id_compagnie=?'
+SELECT_ALL_ID_MEMBRES_DE_COMPAGNIE = 'SELECT id_membre FROM membre_dans_compagnie WHERE id_compagnie=?'
 SELECT_ID_FROM_MEMBRE_DE_COMPAGNIE = 'SELECT id FROM membre_dans_compagnie WHERE id_membre=? AND id_compagnie=?'
 DELETE_MEMBRE_FROM_COMPAGNIE = 'DELETE FROM membre_dans_compagnie WHERE id_membre=?'
 UPDATE_PERMISSION_MEMBRE = '''

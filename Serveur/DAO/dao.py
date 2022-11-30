@@ -123,6 +123,14 @@ class Dao:
         id_compagnie = self.select_id_of_compagnie(nom_compagnie)
         self.cur.execute(SELECT_ALL_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
+    def select_infos_membres_by_id(self, id):
+        self.cur.execute(SELECT_INFOS_MEMBRES_BY_ID, (id,))
+        return self.cur.fetchall()
+
+    def select_all_id_membres_de_compagnie(self, nom_compagnie):
+        id_compagnie = self.select_id_of_compagnie(nom_compagnie)
+        self.cur.execute(SELECT_ALL_ID_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
+        return self.cur.fetchall()
 
     def select_nom_compagnie(self, id_compagnie):
         self.cur.execute(SELECT_NOM_COMPAGNIE, (id_compagnie,))
@@ -223,6 +231,7 @@ class Dao:
         self.cur.execute(DELETE_MEMBRE_FROM_COMPAGNIE, (id_membre,))
         self.cur.execute(DELETE_MEMBRE, (identifiant,))
 
+
     def delete_access(self, nom):
         id_access = self.get_access_id(nom)
         self.cur.execute(DELETE_ACCESS, (nom, id_access))
@@ -290,6 +299,10 @@ class Dao:
         self.cur.execute(INSERT_MEMBRE_A_ACCESS, (membre_id, id_access[0]))
         self.conn.commit()
 
+    def test(self):
+        self.cur.execute(SELECT_ALL_ACCES_POUR_ALL_MEMBRES)
+        return self.cur.fetchall()
+
     def ajouter_acces_super_admin(self):
         self.cur.execute(INSERT_ACCESS, ("Super_Admin",))
 
@@ -341,7 +354,8 @@ class Dao:
         return self.cur.execute(SELECT_MODULE_ID, (nom, version)).fetchone()[0]
 
     def select_id_access(self, user_id):
-        return self.cur.execute(SELECT_ACCESS_ID_WITH_USER_ID, (user_id,)).fetchone()[0]
+        a = self.cur.execute(SELECT_ACCESS_ID_WITH_USER_ID, (user_id,)).fetchone()[0]
+        return a
 
     def select_modules_with_access_id(self, access_id):
         return self.cur.execute(SELECT_MODULES_WITH_ACCESS_ID, (access_id,)).fetchall()

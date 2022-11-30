@@ -60,6 +60,8 @@ class ModuleInitial(Module):
                 print(reponse)
                 if reponse:
                     self.controleur.username = self.var_nom.get()
+                    self.controleur.user_id = self.controleur.get_username_id(self.var_nom.get())
+                    self.controleur.access = self.controleur.get_access()
                     self.controleur.set_module("menu")
                 else:
                     self.afficher_erreur(f'Nom ou mot de passe incorrects')

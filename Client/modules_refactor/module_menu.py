@@ -96,8 +96,7 @@ class ModuleMenu(Module):
             data = []
             # TODO utiliser de vrais employés
             # Ici on append dans le data de faux employés avec la boucle
-            a = self.controleur.get_employes_de_compagnie(self.controleur.user_id)
-            print(a)
+
 
             for n in range(1, 50):
                 data.append((f'Employé {n}', f'Identifiant {n}', f'Accès {n}', f'Rôle {n}'))
