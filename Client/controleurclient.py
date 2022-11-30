@@ -11,7 +11,7 @@ from Client.modules_refactor.module_gestion_ajout import ModuleGestionAjout
 from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
 from Client.modules_refactor.module_menu import ModuleMenu
 from Client.modules_refactor.module_paiement import ModulePaiement
-from Client.modules_refactor.moduleventesenligne import ModuleVentesEnLigne
+from Client.modules_refactor.module_ventes_en_ligne import ModuleVentesEnLigne
 from Utils import utils
 from Client.AbstractClasses.Module import Module
 
@@ -29,10 +29,11 @@ class ControleurClient:
             "initial": ModuleInitial,
             "GestionMembre": ModuleGestionEmploye,
             "AjoutModules": ModuleAjoutModules,
-            "GestionAjout": ModuleGestionAjout,
-            "ModulePaiement": ModulePaiement,
-            "ModuleGestionDesModules": ModuleGestionDesModules,
-            "ModuleVentesEnLigne": ModuleVentesEnLigne
+            "GestionAjout":ModuleGestionAjout,
+            "ModulePaiement":ModulePaiement,
+            "ModuleGestionDesModules":ModuleGestionDesModules,
+            "Gestion Vente En Ligne":ModuleVentesEnLigne
+
         }
 
         self.dict_modules_idx = {}

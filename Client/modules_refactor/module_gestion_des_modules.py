@@ -158,7 +158,7 @@ class ModuleGestionDesModules(Module):
             self.liste.column('Modules', anchor='center')
             self.liste.column('Modules', width=600)
             for module in data:
-                self.liste.insert('', tk.END, values=module)
+                self.liste.insert('', tk.END, values=module,command=self.controleur.set_module("ModuleVentesEnLigne"))
             self.liste.place(x=0, y=0)
             self.liste.bind("<Double-1>", self.start_module)
 
