@@ -144,6 +144,7 @@ class ModuleInitial(Module):
             if self.controleur.rechercher_compagnie(nom_compagnie) is False:
                 self.vider_frame()
                 self.afficher_enregistrement_admin()
+
             else:
                 print("Cette ville existe déjà")
                 print(self.controleur.afficher_compagnies())
@@ -218,8 +219,7 @@ class ModuleInitial(Module):
 
                 if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
                     reponse = self.controleur.creer_compte_ville(**args)
-                    self.vider_frame()
-                    self.remplir_vue();
+                    self.controleur.set_module("menu")
 
             else:
                 print("Les deux cases des mots de passe ne sont pas identiques")
