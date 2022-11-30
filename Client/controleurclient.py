@@ -216,12 +216,6 @@ class ControleurClient:
         }
         return self.appel_serveur(a)
 
-    def test(self):
-        a = {
-            utils.FONCTION: utils.TEST,
-            utils.ID_MEMBRE: self.user_id
-        }
-        return self.appel_serveur(a)
 
 
     def delete_membre(self, user_identifiant):

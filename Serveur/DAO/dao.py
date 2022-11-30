@@ -299,9 +299,6 @@ class Dao:
         self.cur.execute(INSERT_MEMBRE_A_ACCESS, (membre_id, id_access[0]))
         self.conn.commit()
 
-    def test(self):
-        self.cur.execute(SELECT_ALL_ACCES_POUR_ALL_MEMBRES)
-        return self.cur.fetchall()
 
     def ajouter_acces_super_admin(self):
         self.cur.execute(INSERT_ACCESS, ("Super_Admin",))

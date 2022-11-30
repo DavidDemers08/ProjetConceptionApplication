@@ -40,16 +40,13 @@ class Controleur_Serveur:
 
             utils.ID_COMPAGNIE: self.id_compagnie,
             utils.CHERCHER_EMPLOYES_COMPAGNIE: self.chercher_employes_compagnie,
-            utils.TEST: self.test
+
         }
 
     # Le nom de la fonction voulue est envoyée
     # par le controleur_client et reçu par le
     # controleur_serveur dans le request.form
     # la réponse de la BD est JSON-ifiée
-
-    def test(self):
-        return Dao().test()
 
     def chercher_employes_compagnie(self, form):
         id_comp = Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])[0][1]
