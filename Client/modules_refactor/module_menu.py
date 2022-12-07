@@ -196,14 +196,14 @@ class ModuleMenu(Module):
             self.controleur.set_module(module)
 
         def click_bouton_ajout_module(self):
+            self.controleur.set_module("AjoutModules")
 
-
-            self.module = ttk.Label(self.master_frame, text="Module")
-            self.module.grid(column=0, row=1, sticky=tk.W, padx=50)
-            self.prix = ttk.Label(self.master_frame, text="Prix")
-            self.prix.grid(column=1, row=1, sticky=tk.W, padx=50)
-            self.exp_date = ttk.Label(self.master_frame, text="Date d'expiration")
-            self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
+            #self.module = ttk.Label(self.master_frame, text="Module")
+            #self.module.grid(column=0, row=1, sticky=tk.W, padx=50)
+            #self.prix = ttk.Label(self.master_frame, text="Prix")
+            #self.prix.grid(column=1, row=1, sticky=tk.W, padx=50)
+            #self.exp_date = ttk.Label(self.master_frame, text="Date d'expiration")
+            #self.exp_date.grid(column=2, row=1, sticky=tk.W, padx=50)
 
             # self.remplir_grid_module()
             # self.table.create()
