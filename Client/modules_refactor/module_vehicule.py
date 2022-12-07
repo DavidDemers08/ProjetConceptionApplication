@@ -49,13 +49,13 @@ class ModuleVehicule(Module):
                 self.canevas_list = tk.Canvas(self.master_frame, height=500, width=500, bg='white')
                 self.canevas_list.grid(row=1, rowspan=6, column=2, columnspan=3, sticky=tk.E, padx=30, pady=20)
 
-                self.liste_module.append(("Ferrari", "Utilisé", "Jean-Marc"))
+                self.liste_module.append(("Ferrari", "Utilisé par:", "Jean-Marc"))
                 table = Table(vue=self.canevas_list, lines_array=self.liste_module, start_row=2, start_column=0,
                               padx=50,
                               modifiable_rows=False)
                 table.create()
 
-                self.button_back = ttk.Button(self.master_frame, text='Retour', width=45)
+                self.button_back = ttk.Button(self.master_frame, text='Retour',command=self.controleur.set_modeule("menu"), width=45)
                 self.button_back.grid(row=7, column=1, columnspan=3, padx=40, pady=20)
 
         def lancer_gestion_vehicule(self):
