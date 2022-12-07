@@ -54,9 +54,12 @@ class ModuleVehicule(Module):
                               padx=50,
                               modifiable_rows=False)
                 table.create()
-
-                self.button_back = ttk.Button(self.master_frame, text='Retour',command=self.controleur.set_modeule("menu"), width=45)
+                
+                self.button_back = ttk.Button(self.master_frame, text='Retour',command=self.retourmenu , width=45)
                 self.button_back.grid(row=7, column=1, columnspan=3, padx=40, pady=20)
+
+        def retourmenu(self):
+            self.controleur.set_module("menu")
 
         def lancer_gestion_vehicule(self):
             pass
