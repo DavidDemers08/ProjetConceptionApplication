@@ -6,7 +6,7 @@ from Client.AbstractClasses.Vue import Vue
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-#from Client.vues.vue_gerer_emp import VueGererEmp
+# from Client.vues.vue_gerer_emp import VueGererEmp
 from Client.modules.module_paiement import ModulePaiement
 
 
@@ -19,8 +19,8 @@ class ModuleGestionEmploye(Module):
         return ModuleGestionEmploye.VueGestionEmploye(self, self.master_frame, row=1, column=1, padx=10, pady=10)
 
     class VueGestionEmploye(Vue):
-        def __init__(self, parent,master_frame, row: int, column: int, padx: int, pady: int):
-            super().__init__(parent,master_frame, row, column, padx, pady)
+        def __init__(self, parent, master_frame, row: int, column: int, padx: int, pady: int):
+            super().__init__(parent, master_frame, row, column, padx, pady)
 
         def remplir_vue(self):
             self.canevas_list = tk.Canvas(self.master_frame, height=300, width=570, bg='white')
@@ -28,12 +28,17 @@ class ModuleGestionEmploye(Module):
 
             self.bouton_ajouter_membre = ttk.Button(self.master_frame, text='Ajouter Membre',
                                                     command=lambda: self.start_module_gerer_emp(None))
-            self.bouton_gerer_employe = ttk.Button(self.master_frame, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
+            self.bouton_gerer_employe = ttk.Button(self.master_frame, text='Gerer Employe',
+                                                   command=self.clic_bouton_gestion_employe)
+
+            self.bouton_retour_menu = ttk.Button(self.master_frame, text='Retour',
+                                                 command=self.retour)
 
             #
 
             self.bouton_ajouter_membre.grid(row=2, column=0, pady=(20, 0), sticky=tk.E)
             self.bouton_gerer_employe.grid(row=2, column=1, pady=(20, 0), sticky=tk.E)
+            self.bouton_retour_menu.grid(row=2, column=2, pady=(20, 0), sticky=tk.E)
             colonnes = ('Nom', 'Identifiant', 'Permission', 'Rôle')
             self.liste = ttk.Treeview(self.canevas_list, columns=colonnes, show='headings',
                                       selectmode='browse')
@@ -41,7 +46,6 @@ class ModuleGestionEmploye(Module):
             ttk.Button(self.master_frame, text='Ajouter Membre',
                        command=lambda: self.start_module_gerer_emp(None)),
             ttk.Button(self.master_frame, text='Gerer Employe', command=self.clic_bouton_gestion_employe)
-
 
             data = []
             # b = self.controleur.test()
@@ -56,8 +60,6 @@ class ModuleGestionEmploye(Module):
                         # acces = self.controleur.get_access_by_id(int(employe[0]))
                         nom = employe[1] + " " + employe[2]
                         data.append((f'{nom}', f'{employe[3]}', f'{acces}', f'{employe[5]}'))
-
-
 
             self.liste.heading('Nom', text='Nom')
             self.liste.heading('Identifiant', text='Identifiant')
@@ -81,10 +83,12 @@ class ModuleGestionEmploye(Module):
                 self.start_module_gerer_emp(record)
 
         def start_module_gerer_emp(self, params):
-            #self.gerer_emp_module = Toplevel()
+            # self.gerer_emp_module = Toplevel()
             self.controleur.set_module("ModuleAjoutEmploye")
-            #vue = VueGererEmp(self, params, self.controleur)
-            #vue.place(height=500, width=500)
-            #self.gerer_emp_module.geometry("500x500")
-            #self.gerer_emp_module.title("Gestion Employé")
+            # vue = VueGererEmp(self, params, self.controleur)
+            # vue.place(height=500, width=500)
+            # self.gerer_emp_module.geometry("500x500")
+            # self.gerer_emp_module.title("Gestion Employé")
 
+        def retour(self):
+            self.controleur.set_module("menu")
