@@ -220,7 +220,7 @@ class ModuleInitial(Module):
 
                 if nom_compagnie and uti_admin and mdp and pays and province and region and genre and prenom and nom:
                     reponse = self.controleur.creer_compte_ville(**args)
-                    self.controleur.set_module("menu")
+                    self.controleur.set_module("initial")
 
             else:
                 print("Les deux cases des mots de passe ne sont pas identiques")
