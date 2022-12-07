@@ -177,7 +177,7 @@ class ModuleAjoutEmploye(Module):
             acced = self.niveau_acces_selectionne
             genre = ""
             # TODO a changer le id
-            compagnie = 1
+            compagnie = self.controleur.company_id
             try:
                 permission = int(self.permission_input.get())
 
@@ -191,7 +191,8 @@ class ModuleAjoutEmploye(Module):
                 reponse = self.controleur.creer_usager(prenom, nom, identification, mdp, titre, genre, compagnie,
                                                        permission, acced)
                 print(reponse)
-                self.controleur.set_module("ModuleAjoutEmploye")
+                #self.controleur.set_module("ModuleAjoutEmploye")
+                self.controleur.set_module("GestionMembre")
 
             else:
                 print("Un des champs ne respecte pas les conditions")
