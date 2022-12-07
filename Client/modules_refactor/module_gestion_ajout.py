@@ -92,7 +92,6 @@ class ModuleGestionAjout(Module):
             info = {}
 
             info['nom'] = self.entry_nom.get()
-
             info['prenom'] = self.entry_prenom.get()
             info['identifiant'] = self.entry_indentifiant.get()
             info['mdp'] = self.entry_mdp.get()
