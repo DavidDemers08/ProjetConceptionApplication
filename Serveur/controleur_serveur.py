@@ -52,12 +52,11 @@ class Controleur_Serveur:
 
     def chercher_employes_compagnie(self, form):
         id_comp = Dao().select_all_compagnie_de_membre(form[utils.ID_MEMBRE])[0][1]
-        nomcomp = Dao().select_nom_compagnie(id_comp)[0][0]
-        users_id = Dao().select_all_id_membres_de_compagnie(nomcomp)
+        users_id = Dao().select_all_id_membres_de_compagnie(id_compagnie=id_comp)
         users = []
         for id in users_id:
-            infos = Dao().select_infos_membres_by_id(id[0])
-            users.append(infos[0])
+             infos = Dao().select_infos_membres_by_id(id[0])
+             users.append(infos[0])
         return users
 
     def delete_membre(self, form):
