@@ -123,8 +123,9 @@ class Dao:
         self.cur.execute(SELECT_INFOS_MEMBRES_BY_ID, (id,))
         return self.cur.fetchall()
 
-    def select_all_id_membres_de_compagnie(self, nom_compagnie):
-        id_compagnie = self.select_id_of_compagnie(nom_compagnie)
+    def select_all_id_membres_de_compagnie(self, nom_compagnie = "", id_compagnie = None):
+        if id_compagnie == None:
+            id_compagnie = self.select_id_of_compagnie(nom_compagnie)
         self.cur.execute(SELECT_ALL_ID_MEMBRES_DE_COMPAGNIE, (id_compagnie,))
         return self.cur.fetchall()
 
@@ -164,7 +165,7 @@ class Dao:
                       nom_access: str):
         try:
             cursor = self.cur.execute(INSERT_MEMBRE, (prenom, nom, identifiant, mdp, titre, genre))
-            self.conn.commit()
+
             self.cur.execute(INSERT_MEMBRE_DANS_COMPAGNIE, (id_compagnie, cursor.lastrowid, permission))
             self.conn.commit()
 

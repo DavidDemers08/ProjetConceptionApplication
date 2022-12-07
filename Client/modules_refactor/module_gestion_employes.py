@@ -50,6 +50,7 @@ class ModuleGestionEmploye(Module):
             data = []
             # b = self.controleur.test()
             # print(b)
+            membre = self.controleur.get_employes_de_compagnie()
             employes = self.controleur.get_employes_de_compagnie()
             if len(employes) > 0:
                 for employe in employes:

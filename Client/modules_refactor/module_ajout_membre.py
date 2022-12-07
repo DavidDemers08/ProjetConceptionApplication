@@ -175,9 +175,9 @@ class ModuleAjoutEmploye(Module):
             titre = self.titre_input.get()
             mdp = self.mdp_input.get()
             acced = self.niveau_acces_selectionne
-            genre = ""
+            genre = "h"
             # TODO a changer le id
-            compagnie = 1
+            compagnie = self.controleur.get_compagnie_id(self.compagnie_selectionnee)
             try:
                 permission = int(self.permission_input.get())
 
