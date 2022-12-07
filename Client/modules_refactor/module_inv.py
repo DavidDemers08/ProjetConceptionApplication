@@ -30,7 +30,10 @@ class ModuleInventaire(Module):
 
             self.buttton_gestion_materielle = ttk.Button(self.master_frame, text='Materielle',
                                                          command=self.lancer_gestion_materielle)
+            self.button_retour = ttk.Button(self.master_frame, text='Retour',
+                                                         command=self.retour_menu)
             self.buttton_gestion_materielle.grid(row=4, column=2, padx=40, pady=20)
+            self.button_retour.grid(row=5, column=2, padx=40, pady=20)
 
 
         def lancer_gestion_vehicule(self):
@@ -38,3 +41,6 @@ class ModuleInventaire(Module):
 
         def lancer_gestion_materielle(self):
             pass
+
+        def retour_menu(self):
+            self.controleur.set_module("menu")
