@@ -1,24 +1,21 @@
-import urllib.request
-import urllib.parse
 import json
-from tkinter import *
+import urllib.parse
+import urllib.request
 from sys import path
 from tkinter import ttk
 
-from Client.modules_refactor.module_vehicule import ModuleVehicule
-from Client.modules_refactor.module_inv import ModuleInventaire
-from Client.modules_refactor.module_initial import ModuleInitial
-from Client.modules_refactor.module_gestion_des_modules import ModuleGestionDesModules
+from Client.modules_refactor.module_ajout_membre import ModuleAjoutEmploye
 from Client.modules_refactor.module_ajout_modules import ModuleAjoutModules
 from Client.modules_refactor.module_gestion_ajout import ModuleGestionAjout
+from Client.modules_refactor.module_gestion_des_modules import ModuleGestionDesModules
 from Client.modules_refactor.module_gestion_employes import ModuleGestionEmploye
+from Client.modules_refactor.module_initial import ModuleInitial
+from Client.modules_refactor.module_inv import ModuleInventaire
 from Client.modules_refactor.module_menu import ModuleMenu
 from Client.modules_refactor.module_paiement import ModulePaiement
+from Client.modules_refactor.module_vehicule import ModuleVehicule
 from Client.modules_refactor.module_ventes_en_ligne import ModuleVentesEnLigne
-from Client.modules_refactor.module_ajout_membre import ModuleAjoutEmploye
-
 from Utils import utils
-from Client.AbstractClasses.Module import Module
 
 path.append('../Utils')
 
@@ -49,7 +46,9 @@ class ControleurClient:
         self.user_id: int = -1
         self.company_id: int = -1
         self.module_actuelle = None
-        self.master_frame = ttk.Frame()
+        config = ttk.Style()
+        config.configure('new.TFrame', background='dark red')
+        self.master_frame = ttk.Frame(style='new.TFrame')
         self.set_module("initial")
         self.master_frame.mainloop()
 
