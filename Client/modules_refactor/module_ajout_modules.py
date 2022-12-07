@@ -27,14 +27,16 @@ class ModuleAjoutModules(Module):
 
         def remplir_vue(self):
             self.heading = ttk.Label(self.master_frame, text='Ajout de Module', style='Heading.TLabel')
-            self.heading.grid(column=5, row=5, columnspan=2, pady=5, sticky=tk.N)
+            self.heading.grid(column=5, row=1, columnspan=2, pady=5, sticky=tk.N)
 
             self.module = ttk.Label(self.master_frame, text="Module")
-            self.module.grid(column=0, row=5, sticky=tk.W, padx=50)
+            self.module.grid(column=0, row=2, sticky=tk.W, padx=50)
             self.prix = ttk.Label(self.master_frame, text="Prix")
-            self.prix.grid(column=1, row=5, sticky=tk.W, padx=50)
+            self.prix.grid(column=0, row=3, sticky=tk.W, padx=50)
             self.exp_date = ttk.Label(self.master_frame, text="Date d'expiration")
-            self.exp_date.grid(column=2, row=5, sticky=tk.W, padx=50)
+            self.exp_date.grid(column=0, row=4, sticky=tk.W, padx=50)
+            self.bouton_annuler = ttk.Button(self.master_frame, text="Annuler", command=self.clic_bouton_annuler)
+            self.bouton_annuler.grid(column=3, row=5, sticky=tk.W, padx=50)
 
             #self.remplir_grid_module()
             # self.table.create()
@@ -44,7 +46,8 @@ class ModuleAjoutModules(Module):
         def update_liste_modules(self):
             self.liste_module = self.table.update_lines()
 
-
+        def clic_bouton_annuler(self):
+            self.controleur.set_module("menu")
 
 
 def main():
